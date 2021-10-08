@@ -13,6 +13,7 @@
     "gh-pages": "^3.2.3",
     "http-errors": "~1.6.3",
     "morgan": "~1.9.1",
-    "pug": "2.0.0-beta11"    
+    "mysql": "^2.18.1",
+    "pug": "2.0.0-beta11"
   }
 }
