@@ -9,8 +9,15 @@ var usersRouter = require('./routes/users');
 
 var app = express();
 // mariadb connection
-const maria = require('./maria');
-maria.connect();
+const mysql = require('./mysql');
+mysql.connect(function(err){
+  if (err) throw err;
+  console.log('mysql connected.');
+  mysql.query("select * from attendance", function(err,result,fields){
+    if(err) throw err;
+    console.log(result);
+  });
+});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

@@ -1,7 +1,7 @@
-require('dotenv').config()
+require('dotenv').config();
 
-const maria = require('mysql');
-const conn = maria.createConnection({
+const mysql = require('mysql');
+const conn = mysql.createConnection({
     host: process.env.DB_HOST,
     port: process.env.DB_PORT,
     user: process.env.DB_USER,

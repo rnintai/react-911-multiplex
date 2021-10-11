@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-const maria = require('../maria');
+const maria = require('../mysql');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
