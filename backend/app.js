@@ -13,10 +13,6 @@ const mysql = require('./mysql');
 mysql.connect(function(err){
   if (err) throw err;
   console.log('mysql connected.');
-  mysql.query("select * from attendance", function(err,result,fields){
-    if(err) throw err;
-    console.log(result);
-  });
 });
 
 // view engine setup
@@ -29,6 +25,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// routers
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
