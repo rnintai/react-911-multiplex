@@ -15,7 +15,7 @@ router.get("/", async function (req, res) {
       .catch((error) => {
         res.status(400).send(error);
       });
-    res.status(200).send(response.data.boxOfficeResult);
+    res.status(200).send(response.data.boxOfficeResult.dailyBoxOfficeList);
   } catch (error) {
     console.log(error);
   }

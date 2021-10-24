@@ -11,12 +11,17 @@ router.get("/", async function (req, res) {
   try {
     const response = await axios
       .get(
-        `http://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieList.xml?key=${process.env.KOBIS_KEY}&curPage=${i}&openStartDt=2021&openEndDt=2021`
+        `http://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieList.json?key=${process.env.KOBIS_KEY}&curPage=${req.query.page}&itemPerPage=10&openStartDt=2021&openEndDt=2021&movieTypeCd=220101&repNationCd=22041011`
       )
       .catch((error) => {
         res.status(400).send(error);
       });
-    res.status(200).send(response.data.boxOfficeResult);
+    let movieList = response.data.movieListResult.movieList;
+    let newList = movieList.filter((element) => {
+      return element.prdtStatNm == "개봉예정";
+    });
+    console.log(movieList);
+    res.status(200).send(newList);
   } catch (error) {
     console.log(error);
   }

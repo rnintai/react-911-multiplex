@@ -8,6 +8,7 @@ const cors = require("cors");
 
 const signUpRouter = require("./routes/signUp");
 const boxOfficeRouter = require("./routes/movies/boxOffice");
+const preMoviesRouter = require("./routes/movies/preMovies");
 
 var app = express();
 
@@ -32,7 +33,8 @@ app.use(cors());
 
 // routers
 app.use("/signup", signUpRouter);
-app.use("/boxoffice", boxOfficeRouter);
+app.use("/movies/boxoffice", boxOfficeRouter);
+app.use("/movies/pre", preMoviesRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
