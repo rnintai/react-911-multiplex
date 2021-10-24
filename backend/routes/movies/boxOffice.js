@@ -1,12 +1,12 @@
-const axios = require('axios');
-const express = require('express');
+const axios = require("axios");
+const express = require("express");
 const router = express.Router();
-require('dotenv').config();
+require("dotenv").config();
 
 // const mysql = require('../mysql');
 
 /* GET boxoffice from kobis. */
-router.get('/', async function (req, res) {
+router.get("/", async function (req, res) {
   try {
     const response = await axios
       .get(
