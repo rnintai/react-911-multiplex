@@ -25,6 +25,7 @@ router.post("/", function (req, res) {
       } else {
         // 에러가 있다면?
         console.log(`err : ${err}, `);
+        // 중복일 시 409 반환
         if (err.code === "ER_DUP_ENTRY") {
           res.status(409).send(err);
         } else {
