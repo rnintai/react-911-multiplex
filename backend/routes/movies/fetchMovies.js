@@ -65,8 +65,8 @@ router.get("/", async function (req, res) {
           "-" +
           openDt.substr(6, 2);
         // Array[string]
-        let directors = element.directors.map((arr) => arr.peopleNm).join(", ");
-        let companys = element.companys.map((arr) => arr.companyNm).join(", ");
+        let directors = element.directors.map((arr) => arr.peopleNm).join(",");
+        let companys = element.companys.map((arr) => arr.companyNm).join(",");
         // Array[object]
         let repNationNm = element.repNationNm;
 
@@ -78,31 +78,22 @@ router.get("/", async function (req, res) {
         if (checkMonths(openDt) == false) {
           continue;
         }
-        mysql.query(
-          sql,
-          [
-            movieCd,
-            movieNm,
-            movieNmEn,
-            prdtStatNm,
-            repGenreNm,
-            openDt,
-            directors,
-            companys,
-            repNationNm,
-          ],
-          function (err, result) {
-            if (!err) {
-              // result.insertId가 0이면 중복이라 업데이트 하지 않은 것.
-              if (result.insertId != 0) {
-                responseObj.updatedCount += 1;
-                responseObj.updatedMovieCodeList.push(movieCd);
-              }
-            } else {
-              res.send(err);
-            }
-          }
-        );
+        const result = await mysql.query(sql, [
+          movieCd,
+          movieNm,
+          movieNmEn,
+          prdtStatNm,
+          repGenreNm,
+          openDt,
+          directors,
+          companys,
+          repNationNm,
+        ]);
+        console.log(result[0]);
+        if (result[0].insertId != 0) {
+          responseObj.updatedCount += 1;
+          responseObj.updatedMovieCodeList.push(movieCd);
+        }
       }
     }
     res.status(200).send(responseObj);
