@@ -10,15 +10,22 @@ router.get("/", async function (req, res) {
   // 페이지로 나누어 조회
   let pageLength = undefined;
   const itemPerPage = 25;
+  let responseObj = {
+    updatedCount: 0,
+    updatedMovieCodeList: [],
+  };
 
   const sql =
-    "INSERT INTO movie (movie_id, movie_name, movie_name_en, movie_state, genre, released_at, director, distributor, nation) VALUES (?,?,?,?,?,?,?,?,?) ON DUPLICATE KEY UPDATE movie_state=VALUES(movie_state)";
+    "INSERT INTO movie (movie_id, movie_name, movie_name_en, movie_state, genre, released_at, director, distributor, nation) " +
+    "VALUES (?,?,?,?,?,?,?,?,?) " +
+    "ON DUPLICATE KEY UPDATE " +
+    "movie_state=VALUES(movie_state), movie_name=VALUES(movie_name), released_at=VALUES(released_at)";
 
   // 페이지 수 체크.
 
   let response = await axios
     .get(
-      `http://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieList.json?key=${process.env.KOBIS_KEY}&itemPerPage=${itemPerPage}&openStartDt=2021&openEndDt=2021&movieTypeCd=220101&repNationCd=22041011`
+      `http://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieList.json?key=${process.env.KOBIS_KEY}&itemPerPage=${itemPerPage}&openStartDt=2021&openEndDt=2022&movieTypeCd=220101`
     )
     .catch((error) => {
       res.status(400).send(error);
@@ -36,20 +43,19 @@ router.get("/", async function (req, res) {
     for (let i = 1; i <= pageLength; i++) {
       let response = await axios
         .get(
-          `http://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieList.json?key=${process.env.KOBIS_KEY}&curPage=${i}&itemPerPage=${itemPerPage}&openStartDt=2021&openEndDt=2021&movieTypeCd=220101`
+          `http://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieList.json?key=${process.env.KOBIS_KEY}&curPage=${i}&itemPerPage=${itemPerPage}&openStartDt=2021&openEndDt=2022&movieTypeCd=220101`
         )
         .catch((error) => {
           res.status(400).send(error);
         });
       const movieList = response.data.movieListResult.movieList;
-      // console.log(response.data.movieListResult.totCnt, pageLength);
       for (const element of movieList) {
         // 각 영화에 대해서 영화 상세정보 조회.
         let movieCd = element.movieCd;
         let movieNm = element.movieNm;
         let movieNmEn = element.movieNmEn;
         let prdtStatNm = element.prdtStatNm;
-        let genreAlt = element.genreAlt;
+        let repGenreNm = element.repGenreNm;
         // mmmmyydd -> mmmm-yy-dd
         let openDt = element.openDt;
         openDt =
@@ -62,12 +68,16 @@ router.get("/", async function (req, res) {
         let directors = element.directors.map((arr) => arr.peopleNm).join(", ");
         let companys = element.companys.map((arr) => arr.companyNm).join(", ");
         // Array[object]
-        let nationAlt = element.nationAlt;
+        let repNationNm = element.repNationNm;
 
-        if (genreAlt.indexOf("성인물(에로)") != -1) {
+        // 특정 장르 필터링
+        if (filterGenre(movieNmEn, repNationNm, repGenreNm) == true) {
           continue;
         }
-
+        // 업데이트 날짜 기준 -2 ~ +6개월 사이 영화만 데이터베이스에 집어넣기.
+        if (checkMonths(openDt) == false) {
+          continue;
+        }
         mysql.query(
           sql,
           [
@@ -75,15 +85,19 @@ router.get("/", async function (req, res) {
             movieNm,
             movieNmEn,
             prdtStatNm,
-            genreAlt,
+            repGenreNm,
             openDt,
             directors,
             companys,
-            nationAlt,
+            repNationNm,
           ],
-          function (err, rows) {
+          function (err, result) {
             if (!err) {
-              console.log(rows);
+              // result.insertId가 0이면 중복이라 업데이트 하지 않은 것.
+              if (result.insertId != 0) {
+                responseObj.updatedCount += 1;
+                responseObj.updatedMovieCodeList.push(movieCd);
+              }
             } else {
               res.send(err);
             }
@@ -91,16 +105,30 @@ router.get("/", async function (req, res) {
         );
       }
     }
-    mysql.query("SELECT * FROM movie", function (err, rows) {
-      if (!err) {
-        res.status(200).send(rows);
-      } else {
-        res.send(err);
-      }
-    });
-  } catch (error) {
-    console.log(error);
+    res.status(200).send(responseObj);
+  } catch (e) {
+    res.status(400).send(e);
   }
 });
 
+function filterGenre(movieNmEn, repNationNm, repGenreNm) {
+  let result =
+    repGenreNm.indexOf("성인") != -1 ||
+    repGenreNm.indexOf("멜로") != -1 ||
+    (repNationNm.indexOf("일본") != -1 && repGenreNm.indexOf("드라마") != -1) ||
+    (repNationNm.indexOf("한국") != -1 &&
+      repGenreNm.indexOf("드라마") != -1 &&
+      movieNmEn === "");
+
+  return result;
+}
+
+function checkMonths(openDt) {
+  const today = new Date();
+  let result =
+    new Date(openDt) >= today.setMonth(today.getMonth() - 2) &&
+    new Date(openDt) < today.setMonth(today.getMonth() + 6);
+
+  return result;
+}
 module.exports = router;
