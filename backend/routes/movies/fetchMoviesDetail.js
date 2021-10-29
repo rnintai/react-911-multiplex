@@ -14,6 +14,7 @@ router.get("/", async function (req, res) {
   // 페이지로 나누어 조회
   let responseObj = {
     updatedCount: 0,
+    updatedMovieId: [],
   };
 
   let rows = await mysql.query("SELECT movie_id FROM movie");
@@ -70,6 +71,7 @@ router.get("/", async function (req, res) {
       // 변경 사항이 있을 경우 그 개수를 카운팅하여 결과로 돌려줌.
       if (insertResult[0].changedRows != 0) {
         responseObj.updatedCount += 1;
+        responseObj.updatedMovieId.push(movieId);
       }
     }
     res.status(200).send(responseObj);
