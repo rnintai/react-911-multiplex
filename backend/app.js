@@ -16,9 +16,21 @@ var app = express();
 
 // mysql connection
 const mysql = require("./mysql");
-mysql.connect(function (err) {
-  if (err) throw err;
-  console.log("mysql connected.");
+mysql.getConnection((err, connection) => {
+  if (err) {
+    switch (err.code) {
+      case "PROTOCOL_CONNECTION_LOST":
+        console.error("Database connection was closed.");
+        break;
+      case "ER_CON_COUNT_ERROR":
+        console.error("Database has too many connections.");
+        break;
+      case "ECONNREFUSED":
+        console.error("Database connection was refused.");
+        break;
+    }
+  }
+  if (connection) return connection.release();
 });
 
 // view engine setup
