@@ -5,7 +5,9 @@ require("dotenv").config();
 
 const mysql = require("../../mysql");
 
-/* GET boxoffice from kobis. */
+/**
+ * 페이지 별 영화 정보 조회 후 DB에 업데이트
+ */
 router.get("/", async function (req, res) {
   // 페이지로 나누어 조회
   const itemPerPage = 25;
@@ -20,23 +22,6 @@ router.get("/", async function (req, res) {
     "VALUES (?,?,?,?,?,?,?,?,?) " +
     "ON DUPLICATE KEY UPDATE " +
     "movie_state=VALUES(movie_state), movie_name=VALUES(movie_name), released_at=VALUES(released_at)";
-
-  // 페이지 수 체크. -> admin 페이지 프론트엔드에서 체크 후 반복문 통해 호출.
-
-  // let response = await axios
-  //   .get(
-  //     `http://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieList.json?key=${process.env.KOBIS_KEY}&itemPerPage=${itemPerPage}&openStartDt=2021&openEndDt=2022&movieTypeCd=220101`
-  //   )
-  //   .catch((error) => {
-  //     res.status(400).send(error);
-  //   });
-  // if (pageLength == undefined) {
-  //   // 나누어 떨어지면 몫을, 안떨어지면 1페이지 더 조회.
-  //   pageLength =
-  //     response.data.movieListResult.totCnt % itemPerPage != 0
-  //       ? response.data.movieListResult.totCnt / itemPerPage + 1
-  //       : response.data.movieListResult.totCnt / itemPerPage;
-  // }
 
   // 모든 페이지 iterate하며 db에 추가.
   try {
