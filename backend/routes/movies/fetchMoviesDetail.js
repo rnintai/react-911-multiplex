@@ -7,6 +7,8 @@ const mysql = require("../../mysql");
 
 /* GET boxoffice from kobis. */
 router.get("/", async function (req, res) {
+  // 페이지 당 조회 item
+  const itemsPerPage = 25;
   // 페이지로 나누어 조회
   let responseObj = {
     updatedCount: 0,
@@ -16,8 +18,13 @@ router.get("/", async function (req, res) {
   let movieIdList = rows[0];
   // 데이터베이스 내 모든 레코드를 iterate하며 db에 추가.
   try {
-    for (const element of movieIdList) {
-      let movieId = element.movie_id;
+    // for (const element of movieIdList) {
+    for (
+      let i = (req.query.curPage - 1) * itemsPerPage + 1;
+      i <= req.query.curPage * itemsPerPage;
+      i++
+    ) {
+      let movieId = movieIdList[i].movie_id;
       // kobis API에서 현재 영화의
       let response = await axios
         .get(
