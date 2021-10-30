@@ -3,7 +3,7 @@ const express = require("express");
 const router = express.Router();
 require("dotenv").config();
 
-const mysql = require("../../mysql");
+const pool = require("../../mysql");
 
 const itemPerPage = 25;
 let pageLength = 0;
@@ -37,12 +37,16 @@ router.get("/", async function (req, res, next) {
 
 router.get("/", function (req, res) {
   res.on("finish", async () => {
+    let connection = await pool.getConnection();
+
     const sql =
       "INSERT INTO movie (movie_id, movie_name, movie_name_en, movie_state, genre, released_at, director, distributor, nation) " +
       "VALUES (?,?,?,?,?,?,?,?,?) " +
       "ON DUPLICATE KEY UPDATE " +
       "movie_state=VALUES(movie_state), movie_name=VALUES(movie_name), released_at=VALUES(released_at)";
     // 모든 페이지 iterate하며 db에 추가.
+    await connection.beginTransaction();
+
     try {
       for (let i = 1; i <= pageLength; i++) {
         console.log(`page ${i}/${pageLength}`);
@@ -85,7 +89,7 @@ router.get("/", function (req, res) {
           if (checkMonths(openDt) == false) {
             continue;
           }
-          const result = await mysql.query(sql, [
+          const result = await connection.query(sql, [
             movieCd,
             movieNm,
             movieNmEn,
@@ -103,8 +107,12 @@ router.get("/", function (req, res) {
           }
         }
       }
+      await connection.commit();
+      connection.release();
       console.log(responseObj);
     } catch (e) {
+      await connection.rollback();
+      connection.release();
       console.log(e);
     }
   });
