@@ -1,23 +1,31 @@
-const axios = require("axios");
 const express = require("express");
 const router = express.Router();
 require("dotenv").config();
 
-// const mysql = require('../mysql');
+const pool = require("../../mysql");
 
-/* GET boxoffice from kobis. */
+/**
+ * 박스오피스에서 개봉한 영화 중 예매율 상위 10위. 예매율이 같을 경우 이름순으로 정렬.
+ * 추후
+ */
 router.get("/", async function (req, res) {
   try {
-    const response = await axios
-      .get(
-        `http://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=${process.env.KOBIS_KEY}&targetDt=${req.query.date}&multiMovieYn=N`
-      )
-      .catch((error) => {
-        res.status(400).send(error);
-      });
-    res.status(200).send(response.data.boxOfficeResult.dailyBoxOfficeList);
-  } catch (error) {
-    console.log(error);
+    let connection = await pool.getConnection((conn) => conn);
+
+    const sql =
+      "SELECT * FROM movie " +
+      "ORDER BY reserved_count DESC, movie_name ASC " +
+      "LIMIT 10;";
+
+    const result = await connection.query(sql);
+
+    (await connection).release();
+
+    console.log("success");
+    res.status(200).send(result[0]);
+  } catch (err) {
+    console.log(err);
+    res.status(400).send(err);
   }
 });
 
