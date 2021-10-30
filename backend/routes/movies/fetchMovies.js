@@ -51,7 +51,7 @@ router.get("/", function (req, res) {
             `http://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieList.json?key=${process.env.KOBIS_KEY}&curPage=${i}&itemPerPage=${itemPerPage}&openStartDt=2021&openEndDt=2022&movieTypeCd=220101`
           )
           .catch((error) => {
-            console.log(error);
+            res.status(400).send(error);
           });
         const movieList = response.data.movieListResult.movieList;
         for (const element of movieList) {
@@ -105,7 +105,7 @@ router.get("/", function (req, res) {
       }
       console.log(responseObj);
     } catch (e) {
-      console.log(e);
+      res.status(400).send(e);
     }
   });
   res.status(200).send("processing on background...");
