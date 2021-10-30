@@ -3,22 +3,25 @@ const express = require("express");
 const router = express.Router();
 require("dotenv").config();
 
-const mysql = require("../../mysql");
+const pool = require("../../mysql");
 
 router.get("/", function (req, res) {
   res.on("finish", async function () {
+    let connection = await pool.getConnection();
+
     // 페이지로 나누어 조회
     let responseObj = {
       updatedCount: 0,
       updatedMovieId: [],
     };
-
-    let rows = await mysql.query("SELECT movie_id FROM movie");
+    let rows = await connection.query("SELECT movie_id FROM movie");
     let movieIdList = rows[0];
     // 데이터베이스 내 모든 레코드를 iterate하며 db에 추가.
-    try {
-      let index = 1;
+    let index = 1;
 
+    await connection.beginTransaction();
+
+    try {
       for (const element of movieIdList) {
         let movieId = element.movie_id;
         console.log(`movieId ${movieId} (${index++}/${movieIdList.length})`);
@@ -56,8 +59,8 @@ router.get("/", function (req, res) {
         let showTypes = showTypesList.join(",");
 
         // update 쿼리문
-        const sql = `UPDATE movie SET running_time=?, actors=?, age_limit=?, show_type=? WHERE movie_id=${movieId}`;
-        let insertResult = await mysql.query(sql, [
+        const updateSql = `UPDATE movie SET running_time=?, actors=?, age_limit=?, show_type=? WHERE movie_id=${movieId}`;
+        let updateResult = await connection.query(updateSql, [
           showTm,
           actors,
           audits,
@@ -65,16 +68,18 @@ router.get("/", function (req, res) {
         ]);
 
         // 변경 사항이 있을 경우 그 개수를 카운팅하여 결과로 돌려줌.
-        if (insertResult[0].changedRows != 0) {
+        if (updateResult[0].changedRows != 0) {
           responseObj.updatedCount += 1;
           responseObj.updatedMovieId.push(movieId);
         }
-        break;
       }
-      console.log(responseObj);
-    } catch (e) {
-      console.log(e);
+      connection.commit();
+    } catch (sqlErr) {
+      connection.rollback();
+      console.log(sqlErr);
     }
+    connection.release();
+    console.log(responseObj);
   });
   res.status(200).send("progess in background...");
 });
