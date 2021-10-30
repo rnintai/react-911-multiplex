@@ -73,12 +73,13 @@ router.get("/", function (req, res) {
           responseObj.updatedMovieId.push(movieId);
         }
       }
-      connection.commit();
+      await connection.commit();
+      connection.release();
     } catch (sqlErr) {
-      connection.rollback();
+      await connection.rollback();
+      connection.release();
       console.log(sqlErr);
     }
-    connection.release();
     console.log(responseObj);
   });
   res.status(200).send("progess in background...");
