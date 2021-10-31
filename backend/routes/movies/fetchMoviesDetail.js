@@ -82,7 +82,7 @@ router.get("/", function (req, res) {
     }
     console.log(responseObj);
   });
-  res.status(200).send("progess in background...");
+  res.status(200).send("progress in background...");
 });
 
 module.exports = router;
