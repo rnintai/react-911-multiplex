@@ -10,6 +10,7 @@ const signUpRouter = require("./routes/signUp");
 const boxOfficeRouter = require("./routes/movies/boxOffice");
 const preMoviesRouter = require("./routes/movies/preMovies");
 const fetchMoviesRouter = require("./routes/movies/fetchMovies");
+const moviesDetailRouter = require("./routes/movies/moviesDetail");
 const fetchMoviesDetailRouter = require("./routes/movies/fetchMoviesDetail");
 
 var app = express();
@@ -50,6 +51,7 @@ app.use("/signup", signUpRouter);
 app.use("/movies/boxoffice", boxOfficeRouter);
 app.use("/movies/pre", preMoviesRouter);
 app.use("/movies/list/fetch", fetchMoviesRouter);
+app.use("/movies/detail", moviesDetailRouter);
 app.use("/movies/detail/fetch", fetchMoviesDetailRouter);
 
 // catch 404 and forward to error handler
