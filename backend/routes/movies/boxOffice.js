@@ -9,9 +9,8 @@ const pool = require("../../mysql");
  * 추후
  */
 router.get("/", async function (req, res) {
+  let connection = await pool.getConnection((conn) => conn);
   try {
-    let connection = await pool.getConnection((conn) => conn);
-
     const sql =
       "SELECT * FROM movie " +
       "ORDER BY reserved_count DESC, movie_name ASC " +
@@ -19,11 +18,13 @@ router.get("/", async function (req, res) {
 
     const result = await connection.query(sql);
 
-    (await connection).release();
+    connection.release();
 
     console.log("success");
     res.status(200).send(result[0]);
   } catch (err) {
+    connection.release();
+
     console.log(err);
     res.status(400).send(err);
   }
