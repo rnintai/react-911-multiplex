@@ -49,8 +49,8 @@ app.use(cors());
 app.use("/signup", signUpRouter);
 app.use("/movies/boxoffice", boxOfficeRouter);
 app.use("/movies/pre", preMoviesRouter);
-app.use("/movies/fetch/list", fetchMoviesRouter);
-app.use("/movies/fetch/detail", fetchMoviesDetailRouter);
+app.use("/movies/list/fetch", fetchMoviesRouter);
+app.use("/movies/detail/fetch", fetchMoviesDetailRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
