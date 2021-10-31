@@ -13,11 +13,11 @@ router.get("/", async function (req, res) {
   let connection = await pool.getConnection((conn) => conn);
 
   const itemsPerPage = 12;
-  const startIndex = req.query.page * itemsPerPage;
+  const startIndex = (req.query.page - 1) * itemsPerPage;
   try {
     const sql = `SELECT * FROM movie
       WHERE movie_state="개봉예정"
-      ORDER BY released_at ASC
+      ORDER BY released_at ASC, movie_name ASC
       LIMIT ${startIndex}, ${itemsPerPage}`;
 
     const result = await connection.query(sql);
