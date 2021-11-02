@@ -6,7 +6,7 @@ const logger = require("morgan");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 
-const signUpRouter = require("./routes/signUp");
+const signUpRouter = require("./routes/member/signUp");
 const boxOfficeRouter = require("./routes/movies/boxOffice");
 const preMoviesRouter = require("./routes/movies/preMovies");
 const fetchMoviesRouter = require("./routes/movies/fetchMovies");
@@ -47,7 +47,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors());
 
 // routers
-app.use("/signup", signUpRouter);
+app.use("/member/signup", signUpRouter);
 app.use("/movies/boxoffice", boxOfficeRouter);
 app.use("/movies/pre", preMoviesRouter);
 app.use("/movies/list/fetch", fetchMoviesRouter);
