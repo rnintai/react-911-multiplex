@@ -61,38 +61,38 @@ nav ul li:first-child{
   padding-right : 15%;
 }
 /*영화카드*/
-.card_view{
+.Card_View{
   background-color : black;
   color : white;
   display : flex;
   justify-content : space-evenly;
   align-items : center;
 }
-.card_list{
+.Card_List{
   display : flex;
   list-style-type : none;
   text-align : center;
   padding : 0%;
 }
-.card_list li{
+.Card_List li{
   padding-left : 10px;
   padding-right : 10px;
 }
 /*영화 카드 리스트*/
-.movie{
+.Movie{
   width : 153px;
   height : 226px;
   display : flex;
   justify-content : center;
   align-items : center;
 }
-.movie img{
+.Movie img{
   position : relative;
   width : 153px;
   height : 226px;
 
 }
-.movieSub{
+.Movie_Sub{
   display: none;
   position : absolute;
   padding : 0%;
@@ -101,7 +101,7 @@ nav ul li:first-child{
   align-items : center;
 
 }
-.movieSub li{
+.Movie_Sub li{
   margin: 10px;
   width: 100px;
   padding: 5px;
@@ -172,7 +172,7 @@ nav ul li:first-child{
   top : 20px;
 }
 
-.Show{
+.Theater_Show{
   position : relative;
   width : 1000px;
   height : 378px;
@@ -215,20 +215,11 @@ nav ul li:first-child{
   display : block;
   position : absolute;
 }
-.movie:hover ul{
+.Movie:hover ul{
   display : block;
   position : absolute;
 }
 
 .App-link {
   color : #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform : rotate(0deg);
-  }
-  to {
-    transform : rotate(360deg);
-  }
 }

@@ -3,12 +3,12 @@ import React, { Component } from "react";
 class Card extends Component {
   render() {
     return (
-      <div className="Card_View"> 
+      <div className="Card_View">
         <ul className="Card_List">
           <li>
             <div className="Movie">
               <img src="#"/>
-              <ul>
+              <ul className="Movie_Sub">
                 <li>예매하기</li>
                 <li>상세정보</li>
               </ul>
@@ -20,7 +20,7 @@ class Card extends Component {
           <li>
             <div className="Movie">
               <img src="#"/>
-              <ul>
+              <ul className="Movie_Sub">
                 <li>예매하기</li>
                 <li>상세정보</li>
               </ul>
@@ -32,7 +32,7 @@ class Card extends Component {
           <li>
             <div className="Movie">
               <img src="#"/>
-              <ul>
+              <ul className="Movie_Sub">
                 <li>예매하기</li>
                 <li>상세정보</li>
               </ul>
@@ -44,7 +44,7 @@ class Card extends Component {
           <li>
             <div className="Movie">
               <img src="#"/>
-              <ul>
+              <ul className="Movie_Sub">
                 <li>예매하기</li>
                 <li>상세정보</li>
               </ul>
@@ -56,7 +56,7 @@ class Card extends Component {
           <li>
             <div className="Movie">
               <img src="#"/>
-              <ul>
+              <ul className="Movie_Sub">
                 <li>예매하기</li>
                 <li>상세정보</li>
               </ul>
