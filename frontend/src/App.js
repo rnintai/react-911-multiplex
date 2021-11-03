@@ -6,6 +6,7 @@ import Name from "./components/header/Name";
 import Card from "./components/body/Card";
 import Theater from "./components/body/Theater";
 import Event from "./components/body/Event";
+import Footer from "./components/footer/Footer"
 
 class App extends Component {
   render() {
@@ -19,7 +20,9 @@ class App extends Component {
         <Card movie1="#" movie2="#" movie3="영화3" movie4="헤헤" movie5="notitle"></Card>
         <Event></Event>
         <Theater></Theater>
+        <Footer></Footer>
       </body>
+
      </div>
     );
   }
