@@ -7,7 +7,6 @@ import Card from "./components/body/Card";
 import Theater from "./components/body/Theater";
 import Event from "./components/body/Event";
 
-
 class App extends Component {
   render() {
     return (
@@ -17,9 +16,9 @@ class App extends Component {
         <Nav></Nav>
       </header>
       <body>
-        <Card></Card>
-        <Theater></Theater>
+        <Card movie1="#" movie2="#" movie3="영화3" movie4="헤헤" movie5="notitle"></Card>
         <Event></Event>
+        <Theater></Theater>
       </body>
      </div>
     );
