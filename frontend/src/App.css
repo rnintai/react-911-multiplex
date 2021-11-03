@@ -109,6 +109,55 @@ nav ul li:first-child{
   border-radius: 10px;
 
 }
+/*이벤트*/
+.Event_box {
+   display : flex;
+   flex-wrap : wrap;
+   flex-direction: row;
+   justify-content: space-around;
+
+ }
+
+ .Eb1 {
+   display : flex;
+   flex-wrap : wrap;
+   flex-direction: row;
+   justify-content: space-around;
+ }
+
+ .Eb2 {
+   display : flex;
+   flex-wrap : wrap;
+   flex-direction: column;
+   justify-content: space-around;
+ }
+
+ .Eb3 {
+   display : flex;
+   flex-wrap : wrap;
+   flex-direction: column;
+   justify-content: space-around;
+ }
+ .event1 {
+   width: 300px;
+   height: 300px;
+ }
+ .event2 {
+   width: 150px;
+   height: 100px;
+ }
+ .event3 {
+   width: 150px;
+   height: 200px;
+ }
+ .event4 {
+   width: 150px;
+   height: 200px;
+ }
+ .event5 {
+   width: 150px;
+   height: 100px;
+ }
 
 /*영화관*/
 .Theater{
