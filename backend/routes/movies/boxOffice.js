@@ -21,7 +21,7 @@ router.get("/", async function (req, res) {
     connection.release();
 
     console.log("success");
-    res.status(200).send(result[0]);
+    res.status(200).send({ boxOfficeList: result[0] });
   } catch (err) {
     connection.release();
 
