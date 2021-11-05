@@ -13,7 +13,6 @@ header{
   padding-right : 15%;
   border-bottom : solid 1px #CBCACA;
 }
-
 .Name {
   padding : 1%;
   margin : 0%;
@@ -23,7 +22,6 @@ header{
   font-family :'Courier New', Courier, monospace;
   border-bottom : solid 1px #CBCACA;
 }
-
 /*메뉴*/
 .Nav_bar {
   margin : 1%;
@@ -31,7 +29,6 @@ header{
   text-align : center;
   padding-left : 0%;
 }
-
 .Nav {
   position : relative;
   display : inline-block;
@@ -41,11 +38,9 @@ header{
   padding-bottom : 10px;
 
 }
-
 nav ul li:first-child{
   border-left : none;
 }
-
 .Sub_bar {
   margin-top : 10px;
   padding-left : 0;
@@ -55,19 +50,16 @@ nav ul li:first-child{
   text-align : center;
   z-index : 1;
 }
-
 .Sub{
   width : 100px;
   height : 20px;
   padding-top : 10px;
   padding-bottom : 10px;
 }
-
 .Main{
   padding-left : 15%;
   padding-right : 15%;
 }
-
 /*영화카드*/
 .Card_View{
   background-color : black;
@@ -76,19 +68,16 @@ nav ul li:first-child{
   justify-content : space-evenly;
   align-items : center;
 }
-
 .Card_List{
   display : flex;
   list-style-type : none;
   text-align : center;
   padding : 0%;
 }
-
 .Card_List li{
   padding-left : 10px;
   padding-right : 10px;
 }
-
 /*영화 카드 리스트*/
 .Movie{
   width : 153px;
@@ -97,24 +86,31 @@ nav ul li:first-child{
   justify-content : center;
   align-items : center;
 }
-
 .Movie img{
   position : relative;
   width : 153px;
   height : 226px;
-  
-}
 
-.Movie ul{
+}
+.Movie_Sub{
+  display: none;
   position : absolute;
   padding : 0%;
   list-style-type : none;
   justify-content : center;
   align-items : center;
-}
 
-/*영화관*/
-.Theater{
+}
+.Movie_Sub li{
+  margin: 10px;
+  width: 100px;
+  padding: 5px;
+  border: 1px solid red;
+  border-radius: 10px;
+
+}
+/*이벤트*/
+.Event{
   width : 1000px;
   height : auto;
   position : relative;
@@ -126,12 +122,84 @@ nav ul li:first-child{
   top : 20px;
 }
 
+.Event_box {
+  position : relative;
+  width : 1000px;
+  height : 400px;
+  left : 0px;
+  top : 45px;
+  display : flex;
+  flex-direction : row;
+  flex-wrap : wrap;
+  align-items : center;
+  justify-content : space-evenly;
+  table-layout : auto;
+  margin : 0 auto;
+
+ }
+
+ .Eb1 {
+   display : flex;
+   flex-wrap : wrap;
+   flex-direction: row;
+   justify-content: space-around;
+ }
+
+ .Eb2 {
+   display : flex;
+   flex-wrap : wrap;
+   flex-direction: column;
+   justify-content: space-around;
+ }
+
+ .Eb3 {
+   display : flex;
+   flex-wrap : wrap;
+   flex-direction: column;
+   justify-content: space-around;
+ }
+ .event1 {
+   width: 398px;
+   height: 398px;
+ }
+ .event2 {
+   width: 213px;
+   height: 163px;
+ }
+ .event3 {
+   margin-top: 22px;
+   width: 213px;
+   height: 213px;
+ }
+ .event4 {
+   width: 321px;
+   height: 213px;
+ }
+ .event5 {
+   margin-top: 18px;
+   width: 321px;
+   height: 169px;
+ }
+
+/*영화관*/
+.Theater{
+  width : 1000px;
+  height : auto;
+  position : relative;
+  display :flex;
+  flex-wrap : wrap;
+  align-items : flex-start;
+  justify-content : flex-start;
+  margin : 0 auto;
+  top : 75px;
+}
+
 .Theater_Show{
   position : relative;
   width : 1000px;
   height : 378px;
   left : 0px;
-  top : 45px;
+  top : 100px;
   display : flex;
   flex-direction : row;
   flex-wrap : wrap;
@@ -146,6 +214,22 @@ nav ul li:first-child{
   height : 184px;
 }
 
+/*푸터*/
+.FT{
+  padding-left: 3%;
+  margin-top: 30%;
+  width: 100%;
+  height: 90px;
+  bottom: 0px;
+  border-top: 1px solid #c4c4c4;
+  padding-top: 15px;
+  color: #808080;
+  font-size: 11px;
+}
+.FT p:last-child{
+  font-size: 8px;
+}
+
 .App-header {
   background-color : #282c34;
   min-height : 100vh;
@@ -157,65 +241,6 @@ nav ul li:first-child{
   color : white;
 }
 
-/*event*/
-.Event_box {
-  display : flex;
-  flex-wrap : wrap;
-  flex-direction: row;
-  justify-content: space-around;
-
-}
-
-.Eb1 {
-  display : flex;
-  flex-wrap : wrap;
-  flex-direction: row;
-  justify-content: space-around;
-}
-
-.Eb2 {
-  display : flex;
-  flex-wrap : wrap;
-  flex-direction: column;
-  justify-content: space-around;
-}
-
-.Eb3 {
-  display : flex;
-  flex-wrap : wrap;
-  flex-direction: column;
-  justify-content: space-around;
-}
-
-.event1 {
-  width: 300px;
-  height: 300px;
-  
-}
-
-.event2 {
-  width: 150px;
-  height: 100px;
-  
-}
-
-.event3 {
-  width: 150px;
-  height: 200px;
-  
-}
-
-.event4 {
-  width: 150px;
-  height: 200px;
-
-}
-
-.event5 {
-  width: 150px;
-  height: 100px;
-  
-}
 
 
 /*hover*/
@@ -228,16 +253,11 @@ nav ul li:first-child{
   display : block;
   position : absolute;
 }
+.Movie:hover ul{
+  display : block;
+  position : absolute;
+}
 
 .App-link {
   color : #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform : rotate(0deg);
-  }
-  to {
-    transform : rotate(360deg);
-  }
 }
