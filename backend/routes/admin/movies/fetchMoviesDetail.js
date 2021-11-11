@@ -3,7 +3,7 @@ const express = require("express");
 const router = express.Router();
 require("dotenv").config();
 
-const pool = require("../../mysql");
+const pool = require("../../../mysql");
 
 router.get("/", function (req, res) {
   res.on("finish", async function () {
