@@ -6,13 +6,16 @@ const logger = require("morgan");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 
+// user
 const signUpRouter = require("./routes/member/signUp");
 const boxOfficeRouter = require("./routes/movies/boxOffice");
 const preMoviesRouter = require("./routes/movies/preMovies");
-const fetchMoviesRouter = require("./routes/movies/fetchMovies");
 const moviesDetailRouter = require("./routes/movies/moviesDetail");
-const fetchMoviesDetailRouter = require("./routes/movies/fetchMoviesDetail");
-
+const getMoviesListRouter = require("./routes/movies/getMoviesList");
+// admin
+const updateMovieDetailRouter = require("./routes/admin/movies/updateMovie");
+const fetchMoviesRouter = require("./routes/admin/movies/fetchMovies");
+const fetchMoviesDetailRouter = require("./routes/admin/movies/fetchMoviesDetail");
 var app = express();
 
 // mysql connection
@@ -50,8 +53,11 @@ app.use(cors());
 app.use("/member/signup", signUpRouter);
 app.use("/movies/boxoffice", boxOfficeRouter);
 app.use("/movies/pre", preMoviesRouter);
-app.use("/movies/list/fetch", fetchMoviesRouter);
 app.use("/movies/detail", moviesDetailRouter);
+app.use("/movies/list", getMoviesListRouter);
+
+app.use("/movies/detail", updateMovieDetailRouter);
+app.use("/movies/list/fetch", fetchMoviesRouter);
 app.use("/movies/detail/fetch", fetchMoviesDetailRouter);
 
 // catch 404 and forward to error handler
