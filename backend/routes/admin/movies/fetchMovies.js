@@ -3,7 +3,7 @@ const express = require("express");
 const router = express.Router();
 require("dotenv").config();
 
-const pool = require("../../mysql");
+const pool = require("../../../mysql");
 
 const itemPerPage = 25;
 let pageLength = 0;
