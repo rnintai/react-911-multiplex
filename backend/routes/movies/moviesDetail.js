@@ -40,7 +40,7 @@ router.get("/", async function (req, res) {
  * trailer 트레일러 영상 url
  * }
  */
-router.post("/:movieId", async function (req, res) {
+router.put("/:movieId", async function (req, res) {
   let connection = await pool.getConnection((conn) => conn);
   const movie_id = req.params.movieId;
   const synopsis = req.body.synopsis;
