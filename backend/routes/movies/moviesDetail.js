@@ -5,13 +5,30 @@ require("dotenv").config();
 const pool = require("../../mysql");
 
 /**
- * GET /omvies/detail/{movie_id}
+ * GET /omvies/detail/{movieId}
  * 영화 1개 상세정보 조회
  */
-router.get("/", async function (req, res) {});
+router.get("/", async function (req, res) {
+  let connection = await pool.getConnection((conn) => conn);
+  try {
+    const sql = `SELECT * FROM movie WHERE movie_id=?`;
+
+    const result = await connection.query(sql, req.params.movieId);
+
+    connection.release();
+
+    console.log("success");
+    res.status(200).send({ msg: "success", movieDetail: result[0] });
+  } catch (err) {
+    connection.release();
+
+    console.log(err);
+    res.status(400).send({ msg: "failed", error: err });
+  }
+});
 
 /**
- * POST /movies/detail/{movie_id}
+ * PUT /movies/detail/{movieId}
  *
  * 영화 줄거리, 포스터, 트레일러 업데이트
  *
@@ -19,59 +36,43 @@ router.get("/", async function (req, res) {});
  * {
  * synopsis 줄거리
  * poster 포스터 이미지 url
+ * poster_thumb 포스터 썸네일 url
  * trailer 트레일러 영상 url
  * }
  */
 router.post("/:movieId", async function (req, res) {
   let connection = await pool.getConnection((conn) => conn);
-
+  const movie_id = req.params.movieId;
   const synopsis = req.body.synopsis;
   const poster = req.body.poster;
+  const posterThumb = req.body.posterThumb;
   const trailer = req.body.trailer;
-
-  let responseObj = {
-    updatedId: req.params.movieId,
-    msg: "",
-    updateResult: {},
-  };
-
   try {
-    let toUpdate =
-      `${
-        synopsis != undefined
-          ? `synopsis="${synopsis}", `
-          : "synopsis=synopsis, "
-      }` +
-      `${poster != undefined ? `poster="${poster}", ` : "poster=poster, "}` +
-      `${trailer != undefined ? `trailer="${trailer}" ` : "trailer=trailer "}`;
+    const sql = `UPDATE movie SET synopsis=?, poster=?, poster_thumb=?, trailer=? WHERE movie_id=${movie_id}`;
 
-    if (toUpdate === "") {
-      res.status(400).send("업데이트 할 내용을 body에 입력해주세요.");
-    } else {
-      const sql = `UPDATE movie SET ${toUpdate} WHERE movie_id=${req.params.movieId}`;
+    const result = await connection.query(sql, [
+      synopsis,
+      poster,
+      posterThumb,
+      trailer,
+    ]);
 
-      await connection.beginTransaction();
+    await connection.commit();
 
-      const result = await connection.query(sql);
-
-      let msg = "";
-      if (result[0].changedRows > 0) {
-        msg = `${req.params.movieId} 업데이트 완료.`;
-        await connection.commit();
-      } else {
-        msg = `${req.params.movieId} 변경사항 없음`;
-      }
-      responseObj.msg = msg;
-      responseObj.updateResult = result[0];
-      res.status(200).send(responseObj);
-    }
+    res.status(200).send({
+      msg: "success",
+      result: result[0],
+    });
     connection.release();
   } catch (err) {
     await connection.rollback();
-
     connection.release();
-    responseObj.msg = err;
-    res.status(400).send(responseObj);
+
+    console.log(err);
+    res.status(400).send({
+      msg: "fail",
+      error: err,
+    });
   }
 });
 
