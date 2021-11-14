@@ -77,3 +77,6 @@ typings/
 
 # OS generated files
 .DS_Store
+
+# public upload
+/public/images/uploads
