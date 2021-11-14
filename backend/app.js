@@ -13,6 +13,7 @@ const preMoviesRouter = require("./routes/movies/preMovies");
 const moviesDetailRouter = require("./routes/movies/moviesDetail");
 const getMoviesListRouter = require("./routes/movies/getMoviesList");
 // admin
+const uploadPosterRouter = require("./routes/admin/movies/uploadPoster");
 const fetchMoviesRouter = require("./routes/admin/movies/fetchMovies");
 const fetchMoviesDetailRouter = require("./routes/admin/movies/fetchMoviesDetail");
 var app = express();
@@ -55,6 +56,7 @@ app.use("/movies/pre", preMoviesRouter);
 app.use("/movies/detail", moviesDetailRouter);
 app.use("/movies/list", getMoviesListRouter);
 
+app.use("/movies/detail/poster", uploadPosterRouter);
 app.use("/movies/list/fetch", fetchMoviesRouter);
 app.use("/movies/detail/fetch", fetchMoviesDetailRouter);
 
