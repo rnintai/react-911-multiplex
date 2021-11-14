@@ -17,7 +17,6 @@ router.get("/", async function (req, res) {
 
     connection.release();
 
-    console.log("success");
     res.status(200).send({ msg: "success", movieDetail: result[0] });
   } catch (err) {
     connection.release();
@@ -36,7 +35,6 @@ router.get("/", async function (req, res) {
  * {
  * synopsis 줄거리
  * poster 포스터 이미지 url
- * poster_thumb 포스터 썸네일 url
  * trailer 트레일러 영상 url
  * }
  */
@@ -45,17 +43,11 @@ router.put("/:movieId", async function (req, res) {
   const movie_id = req.params.movieId;
   const synopsis = req.body.synopsis;
   const poster = req.body.poster;
-  const posterThumb = req.body.posterThumb;
   const trailer = req.body.trailer;
   try {
-    const sql = `UPDATE movie SET synopsis=?, poster=?, poster_thumb=?, trailer=? WHERE movie_id=${movie_id}`;
+    const sql = `UPDATE movie SET synopsis=?, poster=?, trailer=? WHERE movie_id=${movie_id}`;
 
-    const result = await connection.query(sql, [
-      synopsis,
-      poster,
-      posterThumb,
-      trailer,
-    ]);
+    const result = await connection.query(sql, [synopsis, poster, trailer]);
 
     await connection.commit();
 
