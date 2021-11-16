@@ -49,14 +49,16 @@ router.post("/", async function (req, res) {
 
     conn.release();
     res.status(200).json({
-      success: response[0],
+      success: true,
+      result: response[0],
     });
   } catch (err) {
     console.log(err);
     await conn.rollback();
     conn.release();
     res.status(400).json({
-      fail: err,
+      success: false,
+      err,
     });
   }
 });
