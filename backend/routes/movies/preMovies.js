@@ -12,7 +12,7 @@ const pool = require("../../mysql");
 router.get("/", async function (req, res) {
   let connection = await pool.getConnection((conn) => conn);
 
-  const itemsPerPage = 12;
+  const itemsPerPage = 10;
   const startIndex = (req.query.page - 1) * itemsPerPage;
   try {
     const sql = `SELECT * FROM movie
@@ -24,13 +24,18 @@ router.get("/", async function (req, res) {
 
     connection.release();
 
-    console.log("success");
-    res.status(200).send(result[0]);
+    res.status(200).json({
+      success: true,
+      movieCdList: result[0],
+    });
   } catch (err) {
     connection.release();
 
     console.log(err);
-    res.status(400).send(err);
+    res.status(400).json({
+      success: false,
+      err,
+    });
   }
 });
 
