@@ -8,14 +8,15 @@ const cors = require("cors");
 
 // user
 const signUpRouter = require("./routes/member/signUp");
+const memberInfoRouter = require("./routes/member/memberInfo");
 const boxOfficeRouter = require("./routes/movies/boxOffice");
 const preMoviesRouter = require("./routes/movies/preMovies");
 const moviesDetailRouter = require("./routes/movies/moviesDetail");
 const getMoviesListRouter = require("./routes/movies/getMoviesList");
 // admin
 const uploadPosterRouter = require("./routes/admin/movies/uploadPoster");
-const fetchMoviesRouter = require("./routes/admin/movies/fetchMovies");
-const fetchMoviesDetailRouter = require("./routes/admin/movies/fetchMoviesDetail");
+const fetchMoviesRouter = require("./routes/admin/movies/fetchMovie");
+const fetchMovieDetailRouter = require("./routes/admin/movies/fetchMovieDetail");
 var app = express();
 
 // mysql connection
@@ -49,16 +50,20 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors());
 
-// routers
+// user
+// member
 app.use("/member/signup", signUpRouter);
+app.use("/member/info", memberInfoRouter);
+// movies
 app.use("/movies/boxoffice", boxOfficeRouter);
 app.use("/movies/pre", preMoviesRouter);
 app.use("/movies/detail", moviesDetailRouter);
 app.use("/movies/list", getMoviesListRouter);
 
+// admin
 app.use("/movies/detail/poster", uploadPosterRouter);
 app.use("/movies/list/fetch", fetchMoviesRouter);
-app.use("/movies/detail/fetch", fetchMoviesDetailRouter);
+app.use("/movies/detail/fetch", fetchMovieDetailRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
