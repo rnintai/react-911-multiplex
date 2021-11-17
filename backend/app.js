@@ -9,6 +9,7 @@ const cors = require("cors");
 // user
 const signUpRouter = require("./routes/member/signUp");
 const checkIdRouter = require("./routes/member/checkId");
+const checkEmailRouter = require("./routes/member/checkEmail");
 const checkPhoneRouter = require("./routes/member/checkPhone");
 const memberInfoRouter = require("./routes/member/memberInfo");
 const boxOfficeRouter = require("./routes/movies/boxOffice");
@@ -56,6 +57,7 @@ app.use(cors());
 // member
 app.use("/member/signup", signUpRouter);
 app.use("/member/checkid", checkIdRouter);
+app.use("/member/checkemail", checkEmailRouter);
 app.use("/member/checkphone", checkPhoneRouter);
 app.use("/member/info", memberInfoRouter);
 // movies
