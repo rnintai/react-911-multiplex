@@ -1,4 +1,4 @@
-/*영화관*/
+
 .Theater{
   width : 1000px;
   height : auto;
@@ -30,34 +30,4 @@
   width : 188px;
   height : 184px;
 }
-
-/*푸터*/
-.FT{
-  padding-left: 3%;
-  margin-top: 30%;
-  width: 100%;
-  height: 90px;
-  bottom: 0px;
-  border-top: 1px solid #c4c4c4;
-  padding-top: 15px;
-  color: #808080;
-  font-size: 11px;
-}
-.FT p:last-child{
-  font-size: 8px;
-}
-
-.App-header {
-  background-color : #282c34;
-  min-height : 100vh;
-  display : flex;
-  flex-direction : column;
-  align-items : center;
-  justify-content : center;
-  font-size : calc(10px + 2vmin);
-  color : white;
-}
-
-
-
 

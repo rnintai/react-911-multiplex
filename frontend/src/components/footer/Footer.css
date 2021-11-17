@@ -1,0 +1,17 @@
+
+.FT{
+  padding-left: 3%;
+  margin-top: 30%;
+  width: 100%;
+  height: 90px;
+  bottom: 0px;
+  border-top: 1px solid #c4c4c4;
+  padding-top: 15px;
+  color: #808080;
+  font-size: 11px;
+}
+.FT p:last-child{
+  font-size: 8px;
+}
+
+

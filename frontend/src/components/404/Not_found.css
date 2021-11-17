@@ -1,0 +1,8 @@
+.Not_found{
+  width : 1000px;
+  display : flex;
+  flex-wrap : wrap;
+  flex-direction : row;
+  justify-content: center;
+  margin : 0 auto;
+}
