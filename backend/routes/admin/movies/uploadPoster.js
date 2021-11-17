@@ -48,7 +48,7 @@ router.post("/:movieId", async function (req, res) {
       let connection = await pool.getConnection((conn) => conn);
 
       try {
-        path = path.replace("public\\", "");
+        path = path.replace("public\\", "/");
         const sql = `UPDATE movie SET poster=? WHERE movie_id=${req.params.movieId}`;
 
         const result = await connection.query(sql, [path]);
