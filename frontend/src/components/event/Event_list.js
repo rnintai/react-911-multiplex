@@ -9,7 +9,7 @@ class Movie_info extends Component {
     return (
       <>
       <h2 className="Title"> EVENT LIST </h2>
-      <div className="Event">
+      <div className="Event_list">
         <img src="#" />
         <img src="#" />
         <img src="#" />
