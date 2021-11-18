@@ -12,9 +12,9 @@ import Card from "./components/main/Card";
 import Theater from "./components/main/Theater";
 import Event from "./components/main/Event";
 import Footer from "./components/footer/Footer";
-import Movie_info from "./components/movie_info/Movie_info";
-import Event_list from "./components/event/Event_list";
-import Not_found from "./components/404/Not_found";
+import MovieInfo from "./components/movie_info/Movie_info";
+import EventList from "./components/event/Event_list";
+import NotFound from "./components/404/Not_found";
 
 class App extends Component {
   render() {
@@ -22,22 +22,24 @@ class App extends Component {
       <Browser>
         <Switch>
           <Route>
-            <Nav></Nav>
-            <Route path="/"exact>
-              <Card></Card>
-              <Event></Event>
-              <Theater></Theater>
-            </Route>
-            <Route path="/movie_info" exact>
-              <Movie_info></Movie_info>
+            <Route path="/">
+              <Nav></Nav>
+              <Route path="/"exact>
+                <Card></Card>
+                <Event></Event>
+                <Theater></Theater>
               </Route>
-            <Route path="/event" exact>
-              <Event_list></Event_list>
+              <Route path="/movie_info" exact>
+                <MovieInfo></MovieInfo>
+              </Route>
+              <Route path="/event" exact>
+                <EventList></EventList>
+              </Route>
+              <Route path="/404" exact>
+                <NotFound></NotFound>
+              </Route>
+              <Footer></Footer>
             </Route>
-            <Route path="/404" exact>
-              <Not_found></Not_found>
-            </Route>
-            <Footer></Footer>
           </Route>
         </Switch>
       </Browser>
