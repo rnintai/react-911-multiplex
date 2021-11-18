@@ -8,7 +8,7 @@ const pool = require("../../mysql");
  * GET /omvies/detail/{movieId}
  * 영화 1개 상세정보 조회
  */
-router.get("/", async function (req, res) {
+router.get("/:movieId", async function (req, res) {
   let connection = await pool.getConnection((conn) => conn);
   try {
     const sql = `SELECT * FROM movie WHERE movie_id=?`;
