@@ -24,7 +24,7 @@ class App extends Component {
           <Route>
             <Route path="/">
               <Nav></Nav>
-              <Route path="/"exact>
+              <Route path="/">
                 <Card></Card>
                 <Event></Event>
                 <Theater></Theater>
