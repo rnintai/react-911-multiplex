@@ -39,7 +39,7 @@ class Card extends Component {
               <img src="#"/>
               <ul className="Movie_Sub">
                 <li><a href="/404">예매하기</a></li>
-                <li><a href="/movie_info">상세정보</a></li>
+                <li><a href="/movie-info">상세정보</a></li>
               </ul>
             </div>
             <p>{this.state.data1.movie_name /*data1 안에 movie_name불러오기*/}</p> 
@@ -75,7 +75,7 @@ class Card extends Component {
               <img src="#"/>
               <ul className="Movie_Sub">
                 <li><a href="/404">예매하기</a></li>
-                <li><a href="/movie_info">상세정보</a></li>
+                <li><a href="/movie-info">상세정보</a></li>
               </ul>
             </div>
             <p>제목4</p>
