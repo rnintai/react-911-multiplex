@@ -29,7 +29,7 @@ class App extends Component {
                 <Event></Event>
                 <Theater></Theater>
               </Route>
-              <Route path="/movie_info" exact>
+              <Route path="/movie-info" exact>
                 <MovieInfo></MovieInfo>
               </Route>
               <Route path="/event" exact>

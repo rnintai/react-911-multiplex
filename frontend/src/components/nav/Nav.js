@@ -11,7 +11,7 @@ class Nav extends Component{
             <ul className="Nav_bar">
               <li className="Nav">영화
                 <ul className="Sub_bar">
-                  <li className="Sub"><a href="/movie_list">전체 영화</a></li>
+                  <li className="Sub"><a href="/movie-list">전체 영화</a></li>
                   <li className="Sub"><a href="#">etc</a></li>
                 </ul>
               </li>
