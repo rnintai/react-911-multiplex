@@ -6,6 +6,24 @@ header{
   padding-right : 15%;
   border-bottom : solid 1px #CBCACA;
 }
+.login_bar {
+  list-style-type : none;
+  font-size : 12px;
+  margin : 0%;
+  border-bottom : solid 1px #CBCACA;
+  text-align : right;
+  position : relative;
+}
+.login_bar a {
+  text-decoration : none;
+  color : black;
+}
+.login_bar li{
+  display : inline-block;
+  padding : 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
 .Name {
   padding : 1%;
   margin : 0%;
@@ -18,6 +36,7 @@ header{
   text-decoration : none;
   color : red;
 }
+
 .Nav_bar {
   margin : 1%;
   list-style-type : none;

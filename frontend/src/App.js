@@ -15,6 +15,7 @@ import Footer from "./components/footer/Footer";
 import MovieInfo from "./components/movie_info/Movie_info";
 import EventList from "./components/event/Event_list";
 import NotFound from "./components/404/Not_found";
+import SignUp from "./components/singup/SignUp";
 
 class App extends Component {
   render() {
@@ -24,6 +25,7 @@ class App extends Component {
           <Route>
             <Route path="/">
               <Nav></Nav>
+              
               <Route path="/"exact>
                 <Card></Card>
                 <Event></Event>
@@ -38,6 +40,18 @@ class App extends Component {
               <Route path="/404" exact>
                 <NotFound></NotFound>
               </Route>
+              <Route path="/signup" exact>
+                <SignUp></SignUp>
+              </Route>
+              <Route path="/login" exact>
+                
+              </Route>
+              <Route path="/movie_ticker" exact>
+
+              </Route>
+              <Route path="/" exact>
+
+              </Route>                
               <Footer></Footer>
             </Route>
           </Route>

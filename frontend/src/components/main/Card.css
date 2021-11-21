@@ -52,6 +52,9 @@
 
 }
 
+.Movie:hover img{
+  opacity: 0.5;
+}
 
 .Movie:hover ul{
   display : block;

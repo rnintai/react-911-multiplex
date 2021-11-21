@@ -6,6 +6,10 @@ class Nav extends Component{
     render() {
       return (
         <header>
+          <ul className="login_bar">
+            <li><a href="/login">로그인</a></li>
+            <li><a href="/signup">회원가입</a></li>
+          </ul>
           <h1 className="Name"><a href="/">911 CINEMA</a></h1>
           <nav>
             <ul className="Nav_bar">
