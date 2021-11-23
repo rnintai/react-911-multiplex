@@ -16,6 +16,7 @@ const boxOfficeRouter = require("./routes/movies/boxOffice");
 const preMoviesRouter = require("./routes/movies/preMovies");
 const moviesDetailRouter = require("./routes/movies/moviesDetail");
 const getMoviesListRouter = require("./routes/movies/getMoviesList");
+const getMovieScheduleRouter = require("./routes/tickets/schedule");
 // admin
 const uploadPosterRouter = require("./routes/admin/movies/uploadPoster");
 const fetchMoviesRouter = require("./routes/admin/movies/fetchMovie");
@@ -66,6 +67,8 @@ app.use("/movies/boxoffice", boxOfficeRouter);
 app.use("/movies/pre", preMoviesRouter);
 app.use("/movies/detail", moviesDetailRouter);
 app.use("/movies/list", getMoviesListRouter);
+// tickets
+app.use("/tickets/schedule", getMovieScheduleRouter);
 
 // admin
 app.use("/movies/detail/poster", uploadPosterRouter);
