@@ -69,7 +69,7 @@ router.get("/id/:scheduleId", async function (req, res) {
     connection.release();
     res.json({
       success: true,
-      scheduleInfo: result[0],
+      scheduleInfo: result[0][0],
     });
   } catch (err) {
     connection.release();
@@ -80,7 +80,7 @@ router.get("/id/:scheduleId", async function (req, res) {
   }
 });
 
-// 스케줄 등록
+// 스케줄 생성
 router.post("/", async function (req, res) {
   let connection = await pool.getConnection();
 
@@ -120,7 +120,35 @@ router.post("/", async function (req, res) {
       success: true,
       result: result[0],
     });
+    connection.release();
+  } catch (err) {
+    await connection.rollback();
+    res.status(400).json({
+      success: false,
+      err,
+    });
+    connection.release();
+  }
+});
 
+// 스케줄 삭제
+router.post("/delete/:scheduleId", async function (req, res) {
+  let connection = await pool.getConnection();
+
+  const sql = `
+    DELETE FROM movie_schedule
+    WHERE movie_schedule_id=${req.params.scheduleId}`;
+
+  await connection.beginTransaction();
+
+  try {
+    let result = await connection.execute(sql);
+    await connection.commit();
+    console.log(result);
+    res.status(200).json({
+      success: true,
+      result: result[0],
+    });
     connection.release();
   } catch (err) {
     await connection.rollback();
