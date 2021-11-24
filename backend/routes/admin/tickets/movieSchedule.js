@@ -44,9 +44,47 @@ router.get("/:page", async function (req, res) {
   }
 });
 
+// id로 스케줄 조회
+router.get("/id/:scheduleId", async function (req, res) {
+  let connection = await pool.getConnection();
+
+  const sql = `SELECT movie_schedule_id, 
+    multiplex_id, 
+    (SELECT multiplex_name FROM multiplex as M 
+    WHERE M.multiplex_id=S.multiplex_id) as multiplex_name,
+    movie_id, 
+    (SELECT movie_name FROM movie
+    WHERE movie.movie_id=S.movie_id) as movie_name, 
+    theater_id,
+    (SELECT theater_name FROM theater as T
+    WHERE T.theater_id=S.theater_id) as theater_name, 
+    movie_schedule_start, movie_schedule_end 
+    FROM movie_schedule as S
+    WHERE movie_schedule_id=${req.params.scheduleId}
+    `;
+
+  const result = await connection.query(sql);
+
+  try {
+    connection.release();
+    res.json({
+      success: true,
+      scheduleInfo: result[0],
+    });
+  } catch (err) {
+    connection.release();
+    res.json({
+      success: false,
+      err,
+    });
+  }
+});
+
+// 스케줄 등록
 router.post("/", async function (req, res) {
   let connection = await pool.getConnection();
 
+  let scheduleId = req.body.scheduleId;
   let multiplex = req.body.multiplex;
   let theater = req.body.theater;
   let startTime = req.body.startTime;
@@ -54,9 +92,10 @@ router.post("/", async function (req, res) {
   let movieCd = req.body.movieCd;
 
   const sql =
-    "INSERT INTO movie_schedule (multiplex_id, theater_id, movie_schedule_start, movie_schedule_end, movie_id) " +
-    "VALUES (?,?,?,?,?) " +
+    "INSERT INTO movie_schedule (movie_schedule_id, multiplex_id, theater_id, movie_schedule_start, movie_schedule_end, movie_id) " +
+    "VALUES (?,?,?,?,?,?) " +
     "ON DUPLICATE KEY UPDATE " +
+    "movie_schedule_id=VALUES(movie_schedule_id), " +
     "multiplex_id=VALUES(multiplex_id), " +
     "theater_id=VALUES(theater_id), " +
     "movie_schedule_start=VALUES(movie_schedule_start), " +
@@ -67,6 +106,7 @@ router.post("/", async function (req, res) {
 
   try {
     let result = await connection.execute(sql, [
+      scheduleId,
       multiplex,
       theater,
       startTime,
