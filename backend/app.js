@@ -75,7 +75,7 @@ app.use("/movies/detail/poster", uploadPosterRouter);
 app.use("/movies/list/fetch", fetchMoviesRouter);
 app.use("/movies/detail/fetch", fetchMovieDetailRouter);
 
-app.use("/tickets/schedule", movieScheduleRouter);
+app.use("/admin/tickets/schedule", movieScheduleRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
