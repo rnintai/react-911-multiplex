@@ -17,6 +17,7 @@ const preMoviesRouter = require("./routes/movies/preMovies");
 const moviesDetailRouter = require("./routes/movies/moviesDetail");
 const getMoviesListRouter = require("./routes/movies/getMoviesList");
 const getMovieScheduleRouter = require("./routes/tickets/schedule");
+
 // admin
 const uploadPosterRouter = require("./routes/admin/movies/uploadPoster");
 const fetchMoviesRouter = require("./routes/admin/movies/fetchMovie");
