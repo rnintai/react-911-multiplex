@@ -1,12 +1,12 @@
 // 천체 영화  
 import React, {Component} from "react";
-import "./All_movies.css";
+import "./Movies-list.css";
 import axios from "axios";
 
-class All_movies extends Component{
+class Movies_list extends Component{
     render () {
         return (
-            <h2>All Movies</h2>
+            <h2>Movies_list</h2>
             
         )
     }

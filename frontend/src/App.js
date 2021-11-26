@@ -16,7 +16,7 @@ import MovieInfo from "./components/movie_info/Movie_info";
 import EventList from "./components/event/Event_list";
 import NotFound from "./components/404/Not_found";
 import SignUp from "./components/singup/SignUp";
-import All_movies from "./components/all_movies/All_movies";
+import Movie_list from "./components/movie_list/Movie_list";
 
 class App extends Component {
   render() {
@@ -51,9 +51,9 @@ class App extends Component {
 
               </Route>
 
-              <Route path="/All_movies" exact>
-                <All_movies></All_movies>
-                
+              <Route path="/movie_list" exact>
+                <Movie_list></Movie_list>
+
               </Route>
 
               <Route path="/" exact>
