@@ -1,9 +1,9 @@
 // 천체 영화  
 import React, {Component} from "react";
-import "./Movies-list.css";
+import "./Movie-list.css";
 import axios from "axios";
 
-class Movies_list extends Component{
+class Movie_list extends Component{
     render () {
         return (
             <h2>Movies_list</h2>
@@ -11,4 +11,4 @@ class Movies_list extends Component{
         )
     }
 }
-export default All_movies;
+export default Movie_list;
