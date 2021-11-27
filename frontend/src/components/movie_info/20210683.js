@@ -13,8 +13,8 @@ class Movie_info extends Component {
     MovieInfo : [],   
   }
   getData = async() =>{       //  데이터불러오기
-    let MovieInfo = await axios.get('https://react-911-multiplex.herokuapp.com/movies/boxoffice', {params: {movie_id: 20218256}});
-    MovieInfo = MovieInfo.data.boxOfficeList[0] //data1 지정
+    let MovieInfo = await axios.get('https://react-911-multiplex.herokuapp.com/movies/detail/20210683');
+    MovieInfo = MovieInfo.data.movieDetail[0] //data1 지정
     this.setState({MovieInfo});      
     console.log(MovieInfo);
   };

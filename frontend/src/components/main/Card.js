@@ -54,7 +54,7 @@ class Card extends Component {
               <img src= {this.state.data1.poster}/>
               <ul className="Movie_Sub">
                 <li><a href="/404">예매하기</a></li>
-                <li><a href="/movie-info">상세정보</a></li>
+                <li><a href="/20218256">상세정보</a></li>
               </ul>
             </div>
             <p>{this.state.data1.movie_name /*data1 안에 movie_name불러오기*/}</p> 
@@ -65,7 +65,7 @@ class Card extends Component {
               <img src={"https://react-911-multiplex.herokuapp.com" + this.state.data2.poster}/>
               <ul className="Movie_Sub">
                 <li><a href="/404">예매하기</a></li>
-                <li><a href="/movie-info">상세정보</a></li>
+                <li><a href="/20210087">상세정보</a></li>
               </ul>
             </div>
             <p>{this.state.data2.movie_name}</p>
@@ -76,7 +76,7 @@ class Card extends Component {
               <img src={this.state.data3.poster}/>
               <ul className="Movie_Sub">
                 <li><a href="/404">예매하기</a></li>
-                <li><a href="/movie-info">상세정보</a></li>
+                <li><a href="/20218052">상세정보</a></li>
               </ul>
             </div>
             <p>{this.state.data3.movie_name}</p>
@@ -87,7 +87,7 @@ class Card extends Component {
               <img src={this.state.data4.poster}/>
               <ul className="Movie_Sub">
                 <li><a href="/404">예매하기</a></li>
-                <li><a href="/movie-info">상세정보</a></li>
+                <li><a href="/20210865">상세정보</a></li>
               </ul>
             </div>
             <p>{this.state.data4.movie_name}</p>
@@ -98,7 +98,7 @@ class Card extends Component {
               <img src={this.state.data5.poster}/>
               <ul className="Movie_Sub">
                 <li><a href="/404">예매하기</a></li>
-                <li><a href="/movie-info">상세정보</a></li>
+                <li><a href="/20210683">상세정보</a></li>
               </ul>
             </div>
             <p>{this.state.data5.movie_name}</p>
