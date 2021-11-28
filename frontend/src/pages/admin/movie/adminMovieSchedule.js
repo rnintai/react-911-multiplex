@@ -18,7 +18,7 @@ import MultiplexSelect from "src/components/admin/tickets/multiplexSelect";
 import TheaterSelect from "src/components/admin/tickets/theaterSelect";
 import "src/App.css";
 
-const API = window.location.hostname === 'localhost' ? '' : '/api';
+const API = window.location.hostname === 'localhost' ? 'http://localhost:5000' : '/api';
 
 const AdminMovieSchedule = () => {
   const [scheduleList, setScheduleList] = useState([]);
@@ -144,8 +144,9 @@ const AdminMovieSchedule = () => {
         movieCd={movieCd}
         setMovieCd={setMovieCd}
         getSchedule={getSchedule}
-        // scheduleList={scheduleList}
-        // setFilteredScheduleList={setFilteredScheduleList}
+        scheduleList={scheduleList}
+        // setScheduleList={setScheduleList}
+        setFilteredScheduleList={setFilteredScheduleList}
       ></AddScheduleModal>
       <section
         style={{

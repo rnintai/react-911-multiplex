@@ -15,7 +15,7 @@ import "../movie/modal.scss";
 import "src/App.css";
 import "./addScheduleModal.scss";
 
-const API = window.location.hostname === 'localhost' ? '' : '/api';
+const API = window.location.hostname === 'localhost' ? 'http://localhost:5000' : '/api';
 
 const AddScheduleModal = ({
   scheduleId,

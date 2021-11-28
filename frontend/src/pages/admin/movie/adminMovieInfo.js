@@ -10,7 +10,7 @@ import {
   FontBold,
 } from "src/design-system/font/Font";
 
-const API = window.location.hostname === 'localhost' ? '' : '/api';
+const API = window.location.hostname === 'localhost' ? 'http://localhost:5000' : '/api';
 
 const AdminMovie = () => {
   const [movieList, setMovieList] = useState([]);
