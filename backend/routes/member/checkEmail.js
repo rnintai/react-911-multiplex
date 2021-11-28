@@ -25,9 +25,9 @@ router.get("/:email", async function (req, res) {
       ];
 
     if (key === 0) {
-      res.status(200).send("available");
+      res.status(200).send(true);
     } else {
-      res.status(409).send("unavailable");
+      res.status(200).send(false);
     }
   } catch (err) {
     connection.release();
