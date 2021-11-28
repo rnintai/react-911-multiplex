@@ -23,6 +23,8 @@ const AdminMovie = () => {
   const [moviesLength, setMoviesLength] = useState(0);
   const [curMovieCnt, setCurMovieCnt] = useState(0);
 
+  console.log(window.location.hostname);
+
   const getMovie = async () => {
     try {
       const response = await axios.get("/movies/boxoffice");
