@@ -9,6 +9,9 @@ import {
   FontColor,
   FontBold,
 } from "src/design-system/font/Font";
+
+const API = window.location.hostname === 'localhost' ? '' : '/api';
+
 const AdminMovie = () => {
   const [movieList, setMovieList] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -35,7 +38,7 @@ const AdminMovie = () => {
     let toBeUpdated = [];
     setListFetching(true);
     try {
-      let response = await axios.get("/movies/list/fetch/1");
+      let response = await axios.get(API + "/movies/list/fetch/1");
       console.log(response.data.totCnt);
       let tmpPageLength =
         response.data.totCnt % 10 !== 0
@@ -48,7 +51,7 @@ const AdminMovie = () => {
 
       for (let i = 2; i <= tmpPageLength; i++) {
         try {
-          let response = await axios.get(`/movies/list/fetch/${i}`);
+          let response = await axios.get(API + `/movies/list/fetch/${i}`);
           console.log(response);
           toBeUpdated = [...toBeUpdated, ...response.data.updatedMovieCodeList];
           console.log(toBeUpdated);
@@ -64,7 +67,7 @@ const AdminMovie = () => {
       try {
         let i = 1;
         while (1) {
-          const toBeUpdatedResponse = await axios.get("/movies/pre?page=" + i);
+          const toBeUpdatedResponse = await axios.get(API + "/movies/pre?page=" + i);
           const movieCdList = toBeUpdatedResponse.data.movieCdList;
           if (movieCdList.length === 0) {
             break;
@@ -83,7 +86,7 @@ const AdminMovie = () => {
 
       for (let i = 0; i < toBeUpdated.length; i++) {
         try {
-          await axios.get(`/movies/detail/fetch/${toBeUpdated[i]}`);
+          await axios.get(API + `/movies/detail/fetch/${toBeUpdated[i]}`);
           setCurMovieCnt(i);
         } catch (e) {
           console.log(e);
