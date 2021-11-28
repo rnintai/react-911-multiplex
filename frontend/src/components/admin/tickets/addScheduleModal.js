@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-import { Table } from "../../../components/admin/movie/Table";
+// import { Table } from "../../../components/admin/movie/Table";
 import { Button, BgColor } from "src/design-system/button/Button";
 import {
   Font,
@@ -12,7 +12,10 @@ import {
 import Input from "src/components/basic/input";
 
 import "../movie/modal.scss";
+import "src/App.css";
 import "./addScheduleModal.scss";
+
+const API = window.location.hostname === 'localhost' ? '' : '/api';
 
 const AddScheduleModal = ({
   scheduleId,
@@ -27,9 +30,13 @@ const AddScheduleModal = ({
   setEndTime,
   modalState,
   setModalState,
+  removeState,
+  setRemoveState,
   movieCd,
   setMovieCd,
   getSchedule,
+  // scheduleList,
+  // setFilteredScheduleList,
 }) => {
   const [response, setResponse] = useState({});
   return (
@@ -120,6 +127,19 @@ const AddScheduleModal = ({
         >
           닫기
         </Button>
+        {removeState && (
+          <Button
+            className="apply-btn"
+            size={FontSize.sm}
+            color={FontColor.white}
+            boldness={FontBold.bold}
+            background={BgColor.gray75}
+            style={{ margin: "10px" }}
+            onClick={removeSchedule}
+          >
+            삭제
+          </Button>
+        )}
         <Font
           className="complete-msg"
           size={FontSize.sm}
@@ -141,6 +161,7 @@ const AddScheduleModal = ({
     setMultiplex("");
     setTheater("");
     setMovieCd("");
+    setRemoveState(false);
     setResponse({});
   }
 
@@ -153,10 +174,10 @@ const AddScheduleModal = ({
     // YYMMDDHH
     generatedId += theater + movieCd;
 
-    if (generatedId !== scheduleId) {
-      await axios.post("/admin/tickets/schedule/delete/" + scheduleId);
+    if (scheduleId !== "" && generatedId !== scheduleId) {
+      await axios.post(API + "/admin/tickets/schedule/delete/" + scheduleId);
     }
-    const response = await axios.post("/admin/tickets/schedule", {
+    const response = await axios.post(API + "/admin/tickets/schedule", {
       scheduleId: generatedId,
       multiplex,
       theater,
@@ -166,7 +187,19 @@ const AddScheduleModal = ({
     });
     setResponse(response.data);
     getSchedule();
+    // refreshSchedule(theater);
   }
+
+  async function removeSchedule() {
+    await axios.post(API + "/admin/tickets/schedule/delete/" + scheduleId);
+    closeModal();
+    getSchedule();
+  }
+
+  // function refreshSchedule(id) {
+  //   const result = scheduleList.filter((v) => v.theater_id === id);
+  //   setFilteredScheduleList(result);
+  // }
 };
 
 export default AddScheduleModal;
