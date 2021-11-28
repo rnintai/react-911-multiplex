@@ -18,3 +18,10 @@ body {
 .row-1_2 {
   width: 49%;
 }
+
+.fc-header-toolbar {
+  position: sticky;
+  background-color: #fff;
+  top: 0px;
+  z-index: 10;
+}
