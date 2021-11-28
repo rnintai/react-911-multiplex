@@ -23,7 +23,7 @@ const AdminMovie = () => {
   const [moviesLength, setMoviesLength] = useState(0);
   const [curMovieCnt, setCurMovieCnt] = useState(0);
 
-  console.log(window.location.hostname);
+  console.log(API);
 
   const getMovie = async () => {
     try {
