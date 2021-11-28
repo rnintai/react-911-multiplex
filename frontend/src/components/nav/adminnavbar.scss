@@ -1,0 +1,130 @@
+.admin-nav-container {
+  /* position: relative; */
+  width: 1000px;
+  margin: 0 auto 50px auto;
+  z-index: 10;
+
+  .nav-head {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 5px;
+    border-bottom: 1px solid rgb(196, 196, 196);
+
+    .logo-wrap {
+      img {
+        width: 100px;
+      }
+    }
+
+    .top-menu {
+      display: flex;
+      align-items: flex-end;
+      li {
+        padding: 3px;
+      }
+      & :not(:last-child) {
+        margin-right: 10px;
+      }
+    }
+  }
+  /*메뉴*/
+  .admin-nav-wrap {
+    /* margin: 3%; */
+    list-style-type: none;
+    text-align: center;
+    padding-left: 0%;
+  }
+  .nav-menu {
+    display: inline-block;
+    height: 35px;
+    /* width: 100px; */
+    /* padding: 10px 0; */
+    /* border-left: solid 1px #CBCACA; */
+  }
+  .nav-link {
+    display: inline-block;
+    position: relative;
+    padding: 9px 20px;
+  }
+  .nav-menu:not(:first-child)::before {
+    content: "";
+    position: relative;
+    display: inline-block;
+    width: 1px;
+    height: 11px;
+    top: 0;
+    background-color: rgb(196, 196, 196);
+  }
+  /* nav ul li:first-child{
+    border-left: none;
+  } */
+  .sub-list {
+    // display: none;
+    visibility: hidden;
+    opacity: 0;
+
+    background-color: #00000010;
+    position: absolute;
+    left: 0;
+    top: 105px;
+    padding: 3px 0;
+
+    width: 100%;
+    transition: all 0.1s 0s ease-in-out;
+  }
+  .sub-item {
+    /* width: 100px; */
+    /*  */
+    display: inline-block;
+  }
+
+  .sub-item a {
+    transition: color 0.1s ease-in-out;
+  }
+
+  .sub-item:not(:last-child) {
+    margin-right: 20px;
+  }
+  // hover
+  .sub-item a:hover {
+    color: #000;
+  }
+
+  /*오버*/
+  .nav-menu:hover .nav-link::before,
+  .sub-list:hover .nav-link::before {
+    content: "";
+    position: absolute;
+    width: 80%;
+    height: 2px;
+    left: 7px;
+    top: 34px;
+    background-color: #000;
+  }
+  .nav-menu:hover .sub-list {
+    // display: inline-block;
+    visibility: visible;
+    opacity: 1;
+    transition: all 0.1s 0.1s ease-in-out;
+    /* position:absolute; */
+  }
+
+  .Main {
+    padding-left: 15%;
+    padding-right: 15%;
+  }
+  /*영화카드*/
+  .Card_list {
+    margin: 0%;
+    list-style-type: none;
+    text-align: center;
+    padding-left: 0%;
+  }
+  .Card_name {
+    position: relative;
+    display: inline-block;
+    width: 100px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+}

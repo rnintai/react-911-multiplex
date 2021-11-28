@@ -1,11 +1,11 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { Component } from "react";
-import './Nav.css';
+import './Nav.scss';
 
 class Nav extends Component{
     render() {
       return (
-        <header>
+        <header className="nav-wrap">
           <ul className="login_bar">
             <li><a href="/login">로그인</a></li>
             <li><a href="/signup">회원가입</a></li>

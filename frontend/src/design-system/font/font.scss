@@ -1,0 +1,54 @@
+.ds-font {
+  line-height: 1.3;
+
+  &.ds-font-size--default {
+    font-size: 14px;
+  }
+  &.ds-font-size--sm {
+    font-size: 12px;
+  }
+  &.ds-font-size--lg {
+    font-size: 17px;
+  }
+  &.ds-font-size--xl {
+    font-size: 20px;
+  }
+  // boldness
+  &.ds-font--light {
+    font-weight: 600;
+  }
+  &.ds-font--bold {
+    font-weight: 700;
+  }
+  // color
+  &.ds-font-color--default {
+    color: #000;
+  }
+  &.ds-font-color--white {
+    color: #fff;
+  }
+  &.ds-font-color--red0 {
+    color: #ffbdbd;
+  }
+  &.ds-font-color--red25 {
+    color: #ff7676;
+  }
+  &.ds-font-color--red50 {
+    color: #ff0000;
+  }
+  &.ds-font-color--red75 {
+    color: #c80000;
+  }
+  &.ds-font-color--red100 {
+    color: #740000;
+  }
+  &.ds-font-color--gray50 {
+    color: #c4c4c4;
+  }
+  &.ds-font-color--gray75 {
+    color: #868686;
+  }
+  &.ds-font-color--green {
+    color: #00c900;
+  }
+}

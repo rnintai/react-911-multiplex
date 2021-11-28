@@ -1,0 +1,89 @@
+.nav-wrap {
+  position: relative;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.19) 0%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  margin: 0%;
+  padding-left: 15%;
+  padding-right: 15%;
+  border-bottom: solid 1px #cbcaca;
+  .login_bar {
+    list-style-type: none;
+    font-size: 12px;
+    margin: 0%;
+    border-bottom: solid 1px #cbcaca;
+    text-align: right;
+    position: relative;
+  }
+  .login_bar a {
+    text-decoration: none;
+    color: black;
+  }
+  .login_bar li {
+    display: inline-block;
+    padding: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+  .Name {
+    padding: 1%;
+    margin: 0%;
+    text-align: center;
+    font-size: 36px;
+    font-family: "Courier New", Courier, monospace;
+    border-bottom: solid 1px #cbcaca;
+  }
+  .Name a {
+    text-decoration: none;
+    color: red;
+  }
+
+  .Nav_bar {
+    margin: 1%;
+    list-style-type: none;
+    text-align: center;
+    padding-left: 0%;
+  }
+  .Nav {
+    position: relative;
+    display: inline-block;
+    border-left: solid 1px #cbcaca;
+    width: 100px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+  nav ul li:first-child {
+    border-left: none;
+  }
+  .Sub_bar {
+    margin-top: 10px;
+    padding-left: 0;
+    list-style-type: none;
+    line-height: 20px;
+    display: none;
+    text-align: center;
+    z-index: 1;
+  }
+  .Sub {
+    width: 100px;
+    height: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+  .Sub a {
+    text-decoration: none;
+    color: black;
+  }
+
+  .Nav:hover {
+    padding-bottom: 8px;
+    border-bottom: solid 2px red;
+  }
+  .Nav:hover ul {
+    background-color: white;
+    display: block;
+    position: absolute;
+  }
+}

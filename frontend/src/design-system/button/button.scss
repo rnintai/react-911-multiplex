@@ -1,0 +1,42 @@
+.ds-btn {
+  padding: 0.3em 0.8em;
+  // bg color
+  &.ds-btn-bg--default {
+    background-color: #000;
+  }
+  &.ds-btn-bg--white {
+    background-color: #fff;
+  }
+  &.ds-btn-bg--red0 {
+    background-color: #ffbdbd;
+  }
+  &.ds-btn-bg--red25 {
+    background-color: #ff7676;
+  }
+  &.ds-btn-bg--red50 {
+    background-color: #ff0000;
+  }
+  &.ds-btn-bg--red75 {
+    background-color: #c80000;
+  }
+  &.ds-btn-bg--red100 {
+    background-color: #740000;
+  }
+  &.ds-btn-bg--gray50 {
+    background-color: #c4c4c4;
+  }
+  &.ds-btn-bg--gray75 {
+    background-color: #868686;
+  }
+  &.ds-btn-bg--skyblue {
+    background-color: #30a9ff;
+  }
+  &.ds-btn-bg--green {
+    background-color: #2d9e00;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: default;
+  }
+}
