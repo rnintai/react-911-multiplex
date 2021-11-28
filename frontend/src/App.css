@@ -3,3 +3,18 @@
 body {
   font-family: "Noto Sans KR", sans-serif;
 }
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+.flex-row {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.row-1_2 {
+  width: 49%;
+}
