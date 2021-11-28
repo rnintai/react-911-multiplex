@@ -27,7 +27,7 @@ const AdminMovie = () => {
 
   const getMovie = async () => {
     try {
-      const response = await axios.get("/movies/boxoffice");
+      const response = await axios.get(API + "/movies/boxoffice");
       setMovieList(response.data.boxOfficeList);
     } catch (e) {
       setError(e);
