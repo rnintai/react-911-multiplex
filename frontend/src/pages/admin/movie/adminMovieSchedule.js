@@ -203,7 +203,7 @@ const AdminMovieSchedule = () => {
   }
   async function handleEventClick(arg) {
     let scheduleResponse = await axios.get(
-      "/admin/tickets/schedule/id/" + arg.event.id
+      API + "/admin/tickets/schedule/id/" + arg.event.id
     );
     setScheduleId(arg.event.id);
     setStartTime(substringOfDate(arg.event.startStr));
