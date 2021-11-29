@@ -45,50 +45,56 @@ const AdminMovieSchedule = () => {
 
   const getSchedule = async () => {
     let curPage = 1;
+    let scheduleListCpy = [];
     while (1) {
       try {
         const response = await axios.get(API + "/admin/tickets/schedule/" + curPage);
         if (response.data.scheduleList.length === 0) {
           break;
         }
-        setScheduleList([...scheduleList, ...response.data.scheduleList]);
+        scheduleListCpy.push(...response.data.scheduleList);
         curPage = curPage + 1;
       } catch (e) {
         setError(e);
       }
     }
+    setScheduleList(scheduleListCpy);
     setLoading(false);
   };
   // 모든 지점을 받아옴.
   const getMultiplexList = async () => {
     let curPage = 1;
+    let multplexListCpy = [];
     while (1) {
       try {
         const response = await axios.get(API + "/admin/multiplex/list/" + curPage);
         if (response.data.multiplexList.length === 0) {
           break;
         }
-        setMultiplexList([...multiplexList, ...response.data.multiplexList]);
+        multplexListCpy.push(...response.data.multiplexList);
         curPage = curPage + 1;
       } catch (e) {
         console.log(e);
       }
     }
+    setMultiplexList(multplexListCpy);
   };
   const getTheaterList = async () => {
     let curPage = 1;
+    let theaterListCpy = [];
     while (1) {
       try {
         const response = await axios.get(API + "/admin/theater/list/" + curPage);
         if (response.data.theaterList.length === 0) {
           break;
         }
-        setTheaterList([...theaterList, ...response.data.theaterList]);
+        theaterListCpy.push(...response.data.theaterList);
         curPage = curPage + 1;
       } catch (e) {
         console.log(e);
       }
     }
+    setTheaterList(theaterListCpy);
   };
 
   useEffect(() => {
@@ -145,7 +151,8 @@ const AdminMovieSchedule = () => {
         setMovieCd={setMovieCd}
         getSchedule={getSchedule}
         scheduleList={scheduleList}
-        // setScheduleList={setScheduleList}
+        setScheduleList={setScheduleList}
+        filteredScheduleList={filteredScheduleList}
         setFilteredScheduleList={setFilteredScheduleList}
       ></AddScheduleModal>
       <section

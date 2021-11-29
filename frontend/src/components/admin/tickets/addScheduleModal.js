@@ -35,8 +35,10 @@ const AddScheduleModal = ({
   movieCd,
   setMovieCd,
   getSchedule,
-  // scheduleList,
-  // setFilteredScheduleList,
+  scheduleList,
+  setScheduleList,
+  filteredScheduleList,
+  setFilteredScheduleList,
 }) => {
   const [response, setResponse] = useState({});
   return (
@@ -174,8 +176,21 @@ const AddScheduleModal = ({
     // YYMMDDHH
     generatedId += theater + movieCd;
 
+    let scheduleListCpy = scheduleList;
+    let filteredScheduleListCpy = filteredScheduleList;
+
     if (scheduleId !== "" && generatedId !== scheduleId) {
-      await axios.post(API + "/admin/tickets/schedule/delete/" + scheduleId);
+      // let scheduleListCpy = scheduleList.filter((elem) => elem.movie_schedule_id !== scheduleId);
+      // setScheduleList(scheduleListCpy);
+      // let filteredScheduleListCpy = filteredScheduleList.filter((elem) => elem.movie_schedule_id !== scheduleId);
+      // setFilteredScheduleList(filteredScheduleListCpy);
+      // removeSchedule();
+      // await axios.post(API + "/admin/tickets/schedule/delete/" + scheduleId);
+
+      scheduleListCpy = scheduleListCpy.filter((elem) => elem.movie_schedule_id !== scheduleId);
+      filteredScheduleListCpy = filteredScheduleListCpy.filter((elem) => elem.movie_schedule_id !== scheduleId);
+      // setScheduleList(scheduleListCpy);
+      // setFilteredScheduleList(filteredScheduleListCpy);
     }
     const response = await axios.post(API + "/admin/tickets/schedule", {
       scheduleId: generatedId,
@@ -185,19 +200,32 @@ const AddScheduleModal = ({
       endTime,
       movieCd,
     });
+    const getResponse = await axios.get(API + "/admin/tickets/schedule/id/" + generatedId);
     setResponse(response.data);
-    getSchedule();
+    // getSchedule();
+    const newScheduleObj = getResponse.data.scheduleInfo;
+    scheduleListCpy.push(newScheduleObj);
+    filteredScheduleListCpy.push(newScheduleObj);
+
+    setScheduleList(scheduleListCpy);
+    setFilteredScheduleList(filteredScheduleListCpy);
+    
+    closeModal();
     // refreshSchedule(theater);
   }
-
+  
   async function removeSchedule() {
     await axios.post(API + "/admin/tickets/schedule/delete/" + scheduleId);
     closeModal();
-    getSchedule();
+    // getSchedule();
+    let scheduleListCpy = scheduleList.filter((elem) => elem.movie_schedule_id !== scheduleId);
+    setScheduleList(scheduleListCpy);
+    let filteredScheduleListCpy = filteredScheduleList.filter((elem) => elem.movie_schedule_id !== scheduleId);
+    setFilteredScheduleList(filteredScheduleListCpy);
   }
-
+  
   // function refreshSchedule(id) {
-  //   const result = scheduleList.filter((v) => v.theater_id === id);
+    //   const result = scheduleList.filter((v) => v.theater_id === id);
   //   setFilteredScheduleList(result);
   // }
 };
