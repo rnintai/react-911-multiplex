@@ -25,3 +25,10 @@ body {
   top: 0px;
   z-index: 10;
 }
+
+.fc-timegrid thead{
+  position: sticky;
+  top: 39px;
+  background-color: white;
+  z-index: 10;
+}
