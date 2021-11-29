@@ -18,6 +18,9 @@ body {
 .row-1_2 {
   width: 49%;
 }
+.row-1_3 {
+  width: 31%;
+}
 
 .fc-header-toolbar {
   position: sticky;
