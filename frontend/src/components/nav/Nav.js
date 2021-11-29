@@ -23,7 +23,7 @@ class Nav extends Component {
               영화
               <ul className="Sub_bar">
                 <li className="Sub">
-                  <a href="/movie_list">전체 영화</a>
+                  <a href="/Movies">전체 영화</a>
                 </li>
                 <li className="Sub">
                   <a href="#">etc</a>
@@ -49,17 +49,6 @@ class Nav extends Component {
                 </li>
                 <li className="Sub">
                   <a href="#">특별관</a>
-                </li>
-              </ul>
-            </li>
-            <li className="Nav">
-              이벤트
-              <ul className="Sub_bar">
-                <li className="Sub">
-                  <a href="/event">이벤트</a>
-                </li>
-                <li className="Sub">
-                  <a href="/gift">기프트샵</a>
                 </li>
               </ul>
             </li>

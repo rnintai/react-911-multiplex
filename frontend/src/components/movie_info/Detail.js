@@ -12,10 +12,12 @@ class Movie_info extends Component {
     //state초기화
     MovieInfo: [],
   };
+
   getData = async () => {
     //  데이터불러오기
     let MovieInfo = await axios.get(
-      "https://react-911-multiplex.herokuapp.com/movies/detail/20210087"
+      "https://react-911-multiplex.herokuapp.com/movies/detail/" +
+        this.props.location.state.movie_id
     );
     MovieInfo = MovieInfo.data.movieDetail[0]; //data1 지정
     this.setState({ MovieInfo });
@@ -24,6 +26,7 @@ class Movie_info extends Component {
   componentDidMount() {
     this.getData();
   }
+
   render() {
     return (
       <div>
@@ -44,5 +47,4 @@ class Movie_info extends Component {
     );
   }
 }
-
 export default Movie_info;
