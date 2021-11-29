@@ -1,6 +1,6 @@
-import './App.css';
-import './reset.css';
-import React, { Component } from 'react';
+import "./App.css";
+import "./reset.css";
+import React, { Component } from "react";
 import {
   Route,
   Switch,
@@ -25,9 +25,12 @@ import SignUp from "./components/singup/SignUp";
 import Movie_list from "./components/movie_list/Movie_list";
 
 // admin
-import AdminNavBar from './components/nav/AdminNavBar';
-import AdminMovieInfo from './pages/admin/movie/adminMovieInfo'
-import AdminMovieSchedule from './pages/admin/movie/adminMovieSchedule'
+import AdminNavBar from "./components/nav/AdminNavBar";
+import AdminMovieInfo from "./pages/admin/movie/adminMovieInfo";
+import AdminMovieSchedule from "./pages/admin/movie/adminMovieSchedule";
+
+// reservation test
+import Reservation from "src/pages/admin/movie/reservation";
 
 class App extends Component {
   render() {
@@ -36,7 +39,7 @@ class App extends Component {
         <Switch>
           <Route>
             {/* <Route path="/"> */}
-              
+
             <Route path="/" exact>
               <Nav></Nav>
               <Card></Card>
@@ -71,11 +74,9 @@ class App extends Component {
             </Route>
             <Route path="/login" exact>
               <Nav></Nav>
-              
             </Route>
             <Route path="/movie_ticker" exact>
               <Nav></Nav>
-
             </Route>
 
             <Route path="/movie_list" exact>
@@ -95,6 +96,10 @@ class App extends Component {
             <Route path="/admin/movie/schedule" exact>
               <AdminNavBar></AdminNavBar>
               <AdminMovieSchedule></AdminMovieSchedule>
+            </Route>
+            <Route path="/admin/movie/reservation" exact>
+              <AdminNavBar></AdminNavBar>
+              <Reservation></Reservation>
             </Route>
             <Footer></Footer>
           </Route>

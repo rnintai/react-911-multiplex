@@ -7,7 +7,6 @@ import {
   FontBold,
 } from "src/design-system/font/Font";
 
-
 const MultiplexSelect = ({
   name,
   type,

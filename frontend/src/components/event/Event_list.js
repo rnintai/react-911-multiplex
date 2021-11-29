@@ -1,22 +1,20 @@
 /* eslint-disable jsx-a11y/alt-text */
-import React, { Component } from 'react';
-import './Event_list.css'
-
-
+import React, { Component } from "react";
+import "./Event_list.css";
 
 class Movie_info extends Component {
   render() {
     return (
       <>
-      <h2 className="Title"> EVENT LIST </h2>
-      <div className="Event_list">
-        <img src="#" />
-        <img src="#" />
-        <img src="#" />
-        <img src="#" />
-        <img src="#" />
-        <img src="#" />
-      </div>
+        <h2 className="Title"> EVENT LIST </h2>
+        <div className="Event_list">
+          <img src="#" />
+          <img src="#" />
+          <img src="#" />
+          <img src="#" />
+          <img src="#" />
+          <img src="#" />
+        </div>
       </>
     );
   }

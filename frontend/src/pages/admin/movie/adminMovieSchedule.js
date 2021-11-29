@@ -18,7 +18,8 @@ import MultiplexSelect from "src/components/admin/tickets/multiplexSelect";
 import TheaterSelect from "src/components/admin/tickets/theaterSelect";
 import "src/App.css";
 
-const API = window.location.hostname === 'localhost' ? 'http://localhost:5000' : '/api';
+const API =
+  window.location.hostname === "localhost" ? "http://localhost:5000" : "/api";
 
 const AdminMovieSchedule = () => {
   const [scheduleList, setScheduleList] = useState([]);
@@ -48,7 +49,9 @@ const AdminMovieSchedule = () => {
     let scheduleListCpy = [];
     while (1) {
       try {
-        const response = await axios.get(API + "/admin/tickets/schedule/" + curPage);
+        const response = await axios.get(
+          API + "/admin/tickets/schedule/" + curPage
+        );
         if (response.data.scheduleList.length === 0) {
           break;
         }
@@ -67,7 +70,9 @@ const AdminMovieSchedule = () => {
     let multplexListCpy = [];
     while (1) {
       try {
-        const response = await axios.get(API + "/admin/multiplex/list/" + curPage);
+        const response = await axios.get(
+          API + "/admin/multiplex/list/" + curPage
+        );
         if (response.data.multiplexList.length === 0) {
           break;
         }
@@ -84,7 +89,9 @@ const AdminMovieSchedule = () => {
     let theaterListCpy = [];
     while (1) {
       try {
-        const response = await axios.get(API + "/admin/theater/list/" + curPage);
+        const response = await axios.get(
+          API + "/admin/theater/list/" + curPage
+        );
         if (response.data.theaterList.length === 0) {
           break;
         }
@@ -224,10 +231,10 @@ const AdminMovieSchedule = () => {
   }
 
   function substringOfDate(orgDate) {
-    if(orgDate.indexOf("+") !== -1){
+    if (orgDate.indexOf("+") !== -1) {
       return orgDate.substring(0, orgDate.indexOf("+"));
-    } else{
-      return orgDate+"T00:00:00";
+    } else {
+      return orgDate + "T00:00:00";
     }
   }
 };

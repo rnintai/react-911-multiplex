@@ -15,7 +15,8 @@ import "../movie/modal.scss";
 import "src/App.css";
 import "./addScheduleModal.scss";
 
-const API = window.location.hostname === 'localhost' ? 'http://localhost:5000' : '/api';
+const API =
+  window.location.hostname === "localhost" ? "http://localhost:5000" : "/api";
 
 const AddScheduleModal = ({
   scheduleId,
@@ -187,8 +188,12 @@ const AddScheduleModal = ({
       // removeSchedule();
       // await axios.post(API + "/admin/tickets/schedule/delete/" + scheduleId);
 
-      scheduleListCpy = scheduleListCpy.filter((elem) => elem.movie_schedule_id !== scheduleId);
-      filteredScheduleListCpy = filteredScheduleListCpy.filter((elem) => elem.movie_schedule_id !== scheduleId);
+      scheduleListCpy = scheduleListCpy.filter(
+        (elem) => elem.movie_schedule_id !== scheduleId
+      );
+      filteredScheduleListCpy = filteredScheduleListCpy.filter(
+        (elem) => elem.movie_schedule_id !== scheduleId
+      );
       // setScheduleList(scheduleListCpy);
       // setFilteredScheduleList(filteredScheduleListCpy);
     }
@@ -200,7 +205,9 @@ const AddScheduleModal = ({
       endTime,
       movieCd,
     });
-    const getResponse = await axios.get(API + "/admin/tickets/schedule/id/" + generatedId);
+    const getResponse = await axios.get(
+      API + "/admin/tickets/schedule/id/" + generatedId
+    );
     setResponse(response.data);
     // getSchedule();
     const newScheduleObj = getResponse.data.scheduleInfo;
@@ -209,23 +216,27 @@ const AddScheduleModal = ({
 
     setScheduleList(scheduleListCpy);
     setFilteredScheduleList(filteredScheduleListCpy);
-    
+
     closeModal();
     // refreshSchedule(theater);
   }
-  
+
   async function removeSchedule() {
     await axios.post(API + "/admin/tickets/schedule/delete/" + scheduleId);
     closeModal();
     // getSchedule();
-    let scheduleListCpy = scheduleList.filter((elem) => elem.movie_schedule_id !== scheduleId);
+    let scheduleListCpy = scheduleList.filter(
+      (elem) => elem.movie_schedule_id !== scheduleId
+    );
     setScheduleList(scheduleListCpy);
-    let filteredScheduleListCpy = filteredScheduleList.filter((elem) => elem.movie_schedule_id !== scheduleId);
+    let filteredScheduleListCpy = filteredScheduleList.filter(
+      (elem) => elem.movie_schedule_id !== scheduleId
+    );
     setFilteredScheduleList(filteredScheduleListCpy);
   }
-  
+
   // function refreshSchedule(id) {
-    //   const result = scheduleList.filter((v) => v.theater_id === id);
+  //   const result = scheduleList.filter((v) => v.theater_id === id);
   //   setFilteredScheduleList(result);
   // }
 };

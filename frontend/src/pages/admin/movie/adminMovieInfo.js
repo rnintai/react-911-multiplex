@@ -10,7 +10,8 @@ import {
   FontBold,
 } from "src/design-system/font/Font";
 
-const API = window.location.hostname === 'localhost' ? 'http://localhost:5000' : '/api';
+const API =
+  window.location.hostname === "localhost" ? "http://localhost:5000" : "/api";
 
 const AdminMovie = () => {
   const [movieList, setMovieList] = useState([]);
@@ -69,7 +70,9 @@ const AdminMovie = () => {
       try {
         let i = 1;
         while (1) {
-          const toBeUpdatedResponse = await axios.get(API + "/movies/pre?page=" + i);
+          const toBeUpdatedResponse = await axios.get(
+            API + "/movies/pre?page=" + i
+          );
           const movieCdList = toBeUpdatedResponse.data.movieCdList;
           if (movieCdList.length === 0) {
             break;
