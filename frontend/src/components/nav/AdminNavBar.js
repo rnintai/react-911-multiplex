@@ -30,15 +30,22 @@ const AdminNavBar = () => {
           <ul className="sub-list">
             <li className="sub-item">
               <Link to="/admin/movie/info">
-                <Font tag="a" href="./#" color={FontColor.gray75}>
+                <Font className="sub-link" color={FontColor.gray75}>
                   영화정보
                 </Font>
               </Link>
             </li>
             <li className="sub-item">
               <Link to="/admin/movie/schedule">
-                <Font tag="a" href="./#" color={FontColor.gray75}>
+                <Font className="sub-link" color={FontColor.gray75}>
                   상영스케줄
+                </Font>
+              </Link>
+            </li>
+            <li className="sub-item">
+              <Link to="/admin/movie/reservation">
+                <Font className="sub-link" color={FontColor.gray75}>
+                  예매하기
                 </Font>
               </Link>
             </li>
