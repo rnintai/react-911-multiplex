@@ -15,7 +15,7 @@ import Footer from "./components/footer/Footer";
 // MovieInfo
 import Detail from "./components/movie_info/Detail";
 import NotFound from "./components/404/Not_found";
-import SignUp from "./components/singup/SignUp";
+import SignUp from "./components/signup/SignUp";
 import MovieList from "./components/movie_list/Movie_list";
 
 // admin
