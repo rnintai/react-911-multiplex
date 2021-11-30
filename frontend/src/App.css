@@ -13,6 +13,9 @@ body {
   width: 100%;
 }
 
+.row-1_4 {
+  width: 24.5%;
+}
 .row-1_2 {
   width: 49%;
 }
