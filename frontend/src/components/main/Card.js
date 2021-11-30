@@ -32,7 +32,13 @@ class Card extends Component {
           {this.state.boxOfficeList.map((element) => (
             <li>
               <div className="Movie">
-                <img src={element.poster} />
+                <img
+                  src={
+                    element.poster === ""
+                      ? "/images/uploads/poster/default.jpg"
+                      : element.poster
+                  }
+                />
                 <ul className="Movie_Sub">
                   <li>
                     <a href="/404">예매하기</a>
