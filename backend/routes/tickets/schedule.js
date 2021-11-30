@@ -12,11 +12,11 @@ router.get("/", async function (req, res) {
     let sql = ``;
 
     if (multiplex === undefined && movie !== undefined) {
-      sql = `SELECT DISTINCT multiplex_id FROM movie_schedule WHERE movie_id = ${movie}`;
+      sql = `SELECT * FROM movie_schedule WHERE movie_id = ${movie}`;
     } else if (multiplex !== undefined && movie === undefined) {
-      sql = `SELECT movie_schedule_id FROM movie_schedule WHERE multiplex_id = ${multiplex}`;
+      sql = `SELECT * FROM movie_schedule WHERE multiplex_id = ${multiplex}`;
     } else if (multiplex !== undefined && movie !== undefined) {
-      sql = `SELECT movie_schedule_id FROM movie_schedule 
+      sql = `SELECT * FROM movie_schedule 
       WHERE movie_id = ${movie} AND multiplex_id = ${multiplex}`;
     }
 
