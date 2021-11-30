@@ -1,0 +1,26 @@
+.rating-mark {
+  width: 17px;
+  height: 17px;
+  font-size: 8px;
+  border-radius: 50%;
+  white-space: nowrap;
+  text-align: center;
+  color: white;
+  letter-spacing: -1px;
+  padding: 2px;
+  font-weight: 100;
+  margin: 0 5px;
+
+  &.orange {
+    background-color: orange;
+  }
+  &.blue {
+    background-color: #00adff;
+  }
+  &.green {
+    background-color: green;
+  }
+  &.red {
+    background-color: red;
+  }
+}
