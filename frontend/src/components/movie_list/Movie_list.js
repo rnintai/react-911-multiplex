@@ -30,9 +30,9 @@ class Movie_list extends Component {
           <h2>천체 영화</h2>
         </div>
         <div className="Moviecard_View">
-          <ul className="Moviecard_List">
+          <div className="Moviecard_List">
             {this.state.boxOfficeList.map((element) => (
-              <li>
+              <div className="Movie_box">
                 <div className="Movie">
                   <img src={element.poster} />
                   <ul className="Movie_Sub">
@@ -53,10 +53,10 @@ class Movie_list extends Component {
                     </li>
                   </ul>
                 </div>
-                <p>{element.movie_name}</p>
-              </li>
+                <div className="Movie_name">{element.movie_name}</div>
+              </div>
             ))}
-          </ul>
+          </div>
         </div>
       </div>
     );
