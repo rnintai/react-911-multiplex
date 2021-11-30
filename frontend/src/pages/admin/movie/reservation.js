@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 // import { Table } from "../../../components/admin/movie/Table";
 import MovieSection from "src/components/reservation/movieSection";
+import TheaterSection from "src/components/reservation/theaterSection";
+
 import { Button, BgColor } from "src/design-system/button/Button";
 import Spinner from "src/components/basic/spinner";
 import {
@@ -26,7 +28,8 @@ const Reservation = () => {
 
   // 선택된 아이템
   const [selectedMovieId, setSelectedMovieId] = useState("");
-  const [selectedTheaterId, setSelectedTheaterId] = useState("");
+  const [selectedMultiplexId, setSelectedMultiplexId] = useState("");
+  // const [selectedTheaterId, setSelectedTheaterId] = useState("");
 
   const getSchedule = async () => {
     let curPage = 1;
@@ -109,14 +112,24 @@ const Reservation = () => {
           {!loading && scheduleList && (
             <>
               <MovieSection
+                loading={loading}
                 scheduleList={scheduleList}
                 selectedMovieId={selectedMovieId}
                 setSelectedMovieId={setSelectedMovieId}
+                // selectedTheaterId={selectedTheaterId}
               ></MovieSection>
-              <div className="row-1_3">지점</div>
-              <div className="row-1_3">시간</div>
+              <TheaterSection
+                scheduleList={scheduleList}
+                selectedMovieId={selectedMovieId}
+                selectedMultiplexId={selectedMultiplexId}
+                setSelectedMultiplexId={setSelectedMultiplexId}
+                // selectedTheaterId={selectedTheaterId}
+                // setSelectedTheaterId={setSelectedTheaterId}
+              ></TheaterSection>
+              <div className="row-1_2">시간</div>
             </>
           )}
+          {loading && <Spinner color="#d8d8d8"></Spinner>}
         </div>
       </section>
     </>

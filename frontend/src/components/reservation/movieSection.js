@@ -14,13 +14,17 @@ const MovieSection = ({
   scheduleList,
   selectedMovieId,
   setSelectedMovieId,
+  // selectedTheaterId,
 }) => {
   const [movieList, setMovieList] = useState([]);
   useEffect(() => {
     setMovieList(filterScheduleListByMovieId());
-  }, []);
+  }, [scheduleList]);
   return (
-    <div className="row-1_3" style={{ padding: 10 }}>
+    <div
+      className="row-1_4"
+      style={{ margin: 10, borderRight: "1px solid #d9d9d9" }}
+    >
       <Font size={FontSize.lg}>영화</Font>
       <div className="flex-col selection-container">
         {movieList.map((elem) => (
@@ -42,7 +46,8 @@ const MovieSection = ({
   );
 
   function filterScheduleListByMovieId() {
-    return _.uniqBy(scheduleList, "movie_id");
+    let tmp = _.uniqBy(scheduleList, "movie_id");
+    return tmp;
   }
 
   function onClickMovie(id) {
