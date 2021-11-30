@@ -19,9 +19,14 @@ const API =
 const Reservation = () => {
   const [loading, setLoading] = useState(true);
 
+  // 데이터 목록
   const [scheduleList, setScheduleList] = useState([]);
   const [multiplexList, setMultiplexList] = useState([]);
   const [theaterList, setTheaterList] = useState([]);
+
+  // 선택된 아이템
+  const [selectedMovieId, setSelectedMovieId] = useState("");
+  const [selectedTheaterId, setSelectedTheaterId] = useState("");
 
   const getSchedule = async () => {
     let curPage = 1;
@@ -41,7 +46,6 @@ const Reservation = () => {
       }
     }
     setScheduleList(scheduleListCpy);
-    setLoading(false);
   };
   // 모든 지점을 받아옴.
   const getMultiplexList = async () => {
@@ -81,6 +85,7 @@ const Reservation = () => {
       }
     }
     setTheaterList(theaterListCpy);
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -101,9 +106,17 @@ const Reservation = () => {
         </Font>
         <div className="res-wrap border-gray flex-row">
           {/* <div className="flex-"></div> */}
-          <MovieSection scheduleList={scheduleList}></MovieSection>
-          <div className="row-1_3">b</div>
-          <div className="row-1_3">c</div>
+          {!loading && scheduleList && (
+            <>
+              <MovieSection
+                scheduleList={scheduleList}
+                selectedMovieId={selectedMovieId}
+                setSelectedMovieId={setSelectedMovieId}
+              ></MovieSection>
+              <div className="row-1_3">지점</div>
+              <div className="row-1_3">시간</div>
+            </>
+          )}
         </div>
       </section>
     </>
