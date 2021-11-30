@@ -11,8 +11,6 @@ body {
 .flex-row {
   display: flex;
   width: 100%;
-  justify-content: space-between;
-  margin-bottom: 10px;
 }
 
 .row-1_2 {
@@ -29,7 +27,7 @@ body {
   z-index: 10;
 }
 
-.fc-timegrid thead{
+.fc-timegrid thead {
   position: sticky;
   top: 39px;
   background-color: white;
