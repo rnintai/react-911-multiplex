@@ -10,7 +10,6 @@ body {
 }
 .flex-row {
   display: flex;
-  width: 100%;
 }
 
 .row-1_4 {
