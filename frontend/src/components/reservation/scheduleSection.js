@@ -37,9 +37,9 @@ const ScheduleSection = ({
   return (
     <div className="row-1_2">
       <div className="flex-col">
-        <Font style={{ marginLeft: 10 }}>
+        {/* <Font style={{ marginLeft: 10 }}>
           {dateToYear(curDate) + "/" + dateToMonth(curDate)}
-        </Font>
+        </Font> */}
         <div
           className="flex-row justify-cen"
           style={{ width: "100%", position: "relative" }}
