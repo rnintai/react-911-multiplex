@@ -28,5 +28,11 @@
     &.selected {
       background-color: rgba(0, 0, 0, 0.08);
     }
+
+    &.unavailable {
+      cursor: default;
+      pointer-events: none;
+      opacity: 0.5;
+    }
   }
 }
