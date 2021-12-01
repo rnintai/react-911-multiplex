@@ -18,19 +18,53 @@ const ScheduleSection = ({
   filteredScheduleList,
   setFilteredScheduleList,
 }) => {
-  // 영화 및 지점 선택 시 호출
+  const [curDate, setcurDate] = useState(ISOtoYMD(new Date().toISOString()));
+  const [curWeekList, setCurWeekList] = useState([]);
+  const [dateList, setDateList] = useState([]);
+
   useEffect(() => {
     setFilteredScheduleList(scheduleList);
+    setDateList(getDatesStartToLast(yearStartDate(), yearEndDate()));
+    setCurWeekList(
+      getDatesStartToLast(weekStartDate(curDate), weekEndDate(curDate))
+    );
   }, [scheduleList]);
+  // 영화 및 지점 선택 시 호출
   useEffect(() => {
     filterScheduleListWithSelection(selectedMovieId, selectedMultiplexId);
   }, [selectedMovieId, selectedMultiplexId]);
 
   return (
     <div className="row-1_2">
-      <Font size={FontSize.lg} style={{ marginLeft: 10 }}>
-        시간
-      </Font>
+      <div className="flex-col">
+        <Font style={{ marginLeft: 10 }}>
+          {dateToYear(curDate) + "/" + dateToMonth(curDate)}
+        </Font>
+        <div
+          className="flex-row justify-cen"
+          style={{ width: "100%", position: "relative" }}
+        >
+          <div className="date-btn">
+            <i class="fas fa-caret-left"></i>
+          </div>
+          {curWeekList.map((elem) => (
+            <Font
+              className={
+                elem === curDate
+                  ? "flex-row justify-cen date-selector selected"
+                  : "flex-row justify-cen date-selector"
+              }
+              color={FontColor.gray75}
+              style={{ width: 30, height: 30 }}
+            >
+              {dateToDay(elem)}
+            </Font>
+          ))}
+          <div className="date-btn">
+            <i class="fas fa-caret-right"></i>
+          </div>
+        </div>
+      </div>
       <div className="flex-row row-1/2">
         <div className="flex-col selection-container" style={{ width: "100%" }}>
           {selectedMovieId !== "" &&
@@ -53,57 +87,19 @@ const ScheduleSection = ({
               영화 및 지점을 선택해주세요.
             </Font>
           )}
-          {/* {filteredScheduleList} */}
-          {/* {multiplexList.map((elem) => (
-            <div
-              className={
-                selectedMultiplexId === elem.multiplex_id
-                  ? "selection-item selected"
-                  : "selection-item"
-              }
-              style={{ padding: "2px" }}
-              key={elem.theater_id}
-              onClick={() => onClickMultiplex(elem.multiplex_id)}
-            >
-              <Font size={FontSize.sm} boldness={FontBold.light}>
-                {elem.multiplex_name}
-              </Font>
-            </div>
-          ))} */}
         </div>
-        {/* <div
-          className="flex-col selection-container row-1_2"
-          style={{ margin: "10px 0 0 10px" }}
-        >
-          {theaterList.map((elem) => (
-            <div
-              className={
-                selectedTheaterId === elem.theater_id
-                  ? "selection-item selected"
-                  : "selection-item"
-              }
-              style={{ padding: "0 2px" }}
-              key={elem.theater_id}
-              onClick={() => onClickTheater(elem.theater_id)}
-            >
-              <Font size={FontSize.sm} boldness={FontBold.light}>
-                {elem.theater_name}
-              </Font>
-            </div>
-          ))}
-        </div> */}
       </div>
     </div>
   );
 
   function filterScheduleListWithSelection(movieId, multiplexId) {
     let scheduleListCpy = scheduleList;
-    if (movieId === "" && multiplexId !== "") {
+    if (movieId !== "" && multiplexId === "") {
       // 영화 선택됨
       scheduleListCpy = scheduleListCpy.filter(
         (elem) => elem.movie_id === movieId
       );
-    } else if (movieId !== "" && multiplexId === "") {
+    } else if (movieId === "" && multiplexId !== "") {
       // 지점 선택
       scheduleListCpy = scheduleListCpy.filter(
         (elem) => elem.multiplex_id === multiplexId
@@ -119,10 +115,12 @@ const ScheduleSection = ({
 
   function parseDateOnly(orgTime) {
     let dateStr = new Date(orgTime);
+    let month =
+      dateStr.getMonth() < 10 ? "0" + dateStr.getMonth() : dateStr.getMonth();
+    let date =
+      dateStr.getDate() < 10 ? "0" + dateStr.getDate() : dateStr.getDate();
 
-    return (
-      dateStr.getFullYear() + "." + dateStr.getMonth() + "." + dateStr.getDate()
-    );
+    return dateStr.getFullYear() + "." + month + "." + date;
   }
   function dateToTime(orgTime) {
     let timeObj = new Date(orgTime);
@@ -134,7 +132,61 @@ const ScheduleSection = ({
         : timeObj.getMinutes();
     return hour + ":" + minute;
   }
+  function yearStartDate() {
+    let startDate = new Date();
+    startDate.setFullYear(startDate.getFullYear() - 1);
+    startDate = startDate.toISOString();
+    startDate = ISOtoYMD(startDate);
+    return startDate;
+  }
+  function yearEndDate() {
+    let endDate = new Date();
+    endDate.setFullYear(endDate.getFullYear() + 1);
+    endDate = endDate.toISOString();
+    endDate = ISOtoYMD(endDate);
+    return endDate;
+  }
+  function weekStartDate(date) {
+    let yoill = new Date(date).getDay();
+    let currentDate = new Date(date);
+    currentDate.setDate(currentDate.getDate() - yoill);
+    currentDate = currentDate.toISOString();
+    currentDate = ISOtoYMD(currentDate);
+    return currentDate;
+  }
+  function weekEndDate(date) {
+    let yoill = new Date(date).getDay();
+    let currentDate = new Date(date);
+    currentDate.setDate(currentDate.getDate() - yoill + 6);
+    currentDate = currentDate.toISOString();
+    currentDate = ISOtoYMD(currentDate);
+    return currentDate;
+  }
+  function getDatesStartToLast(startDate, lastDate) {
+    var regex = RegExp(/^\d{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$/);
+    if (!(regex.test(startDate) && regex.test(lastDate)))
+      return "Not Date Format";
+    var result = [];
+    var curDate = new Date(startDate);
+    while (curDate <= new Date(lastDate)) {
+      result.push(curDate.toISOString().split("T")[0]);
+      curDate.setDate(curDate.getDate() + 1);
+    }
+    return result;
+  }
 
+  function ISOtoYMD(date) {
+    return date.substring(0, date.indexOf("T"));
+  }
+  function dateToYear(date) {
+    return date.split("-")[0];
+  }
+  function dateToMonth(date) {
+    return date.split("-")[1];
+  }
+  function dateToDay(date) {
+    return date.split("-")[2];
+  }
   // function onClickMultiplex(id) {
   //   if (id === selectedMultiplexId) {
   //     setSelectedMultiplexId("");
