@@ -48,17 +48,34 @@ const ScheduleSection = ({
             <i class="fas fa-caret-left"></i>
           </div>
           {curWeekList.map((elem) => (
-            <Font
+            <div
               className={
                 elem === curDate
                   ? "flex-row justify-cen date-selector selected"
                   : "flex-row justify-cen date-selector"
               }
-              color={FontColor.gray75}
-              style={{ width: 30, height: 30 }}
+              style={{ width: 40, height: 40, position: "relative" }}
             >
-              {dateToDay(elem)}
-            </Font>
+              {dateToDay(elem) === "01" && (
+                <div className="flex-col" style={{ fontSize: 14 }}>
+                  <Font
+                    size={FontSize.xs}
+                    boldness={FontBold.bold}
+                    style={{
+                      position: "absolute",
+                      top: 0,
+                      left: 7,
+                    }}
+                  >
+                    {dateToYear(elem).substr(2, 2) + "/" + dateToMonth(elem)}
+                  </Font>
+                  {dateToDay(elem)}
+                </div>
+              )}
+              {dateToDay(elem) !== "01" && (
+                <Font color={FontColor.gray75}>{dateToDay(elem)}</Font>
+              )}
+            </div>
           ))}
           <div className="date-btn">
             <i class="fas fa-caret-right"></i>
