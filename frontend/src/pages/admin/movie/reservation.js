@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 // import { Table } from "../../../components/admin/movie/Table";
 import MovieSection from "src/components/reservation/movieSection";
-import TheaterSection from "src/components/reservation/theaterSection";
+import MultiplexSection from "src/components/reservation/multiplexSection";
+import ScheduleSection from "src/components/reservation/scheduleSection";
 
 import { Button, BgColor } from "src/design-system/button/Button";
 import Spinner from "src/components/basic/spinner";
@@ -29,7 +30,10 @@ const Reservation = () => {
   // 선택된 아이템
   const [selectedMovieId, setSelectedMovieId] = useState("");
   const [selectedMultiplexId, setSelectedMultiplexId] = useState("");
-  // const [selectedTheaterId, setSelectedTheaterId] = useState("");
+  const [selectedScheduleId, setSelectedScheduleId] = useState("");
+
+  // 필터링 된 스케줄 리스트
+  const [filteredScheduleList, setFilteredScheduleList] = useState([]);
 
   const getSchedule = async () => {
     let curPage = 1;
@@ -108,25 +112,36 @@ const Reservation = () => {
           예매하기
         </Font>
         <div className="res-wrap border-gray flex-row">
-          {/* <div className="flex-"></div> */}
           {!loading && scheduleList && (
             <>
               <MovieSection
                 loading={loading}
                 scheduleList={scheduleList}
                 selectedMovieId={selectedMovieId}
+                selectedMultiplexId={selectedMultiplexId}
                 setSelectedMovieId={setSelectedMovieId}
-                // selectedTheaterId={selectedTheaterId}
+                setSelectedMultiplexId={setSelectedMultiplexId}
+                setSelectedScheduleId={setSelectedScheduleId}
+                filteredScheduleList={filteredScheduleList}
               ></MovieSection>
-              <TheaterSection
+              <MultiplexSection
+                scheduleList={scheduleList}
+                selectedMovieId={selectedMovieId}
+                setSelectedMovieId={setSelectedMovieId}
+                selectedMultiplexId={selectedMultiplexId}
+                setSelectedMultiplexId={setSelectedMultiplexId}
+                setSelectedScheduleId={setSelectedScheduleId}
+                filteredScheduleList={filteredScheduleList}
+                // selectedTheaterId={selectedTheaterId}
+                // setSelectedTheaterId={setSelectedTheaterId}
+              ></MultiplexSection>
+              <ScheduleSection
                 scheduleList={scheduleList}
                 selectedMovieId={selectedMovieId}
                 selectedMultiplexId={selectedMultiplexId}
-                setSelectedMultiplexId={setSelectedMultiplexId}
-                // selectedTheaterId={selectedTheaterId}
-                // setSelectedTheaterId={setSelectedTheaterId}
-              ></TheaterSection>
-              <div className="row-1_2">시간</div>
+                filteredScheduleList={filteredScheduleList}
+                setFilteredScheduleList={setFilteredScheduleList}
+              ></ScheduleSection>
             </>
           )}
           {loading && <Spinner color="#d8d8d8"></Spinner>}

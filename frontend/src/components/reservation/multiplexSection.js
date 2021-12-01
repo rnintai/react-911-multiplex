@@ -10,24 +10,31 @@ import {
 } from "src/design-system/font/Font";
 import RatingMark from "../admin/movie/ratingMark";
 
-const TheaterSection = ({
+const MultiplexSection = ({
   scheduleList,
+  selectedMovieId,
   setSelectedMovieId,
   selectedMultiplexId,
   setSelectedMultiplexId,
-  // selectedTheaterId,
-  // setSelectedTheaterId,
+  setSelectedScheduleId,
+  filteredScheduleList,
 }) => {
   const [multiplexList, setMultiplexList] = useState([]);
   const [theaterList, setTheaterList] = useState([]);
   useEffect(() => {
     setMultiplexList(filterScheduleListByMultiplexId());
   }, [scheduleList]);
+
+  // 지점 선택시
+  // useEffect(() => {
+  //   console.log(selectedMultiplexId);
+  // }, [selectedMultiplexId]);
+
   return (
     <div
       className="row-1_4"
       style={{
-        margin: 10,
+        padding: 10,
         borderRight: "1px solid #d9d9d9",
       }}
     >
@@ -37,9 +44,9 @@ const TheaterSection = ({
           {multiplexList.map((elem) => (
             <div
               className={
-                selectedMultiplexId === elem.multiplex_id
-                  ? "selection-item selected"
-                  : "selection-item"
+                "flex-row selection-item" +
+                selectedClass(elem) +
+                availableClass(elem)
               }
               style={{ padding: "2px" }}
               key={elem.theater_id}
@@ -76,11 +83,37 @@ const TheaterSection = ({
     </div>
   );
 
+  function selectedClass(parent) {
+    if (selectedMultiplexId === parent.multiplex_id) {
+      return " selected";
+    } else {
+      return "";
+    }
+  }
+
+  function availableClass(parent) {
+    let result = filterAvailableScheduleListByMovieId(parent.movie_id).filter(
+      (elem) => elem.multiplex_id === parent.multiplex_id
+    );
+
+    if (result.length !== 0) {
+      return "";
+    } else {
+      return " unavailable";
+    }
+  }
+
   function filterScheduleListByMultiplexId() {
     let tmp = _.uniqBy(scheduleList, "multiplex_id");
-    // if (selectedTheaterId !== "") {
-    //   tmp = tmp.filter((elem) => elem.theater_id === selectedTheaterId);
-    // }
+    return tmp;
+  }
+  function filterAvailableScheduleListByMovieId(id) {
+    let tmp = [];
+    if (id !== "") {
+      tmp = _.uniqBy(filteredScheduleList, "multiplex_id");
+    } else {
+      tmp = multiplexList;
+    }
     return tmp;
   }
   // function filterTheaterListByMultiplexId() {
@@ -101,6 +134,7 @@ const TheaterSection = ({
     } else {
       setSelectedMultiplexId(id);
     }
+    setSelectedScheduleId("");
 
     // setTheaterList(filterTheaterListByMultiplexId());
     // setSelectedTheaterId("");
@@ -111,4 +145,4 @@ const TheaterSection = ({
   // }
 };
 
-export default TheaterSection;
+export default MultiplexSection;
