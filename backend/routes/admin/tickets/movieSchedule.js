@@ -23,6 +23,8 @@ router.get("/:page", async function (req, res) {
     theater_id,
     (SELECT theater_name FROM theater as T
     WHERE T.theater_id=S.theater_id) as theater_name, 
+    (SELECT theater_type FROM theater as T
+    WHERE T.theater_id=S.theater_id) as theater_name, 
     movie_schedule_start, movie_schedule_end,
     (SELECT age_limit FROM movie
     WHERE movie.movie_id=S.movie_id) as age_limit
@@ -59,6 +61,8 @@ router.get("/id/:scheduleId", async function (req, res) {
     WHERE movie.movie_id=S.movie_id) as movie_name, 
     theater_id,
     (SELECT theater_name FROM theater as T
+    WHERE T.theater_id=S.theater_id) as theater_name, 
+    (SELECT theater_type FROM theater as T
     WHERE T.theater_id=S.theater_id) as theater_name, 
     movie_schedule_start, movie_schedule_end 
     FROM movie_schedule as S
