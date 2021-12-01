@@ -12,11 +12,14 @@ body {
   display: flex;
   align-items: center;
 }
-.justify-sb{
+.justify-sb {
   justify-content: space-between;
 }
+.justify-cen {
+  justify-content: center;
+}
 
-.row-1_1{
+.row-1_1 {
   width: 100%;
 }
 
@@ -29,17 +32,17 @@ body {
 .row-1_3 {
   width: 31%;
 }
-.col-1_1{
+.col-1_1 {
   height: 100%;
 }
-.col-1_2{
+.col-1_2 {
   height: 50%;
 }
 
-.text-center{
+.text-center {
   text-align: center;
 }
-.text-right{
+.text-right {
   text-align: right;
 }
 
