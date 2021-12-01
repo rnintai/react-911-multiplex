@@ -51,7 +51,11 @@ const MovieSection = ({
   }
 
   function onClickMovie(id) {
-    setSelectedMovieId(id);
+    if (id === selectedMovieId) {
+      setSelectedMovieId("");
+    } else {
+      setSelectedMovieId(id);
+    }
   }
 };
 

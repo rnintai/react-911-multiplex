@@ -41,7 +41,7 @@ const TheaterSection = ({
                   ? "selection-item selected"
                   : "selection-item"
               }
-              style={{ padding: "0 2px" }}
+              style={{ padding: "2px" }}
               key={elem.theater_id}
               onClick={() => onClickMultiplex(elem.multiplex_id)}
             >
@@ -96,7 +96,12 @@ const TheaterSection = ({
   // }
 
   function onClickMultiplex(id) {
-    setSelectedMultiplexId(id);
+    if (id === selectedMultiplexId) {
+      setSelectedMultiplexId("");
+    } else {
+      setSelectedMultiplexId(id);
+    }
+
     // setTheaterList(filterTheaterListByMultiplexId());
     // setSelectedTheaterId("");
   }
