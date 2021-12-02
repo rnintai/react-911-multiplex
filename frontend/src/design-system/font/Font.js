@@ -4,6 +4,7 @@ import "./font.scss";
 
 export const FontSize = {
   default: "ds-font-size--default",
+  xs: "ds-font-size--xs",
   sm: "ds-font-size--sm",
   lg: "ds-font-size--lg",
   xl: "ds-font-size--xl",
