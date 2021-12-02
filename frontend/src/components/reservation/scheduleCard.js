@@ -7,7 +7,7 @@ import {
 } from "src/design-system/font/Font";
 
 function ScheduleCard({
-  date,
+  // date,
   startTime,
   endTime,
   movieName,
@@ -26,9 +26,9 @@ function ScheduleCard({
       }}
     >
       <div className="flex-col" style={{ width: "15%" }}>
-        <Font boldness={FontBold.bold} style={{ marginBottom: 5 }}>
+        {/* <Font boldness={FontBold.bold} style={{ marginBottom: 5 }}>
           {date}
-        </Font>
+        </Font> */}
         <Font
           size={FontSize.sm}
           boldness={FontBold.bold}
