@@ -3,7 +3,9 @@
 }
 
 .Title{
+  text-align:center;
     width: 1000px;
+    height: 50px;
     margin-left: 50px;
 }
 
