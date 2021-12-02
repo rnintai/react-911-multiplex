@@ -39,13 +39,13 @@ class App extends Component {
               <Card></Card>
               <Theater></Theater>
             </Route>
-            <Route path="/Movies" exact>
+            <Route path="/movies" exact>
               <Nav></Nav>
               <MovieList></MovieList>
             </Route>
             {/* movieInfo */}
             <Route
-              path="/Movies/Detail/:movie_id"
+              path="/movies/detail/:movie_id"
               exact={true}
               component={Detail}
             ></Route>
