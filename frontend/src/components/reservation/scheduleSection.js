@@ -25,9 +25,11 @@ const ScheduleSection = ({
   const [dateList, setDateList] = useState([]);
   // 최종 스케줄 리스트
   const [finalScheduleList, setFinalScheduleList] = useState([]);
-
+  // 지금 주 페이지
+  const [curWeekPage, setCurWeekPage] = useState(0);
   // 오늘 날짜.
-  const datePivot = ISOtoYMD(new Date().toISOString());
+  let datePivot = ISOtoYMD(new Date().toISOString());
+
   useEffect(() => {
     setFilteredScheduleList(scheduleList);
     setDateList(getDatesStartToLast(yearStartDate(), yearEndDate()));
@@ -69,7 +71,7 @@ const ScheduleSection = ({
             position: "relative",
           }}
         >
-          <div className="date-btn">
+          <div className={curWeekPage > -4 ? "date-btn" : "date-btn disabled"}>
             <i className="fas fa-caret-left" onClick={onClickLeft}></i>
           </div>
           {curWeekList.map((elem, idx) => (
@@ -102,7 +104,7 @@ const ScheduleSection = ({
               </div>
             </div>
           ))}
-          <div className="date-btn">
+          <div className={curWeekPage < 12 ? "date-btn" : "date-btn disabled"}>
             <i className="fas fa-caret-right" onClick={onClickRight}></i>
           </div>
         </div>
@@ -196,17 +198,17 @@ const ScheduleSection = ({
   // 예매 시스템이 커버 할 첫 날짜 (-1개월)
   function yearStartDate() {
     let startDate = new Date();
-    startDate.setMonth(startDate.getMonth() - 1);
-    startDate = startDate.toISOString();
-    startDate = ISOtoYMD(startDate);
+    // startDate.setMonth(startDate.getMonth() - 2);
+    startDate.setDate(startDate.getDate() - 7 * 5);
+    startDate = ISOtoYMD(startDate.toISOString());
     return startDate;
   }
   // 예매 시스템이 커버 할 마지막 날짜 (+3개월)
   function yearEndDate() {
     let endDate = new Date();
-    endDate.setMonth(endDate.getMonth() + 3);
-    endDate = endDate.toISOString();
-    endDate = ISOtoYMD(endDate);
+    // endDate.setMonth(endDate.getMonth() + 4);
+    endDate.setDate(endDate.getDate() + 7 * 13);
+    endDate = ISOtoYMD(endDate.toISOString());
     return endDate;
   }
   // date가 해당하는 주의 첫 날 반환
@@ -229,9 +231,9 @@ const ScheduleSection = ({
   }
   // 시작, 종료 날짜 사이의 모든 날을 나열한 배열
   function getDatesStartToLast(startDate, lastDate) {
-    var regex = RegExp(/^\d{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$/);
-    if (!(regex.test(startDate) && regex.test(lastDate)))
-      return "Not Date Format";
+    // var regex = RegExp(/^\d{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$/);
+    // if (!(regex.test(startDate) && regex.test(lastDate)))
+    //   return "Not Date Format";
     var result = [];
     var tmpDate = new Date(startDate);
     while (tmpDate <= new Date(lastDate)) {
@@ -310,6 +312,7 @@ const ScheduleSection = ({
     setCurWeekList(
       getDatesStartToLast(weekStartDate(dateObj), weekEndDate(dateObj))
     );
+    setCurWeekPage(curWeekPage - 1);
   }
   function onClickRight() {
     let dateObj = new Date(curWeekList[4]);
@@ -317,6 +320,7 @@ const ScheduleSection = ({
     setCurWeekList(
       getDatesStartToLast(weekStartDate(dateObj), weekEndDate(dateObj))
     );
+    setCurWeekPage(curWeekPage + 1);
   }
 };
 
