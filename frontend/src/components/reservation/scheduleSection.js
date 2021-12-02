@@ -28,7 +28,6 @@ const ScheduleSection = ({
 
   // 오늘 날짜.
   const datePivot = ISOtoYMD(new Date().toISOString());
-
   useEffect(() => {
     setFilteredScheduleList(scheduleList);
     setDateList(getDatesStartToLast(yearStartDate(), yearEndDate()));
@@ -41,8 +40,9 @@ const ScheduleSection = ({
   // 영화 및 지점 선택 시 호출
   useEffect(() => {
     filterScheduleListWithSelection(selectedMovieId, selectedMultiplexId);
-    // 앞의 선택을 변경하면 선택된 날짜 초기화.
+    // 앞의 선택을 변경하면 선택된 날짜 및 결과 리스트 초기화.
     setSelectedDate("");
+    setFinalScheduleList([]);
   }, [selectedMovieId, selectedMultiplexId]);
 
   // 선택 날짜 변경 시 필터링.
@@ -70,7 +70,7 @@ const ScheduleSection = ({
           }}
         >
           <div className="date-btn">
-            <i class="fas fa-caret-left" onClick={onClickLeft}></i>
+            <i className="fas fa-caret-left" onClick={onClickLeft}></i>
           </div>
           {curWeekList.map((elem, idx) => (
             <div
@@ -104,7 +104,7 @@ const ScheduleSection = ({
             </div>
           ))}
           <div className="date-btn">
-            <i class="fas fa-caret-right" onClick={onClickRight}></i>
+            <i className="fas fa-caret-right" onClick={onClickRight}></i>
           </div>
         </div>
       </div>
@@ -138,7 +138,6 @@ const ScheduleSection = ({
   // 영화 or 지점 선택시 리스트 필터링
   function filterScheduleListWithSelection(movieId, multiplexId) {
     let scheduleListCpy = scheduleList;
-    // console.log(selectedDate, ISOtoYMD(scheduleList[0].movie_schedule_start));
     if (movieId !== "" && multiplexId === "") {
       // 영화 선택됨
       scheduleListCpy = scheduleListCpy.filter(
@@ -237,7 +236,16 @@ const ScheduleSection = ({
 
   // ISOString형식에서 YYMMDD로 바꾸어 주는 함수
   function ISOtoYMD(date) {
-    return date.substring(0, date.indexOf("T"));
+    // new Date(date.substring(0, date.indexOf("T")));
+    let dateObj = new Date(date);
+    const year = dateObj.getFullYear();
+    const month =
+      dateObj.getMonth() < 10
+        ? `0${dateObj.getMonth() + 1}`
+        : dateObj.getMonth() + 1;
+    const day =
+      dateObj.getDate() < 10 ? `0${dateObj.getDate()}` : dateObj.getDate();
+    return `${year}-${month}-${day}`;
   }
   // YYMMDD 중 YY 추출
   function dateToYear(date) {
@@ -273,13 +281,12 @@ const ScheduleSection = ({
     if (date === selectedDate) {
       resultClass += " selected";
     }
-    // if ()
-    console.log(date);
-    console.log(
-      filteredScheduleList.filter(
-        (elem) => ISOtoYMD(elem.movie_schedule_start) === date
-      )
+    const scheduleOfDate = filteredScheduleList.filter(
+      (elem) => ISOtoYMD(elem.movie_schedule_start) === date
     );
+    if (scheduleOfDate.length === 0) {
+      resultClass += " disabled";
+    }
 
     return resultClass;
   }
