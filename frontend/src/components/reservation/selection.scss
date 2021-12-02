@@ -1,3 +1,8 @@
+.disabled {
+  opacity: 0.3;
+  pointer-events: none;
+}
+
 .selection-container {
   margin-top: 10px;
   height: 250px;
@@ -28,22 +33,8 @@
     &.selected {
       background-color: rgba(0, 0, 0, 0.08);
     }
-
-    &.unavailable {
-      cursor: default;
-      pointer-events: none;
-      opacity: 0.5;
-    }
   }
 }
-
-.date-container{
-  &.disabled{
-    opacity: 0.5;
-    pointer-events: none;
-  }
-}
-
 .date-btn {
   opacity: 0.5;
   padding: 0 5px;
@@ -51,6 +42,10 @@
   transition: opacity 0.3s ease-in-out;
   &:hover {
     opacity: 1;
+  }
+
+  &.disabled {
+    visibility: hidden;
   }
 }
 
@@ -62,7 +57,7 @@
   border-radius: 5px;
   transition: all 0.2s ease-in-out;
 
-  &::after{
+  &::after {
     content: "";
     width: 5px;
     height: 5px;
@@ -81,11 +76,8 @@
     border-color: skyblue;
     color: white;
   }
-  &.disabled{
-    opacity: 0.3;
-    pointer-events: none;
-
-    &::after{
+  &.disabled {
+    &::after {
       display: none;
     }
   }
