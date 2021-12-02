@@ -100,7 +100,7 @@ const MultiplexSection = ({
     if (result.length !== 0) {
       return "";
     } else {
-      return " unavailable";
+      return " disabled";
     }
   }
 
