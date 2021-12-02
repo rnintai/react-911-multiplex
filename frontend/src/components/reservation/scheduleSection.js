@@ -18,42 +18,56 @@ const ScheduleSection = ({
   filteredScheduleList,
   setFilteredScheduleList,
 }) => {
-  const [selectedDate, setSelectedDate] = useState(
-    ISOtoYMD(new Date().toISOString())
-  );
+  // const [dateCursor, setDateCursor] = useState(
+  // );
+  const [selectedDate, setSelectedDate] = useState("");
   const [curWeekList, setCurWeekList] = useState([]);
   const [dateList, setDateList] = useState([]);
+  // 최종 스케줄 리스트
+  const [finalScheduleList, setFinalScheduleList] = useState([]);
+
+  // 오늘 날짜.
+  const datePivot = ISOtoYMD(new Date().toISOString());
 
   useEffect(() => {
     setFilteredScheduleList(scheduleList);
     setDateList(getDatesStartToLast(yearStartDate(), yearEndDate()));
+    // 오늘 기준으로 일주일을 보여줌.
     setCurWeekList(
-      getDatesStartToLast(
-        weekStartDate(selectedDate),
-        weekEndDate(selectedDate)
-      )
+      getDatesStartToLast(weekStartDate(datePivot), weekEndDate(datePivot))
     );
   }, [scheduleList]);
+
   // 영화 및 지점 선택 시 호출
   useEffect(() => {
     filterScheduleListWithSelection(selectedMovieId, selectedMultiplexId);
+    // 앞의 선택을 변경하면 선택된 날짜 초기화.
+    setSelectedDate("");
   }, [selectedMovieId, selectedMultiplexId]);
 
   // 선택 날짜 변경 시 필터링.
-  useEffect(() => {}, [selectedDate]);
+  useEffect(() => {
+    if (selectedMovieId !== "" && selectedMultiplexId !== "") {
+      filterScheduleByDate();
+    }
+  }, [selectedDate]);
 
   return (
-    <div className="row-1_2">
+    <div className="row-1_2" style={{ height: 310 }}>
       <div
         className={
           selectedMovieId === "" || selectedMultiplexId === ""
             ? "flex-col date-container disabled"
             : "flex-col date-container"
         }
+        style={{ marginTop: 10 }}
       >
         <div
           className="flex-row justify-cen"
-          style={{ width: "100%", position: "relative" }}
+          style={{
+            width: "100%",
+            position: "relative",
+          }}
         >
           <div className="date-btn">
             <i class="fas fa-caret-left" onClick={onClickLeft}></i>
@@ -61,9 +75,10 @@ const ScheduleSection = ({
           {curWeekList.map((elem, idx) => (
             <div
               className={
-                elem === selectedDate
-                  ? "flex-row justify-cen date-selector selected"
-                  : "flex-row justify-cen date-selector"
+                dateSelectorClass(elem)
+                // elem === selectedDate
+                //   ? "date-selector flex-row justify-cen selected"
+                //   : "date-selector flex-row justify-cen"
               }
               style={{ width: 40, height: 40, position: "relative" }}
               key={elem}
@@ -84,7 +99,7 @@ const ScheduleSection = ({
                     {dateToYear(elem).substr(2, 2) + "/" + dateToMonth(elem)}
                   </Font>
                 )}
-                <Font color={dayColor(elem)}>{dateToDay(elem)}</Font>
+                <Font color={dayColorClass(elem)}>{dateToDay(elem)}</Font>
               </div>
             </div>
           ))}
@@ -97,7 +112,7 @@ const ScheduleSection = ({
         <div className="flex-col selection-container" style={{ width: "100%" }}>
           {selectedMovieId !== "" &&
             selectedMultiplexId !== "" &&
-            filteredScheduleList.map((elem) => (
+            finalScheduleList.map((elem) => (
               <ScheduleCard
                 // date={parseDateOnly(elem.movie_schedule_start)}
                 startTime={dateToTime(elem.movie_schedule_start)}
@@ -120,9 +135,10 @@ const ScheduleSection = ({
     </div>
   );
 
+  // 영화 or 지점 선택시 리스트 필터링
   function filterScheduleListWithSelection(movieId, multiplexId) {
     let scheduleListCpy = scheduleList;
-    console.log(selectedDate, ISOtoYMD(scheduleList[0].movie_schedule_start));
+    // console.log(selectedDate, ISOtoYMD(scheduleList[0].movie_schedule_start));
     if (movieId !== "" && multiplexId === "") {
       // 영화 선택됨
       scheduleListCpy = scheduleListCpy.filter(
@@ -140,6 +156,15 @@ const ScheduleSection = ({
       );
     }
     setFilteredScheduleList(scheduleListCpy);
+  }
+  // 날짜 선택 시 표시될 상영스케줄 필터링.
+  function filterScheduleByDate() {
+    let listCpy = filteredScheduleList;
+    // console.log(selectedDate, ISOtoYMD(listCpy[0].movie_schedule_start));
+    listCpy = listCpy.filter(
+      (elem) => selectedDate === ISOtoYMD(elem.movie_schedule_start)
+    );
+    setFinalScheduleList(listCpy);
   }
 
   // 날짜 관련 함수들
@@ -202,10 +227,10 @@ const ScheduleSection = ({
     if (!(regex.test(startDate) && regex.test(lastDate)))
       return "Not Date Format";
     var result = [];
-    var selectedDate = new Date(startDate);
-    while (selectedDate <= new Date(lastDate)) {
-      result.push(selectedDate.toISOString().split("T")[0]);
-      selectedDate.setDate(selectedDate.getDate() + 1);
+    var tmpDate = new Date(startDate);
+    while (tmpDate <= new Date(lastDate)) {
+      result.push(tmpDate.toISOString().split("T")[0]);
+      tmpDate.setDate(tmpDate.getDate() + 1);
     }
     return result;
   }
@@ -227,8 +252,8 @@ const ScheduleSection = ({
     return date.split("-")[2];
   }
 
-  // 날짜 주말 색상
-  function dayColor(date) {
+  // 날짜 주말 색상 클래스 지정
+  function dayColorClass(date) {
     let result = FontColor.gray75;
     let dateObj = new Date(date);
     if (dateObj.getDay() === 0) {
@@ -241,6 +266,22 @@ const ScheduleSection = ({
       }
     }
     return result;
+  }
+  // unavailable한 날짜는 disable시켜주는 class
+  function dateSelectorClass(date) {
+    let resultClass = "date-selector flex-row justify-cen";
+    if (date === selectedDate) {
+      resultClass += " selected";
+    }
+    // if ()
+    console.log(date);
+    console.log(
+      filteredScheduleList.filter(
+        (elem) => ISOtoYMD(elem.movie_schedule_start) === date
+      )
+    );
+
+    return resultClass;
   }
 
   // 날짜 클릭 시
