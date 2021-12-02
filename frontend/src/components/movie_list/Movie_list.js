@@ -35,7 +35,7 @@ class Movie_list extends Component {
               <div className="Movie_box">
                 <div className="Movie">
                   <img src={element.poster} />
-                  <ul className="Movie_Sub">
+                  <ul className="Moviecard_Sub">
                     <li>
                       <a href="/404">예매하기</a>
                     </li>
