@@ -74,12 +74,7 @@ const ScheduleSection = ({
           </div>
           {curWeekList.map((elem, idx) => (
             <div
-              className={
-                dateSelectorClass(elem)
-                // elem === selectedDate
-                //   ? "date-selector flex-row justify-cen selected"
-                //   : "date-selector flex-row justify-cen"
-              }
+              className={dateSelectorClass(elem)}
               style={{ width: 40, height: 40, position: "relative" }}
               key={elem}
               onClick={() => onClickDateBtn(elem)}
@@ -90,16 +85,20 @@ const ScheduleSection = ({
                   <Font
                     size={FontSize.xs}
                     color={FontColor.blue75}
+                    boldness={FontBold.bold}
                     style={{
                       position: "absolute",
-                      top: 0,
-                      left: 7,
+                      top: "0px",
+                      left: "9px",
+                      letterSpacing: "-1px",
                     }}
                   >
                     {dateToYear(elem).substr(2, 2) + "/" + dateToMonth(elem)}
                   </Font>
                 )}
-                <Font color={dayColorClass(elem)}>{dateToDay(elem)}</Font>
+                <Font size={FontSize.sm} color={dayColorClass(elem)}>
+                  {dateToDay(elem)}
+                </Font>
               </div>
             </div>
           ))}
@@ -112,6 +111,7 @@ const ScheduleSection = ({
         <div className="flex-col selection-container" style={{ width: "100%" }}>
           {selectedMovieId !== "" &&
             selectedMultiplexId !== "" &&
+            selectedDate !== "" &&
             finalScheduleList.map((elem) => (
               <ScheduleCard
                 // date={parseDateOnly(elem.movie_schedule_start)}
@@ -125,6 +125,13 @@ const ScheduleSection = ({
                 key={elem.movie_schedule_id}
               ></ScheduleCard>
             ))}
+          {selectedMovieId !== "" &&
+            selectedMultiplexId !== "" &&
+            selectedDate === "" && (
+              <Font color={FontColor.gray50} style={{ marginLeft: 10 }}>
+                날짜를 선택해주세요.
+              </Font>
+            )}
           {(selectedMovieId === "" || selectedMultiplexId === "") && (
             <Font color={FontColor.gray50} style={{ marginLeft: 10 }}>
               영화 및 지점을 선택해주세요.
