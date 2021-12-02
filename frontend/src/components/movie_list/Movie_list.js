@@ -1,4 +1,4 @@
-// 천체 영화
+//전체 영화
 import React, { Component } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
@@ -27,7 +27,7 @@ class Movie_list extends Component {
     return (
       <div className="Movie_list">
         <div className="Title">
-          <h2>천체 영화</h2>
+          <h2>전체 영화</h2>
         </div>
         <div className="Moviecard_View">
           <div className="Moviecard_List">
