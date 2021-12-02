@@ -1,5 +1,4 @@
 /* eslint-disable no-useless-constructor */
-import { ThirdPartyDraggable } from "@fullcalendar/interaction";
 import axios from "axios";
 import React, { Component } from "react";
 import "./SignUp.css";
