@@ -36,6 +36,7 @@ const MultiplexSection = ({
       style={{
         padding: 10,
         borderRight: "1px solid #d9d9d9",
+        height: 310,
       }}
     >
       <Font size={FontSize.lg}>지점</Font>

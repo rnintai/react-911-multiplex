@@ -111,7 +111,12 @@ const Reservation = () => {
         >
           예매하기
         </Font>
-        <div className="res-wrap border-gray flex-row">
+        <div
+          className="res-wrap border-gray flex-row"
+          style={{
+            alignItems: "flex-start",
+          }}
+        >
           {!loading && scheduleList && (
             <>
               <MovieSection

@@ -34,7 +34,7 @@ const MovieSection = ({
   return (
     <div
       className="row-1_4"
-      style={{ padding: 10, borderRight: "1px solid #d9d9d9" }}
+      style={{ padding: 10, borderRight: "1px solid #d9d9d9", height: 310 }}
     >
       <Font size={FontSize.lg}>영화</Font>
       <div className="flex-col selection-container">

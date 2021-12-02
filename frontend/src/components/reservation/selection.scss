@@ -37,6 +37,13 @@
   }
 }
 
+.date-container{
+  &.disabled{
+    opacity: 0.5;
+    pointer-events: none;
+  }
+}
+
 .date-btn {
   opacity: 0.5;
   padding: 0 5px;
@@ -55,6 +62,16 @@
   border-radius: 5px;
   transition: all 0.2s ease-in-out;
 
+  &::after{
+    content: "";
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background-color: #3f70ff;
+    position: absolute;
+    bottom: 5px;
+  }
+
   &:hover {
     cursor: pointer;
     background-color: #f5f5f5;
@@ -63,5 +80,13 @@
     background-color: skyblue;
     border-color: skyblue;
     color: white;
+  }
+  &.disabled{
+    opacity: 0.3;
+    pointer-events: none;
+
+    &::after{
+      display: none;
+    }
   }
 }

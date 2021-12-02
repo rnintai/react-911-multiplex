@@ -27,6 +27,7 @@ export const FontColor = {
   gray50: "ds-font-color--gray50",
   gray75: "ds-font-color--gray75",
   green: "ds-font-color--green",
+  blue75: "ds-font-color--blue75",
 };
 
 export const Font = ({
