@@ -26,15 +26,10 @@ function ScheduleCard({
       }}
     >
       <div className="flex-col" style={{ width: "15%" }}>
-        {/* <Font boldness={FontBold.bold} style={{ marginBottom: 5 }}>
-          {date}
-        </Font> */}
-        {/* <div> */}
         <Font color={FontColor.black}>{startTime}</Font>
         <Font size={FontSize.xs} color={FontColor.gray75}>
           ~{endTime}
         </Font>
-        {/* </div> */}
       </div>
       <div className="flex-col" style={{ width: "60%" }}>
         <Font className="col-1_1">{movieName}</Font>
