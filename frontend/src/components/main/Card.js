@@ -18,8 +18,8 @@ class Card extends Component {
     let response = await axios.get(
       "https://react-911-multiplex.herokuapp.com/movies/boxoffice"
     );
-    this.setState(response.data);
-    console.log(response.data.boxOfficeList);
+    let temp = response.data.boxOfficeList.slice(0, 5);
+    this.setState({ boxOfficeList: temp });
   };
 
   componentDidMount() {
@@ -30,15 +30,9 @@ class Card extends Component {
       <div className="Card_View">
         <ul className="Card_List">
           {this.state.boxOfficeList.map((element) => (
-            <li>
+            <li key={element.movie_id.toString()}>
               <div className="Movie">
-                <img
-                  src={
-                    element.poster === ""
-                      ? "/images/uploads/poster/default.jpg"
-                      : element.poster
-                  }
-                />
+                <img src={element.poster} />
                 <ul className="Movie_Sub">
                   <li>
                     <a href="/404">예매하기</a>
@@ -46,7 +40,7 @@ class Card extends Component {
                   <li>
                     <Link
                       to={{
-                        pathname: `/movies/detail/${element.movie_id}`,
+                        pathname: `/Movies/Detail/${element.movie_id}`,
                         state: {
                           movie_id: element.movie_id,
                         },
