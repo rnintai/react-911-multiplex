@@ -37,6 +37,13 @@
   }
 }
 
+.date-container{
+  &.disabled{
+    opacity: 0.5;
+    pointer-events: none;
+  }
+}
+
 .date-btn {
   opacity: 0.5;
   padding: 0 5px;
