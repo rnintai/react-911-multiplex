@@ -25,7 +25,7 @@ import AdminMovieInfo from "./pages/admin/movie/adminMovieInfo";
 import AdminMovieSchedule from "./pages/admin/movie/adminMovieSchedule";
 
 // reservation test
-import Reservation from "src/pages/admin/movie/reservation";
+import Reservation from "src/pages/reservation/reservation";
 
 class App extends Component {
   render() {
