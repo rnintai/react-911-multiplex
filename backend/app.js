@@ -17,6 +17,7 @@ const preMoviesRouter = require("./routes/movies/preMovies");
 const moviesDetailRouter = require("./routes/movies/moviesDetail");
 const getMoviesListRouter = require("./routes/movies/getMoviesList");
 const getMovieScheduleRouter = require("./routes/tickets/schedule");
+const reservationRouter = require("./routes/tickets/reservation");
 
 // admin
 const uploadPosterRouter = require("./routes/admin/movies/uploadPoster");
@@ -72,6 +73,7 @@ app.use("/movies/detail", moviesDetailRouter);
 app.use("/movies/list", getMoviesListRouter);
 // tickets
 app.use("/tickets/schedule", getMovieScheduleRouter);
+app.use("/tickets/reservation", reservationRouter);
 
 // admin
 app.use("/movies/detail/poster", uploadPosterRouter);
