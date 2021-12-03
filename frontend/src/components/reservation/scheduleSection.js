@@ -57,7 +57,7 @@ const ScheduleSection = ({
   }, [selectedDate]);
 
   return (
-    <div className="row-1_2" style={{ height: 310 }}>
+    <div className="row-1_2 border-gray" style={{ height: 330 }}>
       <div
         className={
           selectedMovieId === "" || selectedMultiplexId === ""
@@ -112,7 +112,10 @@ const ScheduleSection = ({
         </div>
       </div>
       <div className="flex-row row-1/2">
-        <div className="flex-col selection-container" style={{ width: "100%" }}>
+        <div
+          className="flex-col selection-container"
+          style={{ width: "100%", borderTop: "1px solid rgb(217, 217, 217)" }}
+        >
           {selectedMovieId !== "" &&
             selectedMultiplexId !== "" &&
             selectedDate !== "" &&
@@ -135,12 +138,18 @@ const ScheduleSection = ({
           {selectedMovieId !== "" &&
             selectedMultiplexId !== "" &&
             selectedDate === "" && (
-              <Font color={FontColor.gray50} style={{ marginLeft: 10 }}>
+              <Font
+                color={FontColor.gray50}
+                style={{ marginLeft: 10, marginTop: 10 }}
+              >
                 날짜를 선택해주세요.
               </Font>
             )}
           {(selectedMovieId === "" || selectedMultiplexId === "") && (
-            <Font color={FontColor.gray50} style={{ marginLeft: 10 }}>
+            <Font
+              color={FontColor.gray50}
+              style={{ marginLeft: 10, marginTop: 10 }}
+            >
               영화 및 지점을 선택해주세요.
             </Font>
           )}

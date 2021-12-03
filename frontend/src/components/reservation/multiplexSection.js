@@ -32,10 +32,10 @@ const MultiplexSection = ({
 
   return (
     <div
-      className="row-1_4"
+      className="row-1_4 border-gray"
       style={{
         padding: 10,
-        borderRight: "1px solid #d9d9d9",
+        marginRight: 10,
         height: 310,
       }}
     >
