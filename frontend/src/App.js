@@ -16,6 +16,7 @@ import Footer from "./components/footer/Footer";
 import Detail from "./components/movie_info/Detail";
 import NotFound from "./components/404/Not_found";
 import SignUp from "./components/signup/SignUp";
+import Login from "./components/login/Login";
 import MovieList from "./components/movie_list/Movie_list";
 
 // admin
@@ -59,6 +60,7 @@ class App extends Component {
             </Route>
             <Route path="/login" exact>
               <Nav></Nav>
+              <Login></Login>
             </Route>
             <Route path="/movie_ticker" exact>
               <Nav></Nav>
