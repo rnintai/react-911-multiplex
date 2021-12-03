@@ -71,7 +71,7 @@ const ScheduleSection = ({
             position: "relative",
           }}
         >
-          <div className={curWeekPage > -4 ? "date-btn" : "date-btn disabled"}>
+          <div className={curWeekPage > 0 ? "date-btn" : "date-btn disabled"}>
             <i className="fas fa-caret-left" onClick={onClickLeft}></i>
           </div>
           {curWeekList.map((elem, idx) => (
