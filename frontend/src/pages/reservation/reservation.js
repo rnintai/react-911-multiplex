@@ -121,6 +121,7 @@ const Reservation = () => {
           className="res-wrap flex-row"
           style={{
             alignItems: "flex-start",
+            position: "relative",
           }}
         >
           {!loading && scheduleList && (
