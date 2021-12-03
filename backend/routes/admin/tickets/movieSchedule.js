@@ -1,3 +1,4 @@
+// /admin/tickets/schedule/
 const express = require("express");
 const router = express.Router();
 
@@ -64,6 +65,8 @@ router.get("/id/:scheduleId", async function (req, res) {
     WHERE T.theater_id=S.theater_id) as theater_name, 
     (SELECT theater_type FROM theater as T
     WHERE T.theater_id=S.theater_id) as theater_type, 
+    (SELECT theater_ticket_price FROM theater as T
+    WHERE T.theater_id=S.theater_id) as theater_ticket_price, 
     movie_schedule_start, movie_schedule_end 
     FROM movie_schedule as S
     WHERE movie_schedule_id=${req.params.scheduleId}

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import _ from "lodash";
 import "./selection.scss";
 
-import ScheduleCard from "./scheduleCard";
+import ScheduleCard from "./ScheduleCard";
 
 import {
   Font,

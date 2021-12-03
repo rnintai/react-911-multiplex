@@ -2,7 +2,7 @@ import React, { useState, useEffect, useMemo } from "react";
 import axios from "axios";
 import { Table } from "../../../components/admin/movie/Table";
 import { Button, BgColor } from "src/design-system/button/Button";
-import Spinner from "src/components/basic/spinner";
+import Spinner from "src/components/basic/Spinner";
 import {
   Font,
   FontSize,

@@ -8,7 +8,7 @@ import {
   BrowserRouter as Browser,
 } from "react-router-dom";
 
-import Nav from "./components/nav/nav";
+import Nav from "./components/nav/Nav";
 import Card from "./components/main/Card";
 import Theater from "./components/main/Theater";
 import Footer from "./components/footer/Footer";
@@ -19,13 +19,14 @@ import SignUp from "./components/signup/SignUp";
 import Login from "./components/login/Login";
 import MovieList from "./components/movie_list/Movie_list";
 
+// reservation
+import Reservation from "src/pages/reservation/Reservation";
+import Seat from "./pages/reservation/Seat";
+
 // admin
 import AdminNavBar from "./components/nav/AdminNavBar";
-import AdminMovieInfo from "./pages/admin/movie/adminMovieInfo";
-import AdminMovieSchedule from "./pages/admin/movie/adminMovieSchedule";
-
-// reservation test
-import Reservation from "src/pages/reservation/reservation";
+import AdminMovieInfo from "./pages/admin/movie/AdminMovieInfo";
+import AdminMovieSchedule from "./pages/admin/movie/AdminMovieSchedule";
 
 class App extends Component {
   render() {
@@ -55,6 +56,11 @@ class App extends Component {
               <Nav></Nav>
               <Reservation></Reservation>
             </Route>
+            <Route path="/reservation/seat" exact>
+              <Nav></Nav>
+              <Seat></Seat>
+            </Route>
+            {/*  */}
             <Route path="/404" exact>
               <Nav></Nav>
               <NotFound></NotFound>

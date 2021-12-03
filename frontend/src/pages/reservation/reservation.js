@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 // import { Table } from "../../../components/admin/movie/Table";
-import MovieSection from "src/components/reservation/movieSection";
-import MultiplexSection from "src/components/reservation/multiplexSection";
-import ScheduleSection from "src/components/reservation/scheduleSection";
+import MovieSection from "src/components/reservation/MovieSection";
+import MultiplexSection from "src/components/reservation/MultiplexSection";
+import ScheduleSection from "src/components/reservation/ScheduleSection";
 
 import { Link } from "react-router-dom";
 
 import { Button, BgColor } from "src/design-system/button/Button";
-import Spinner from "src/components/basic/spinner";
+import Spinner from "src/components/basic/Spinner";
 import {
   Font,
   FontSize,
