@@ -24,15 +24,28 @@ class Login extends Component {
     });
   };
 
-  PostSignup = (id, pw) => {
+  PostLogin = (id, pw) => {
     if (this.state.id === "" || this.state.pw === "")
       alert("아이디/비밀번호를 입력해 주십시오");
     else {
-      if (this.state.CKid === "" || this.state.CKpw === "") {
-        alert("아이디/비밀번호를 다시 확인해 주십시오");
+    }
+  };
+
+  checkId = async (id) => {
+    this.setState({
+      [id.target.name]: id.target.value,
+    });
+    if (this.state.id === "") {
+      alert("아이디를 입력해 주십시오");
+    } else {
+      let checkoutID = await axios.get(
+        "https://react-911-multiplex.herokuapp.com/member/checkid/" +
+          this.state.id
+      );
+      if (checkoutID.data === true) {
+        alert("존재하지 않는 아이디 입니다");
       } else {
-        alert("아이디 : " + this.state.CKid);
-        // axios.post("https://react-911-multiplex.herokuapp.com/user/login", {});
+        alert("비밀번호를 입력해 주십시오");
       }
     }
   };
@@ -59,5 +72,4 @@ class Login extends Component {
     );
   }
 }
-
 export default Login;
