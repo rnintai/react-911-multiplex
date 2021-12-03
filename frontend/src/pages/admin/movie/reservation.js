@@ -5,6 +5,8 @@ import MovieSection from "src/components/reservation/movieSection";
 import MultiplexSection from "src/components/reservation/multiplexSection";
 import ScheduleSection from "src/components/reservation/scheduleSection";
 
+import { Link } from "react-router-dom";
+
 import { Button, BgColor } from "src/design-system/button/Button";
 import Spinner from "src/components/basic/spinner";
 import {
@@ -52,6 +54,10 @@ const Reservation = () => {
         console.log(e);
       }
     }
+    // 과거 필터링
+    scheduleListCpy = scheduleListCpy.filter(
+      (elem) => elem.movie_schedule_start >= new Date().toISOString()
+    );
     setScheduleList(scheduleListCpy);
   };
   // 모든 지점을 받아옴.
@@ -146,14 +152,39 @@ const Reservation = () => {
                 selectedMultiplexId={selectedMultiplexId}
                 filteredScheduleList={filteredScheduleList}
                 setFilteredScheduleList={setFilteredScheduleList}
+                selectedScheduleId={selectedScheduleId}
+                setSelectedScheduleId={setSelectedScheduleId}
               ></ScheduleSection>
             </>
           )}
           {loading && <Spinner color="#d8d8d8"></Spinner>}
         </div>
       </section>
+      <Button
+        className={nextButtonClass()}
+        background={BgColor.skyblue}
+        style={{
+          boxShadow: "rgb(0 0 0 / 31%) 1px 1px 4px",
+          position: "relative",
+          float: "right",
+          right: 400,
+          marginTop: 20,
+        }}
+      >
+        <Link to={"/reservation?id=" + selectedScheduleId}>
+          <Font color={FontColor.white}>다음 &gt;</Font>
+        </Link>
+      </Button>
     </>
   );
+
+  function nextButtonClass() {
+    if (selectedScheduleId === "") {
+      return "next-btn disabled";
+    } else {
+      return "next-btn";
+    }
+  }
 };
 
 export default Reservation;
