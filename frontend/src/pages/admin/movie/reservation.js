@@ -160,24 +160,43 @@ const Reservation = () => {
           {loading && <Spinner color="#d8d8d8"></Spinner>}
         </div>
       </section>
-      <Button
-        className={nextButtonClass()}
-        background={BgColor.skyblue}
-        style={{
-          boxShadow: "rgb(0 0 0 / 31%) 1px 1px 4px",
-          position: "relative",
-          float: "right",
-          right: 400,
-          marginTop: 20,
-        }}
+      <div
+        className="flex-row justify-sb"
+        style={{ width: 1100, margin: "0 auto", marginTop: 20 }}
       >
-        <Link to={"/reservation?id=" + selectedScheduleId}>
-          <Font color={FontColor.white}>다음 &gt;</Font>
-        </Link>
-      </Button>
+        <Button
+          background={BgColor.green}
+          color={FontColor.white}
+          style={{
+            boxShadow: "rgb(0 0 0 / 31%) 1px 1px 4px",
+          }}
+          onClick={onClickResetButton}
+        >
+          초기화
+        </Button>
+        <Button
+          className={nextButtonClass()}
+          background={BgColor.skyblue}
+          style={{
+            boxShadow: "rgb(0 0 0 / 31%) 1px 1px 4px",
+          }}
+        >
+          <Link to={"/reservation/seat?id=" + selectedScheduleId}>
+            <Font color={FontColor.white}>다음 &gt;</Font>
+          </Link>
+        </Button>
+      </div>
     </>
   );
 
+  // 리셋 버튼 클릭 핸들러
+  function onClickResetButton() {
+    setSelectedScheduleId("");
+    setSelectedMovieId("");
+    setSelectedMultiplexId("");
+  }
+
+  // 다음 버튼 클래스 정의
   function nextButtonClass() {
     if (selectedScheduleId === "") {
       return "next-btn disabled";
