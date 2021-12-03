@@ -52,6 +52,10 @@ const Reservation = () => {
         console.log(e);
       }
     }
+    // 과거 필터링
+    scheduleListCpy = scheduleListCpy.filter(
+      (elem) => elem.movie_schedule_start >= new Date().toISOString()
+    );
     setScheduleList(scheduleListCpy);
   };
   // 모든 지점을 받아옴.
