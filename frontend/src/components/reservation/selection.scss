@@ -82,3 +82,13 @@
     }
   }
 }
+// 스케줄 카드
+.schedule-card {
+  cursor: pointer;
+  &:hover {
+    background-color: #0000000d;
+  }
+  &.selected {
+    background-color: rgba(0, 0, 0, 0.08);
+  }
+}

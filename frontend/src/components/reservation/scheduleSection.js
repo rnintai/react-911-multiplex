@@ -17,6 +17,8 @@ const ScheduleSection = ({
   selectedMultiplexId,
   filteredScheduleList,
   setFilteredScheduleList,
+  selectedScheduleId,
+  setSelectedScheduleId,
 }) => {
   // const [dateCursor, setDateCursor] = useState(
   // );
@@ -117,6 +119,7 @@ const ScheduleSection = ({
             finalScheduleList.map((elem) => (
               <ScheduleCard
                 // date={parseDateOnly(elem.movie_schedule_start)}
+                scheduleId={elem.movie_schedule_id}
                 startTime={dateToTime(elem.movie_schedule_start)}
                 endTime={dateToTime(elem.movie_schedule_end)}
                 movieName={elem.movie_name}
@@ -125,6 +128,8 @@ const ScheduleSection = ({
                 availSeat="잔여"
                 totalSeat="총"
                 key={elem.movie_schedule_id}
+                selectedScheduleId={selectedScheduleId}
+                setSelectedScheduleId={setSelectedScheduleId}
               ></ScheduleCard>
             ))}
           {selectedMovieId !== "" &&

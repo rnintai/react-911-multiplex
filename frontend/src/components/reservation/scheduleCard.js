@@ -8,6 +8,7 @@ import {
 
 function ScheduleCard({
   // date,
+  scheduleId,
   startTime,
   endTime,
   movieName,
@@ -15,15 +16,18 @@ function ScheduleCard({
   theaterType,
   availSeat,
   totalSeat,
+  selectedScheduleId,
+  setSelectedScheduleId,
 }) {
   return (
     <div
-      className="flex-row"
+      className={scheduleCardClass(scheduleId)}
       style={{
         justifyContent: "space-between",
         borderBottom: "1px solid #d9d9d9",
         padding: "10px 8px",
       }}
+      onClick={() => onClickScheduleCard(scheduleId)}
     >
       <div className="flex-col" style={{ width: "15%" }}>
         <Font color={FontColor.black}>{startTime}</Font>
@@ -56,6 +60,18 @@ function ScheduleCard({
       </div>
     </div>
   );
+  // 카드 클릭 시 호출
+  function onClickScheduleCard(id) {
+    setSelectedScheduleId(id);
+  }
+
+  function scheduleCardClass(id) {
+    if (id === selectedScheduleId) {
+      return "schedule-card flex-row selected";
+    } else {
+      return "schedule-card flex-row";
+    }
+  }
 }
 
 export default ScheduleCard;
