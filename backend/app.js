@@ -12,12 +12,17 @@ const checkIdRouter = require("./routes/member/checkId");
 const checkEmailRouter = require("./routes/member/checkEmail");
 const checkPhoneRouter = require("./routes/member/checkPhone");
 const memberInfoRouter = require("./routes/member/memberInfo");
+// movie
 const boxOfficeRouter = require("./routes/movies/boxOffice");
 const preMoviesRouter = require("./routes/movies/preMovies");
 const moviesDetailRouter = require("./routes/movies/moviesDetail");
 const getMoviesListRouter = require("./routes/movies/getMoviesList");
+// ticket
 const getMovieScheduleRouter = require("./routes/tickets/schedule");
 const reservationRouter = require("./routes/tickets/reservation");
+const reservedSeatRouter = require("./routes/tickets/reservedSeat");
+// theater
+const theaterSeatRouter = require("./routes/admin/theater/theaterSeat");
 
 // admin
 const uploadPosterRouter = require("./routes/admin/movies/uploadPoster");
@@ -74,6 +79,9 @@ app.use("/movies/list", getMoviesListRouter);
 // tickets
 app.use("/tickets/schedule", getMovieScheduleRouter);
 app.use("/tickets/reservation", reservationRouter);
+app.use("/tickets/reservedseat", reservedSeatRouter);
+// theaters
+app.use("/theater/seat", theaterSeatRouter);
 
 // admin
 app.use("/movies/detail/poster", uploadPosterRouter);
