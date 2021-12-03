@@ -4,6 +4,9 @@
   &.ds-font-size--default {
     font-size: 14px;
   }
+  &.ds-font-size--xs {
+    font-size: 6px;
+  }
   &.ds-font-size--sm {
     font-size: 12px;
   }
@@ -15,7 +18,7 @@
   }
   // boldness
   &.ds-font--light {
-    font-weight: 600;
+    font-weight: 300;
   }
   &.ds-font--bold {
     font-weight: 700;
@@ -50,5 +53,8 @@
   }
   &.ds-font-color--green {
     color: #00c900;
+  }
+  &.ds-font-color--blue75 {
+    color: #006dcc;
   }
 }

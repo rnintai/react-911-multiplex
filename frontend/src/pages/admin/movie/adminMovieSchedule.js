@@ -5,7 +5,7 @@ import dayGridPlugin from "@fullcalendar/daygrid"; // a plugin!
 import timeGridPlugin from "@fullcalendar/timegrid"; // a plugin!
 import interactionPlugin from "@fullcalendar/interaction"; // a plugin!
 // import { Table } from "../../../components/admin/movie/Table";
-import AddScheduleModal from "src/components/admin/tickets/addScheduleModal";
+import AddScheduleModal from "src/components/admin/movieSchedule/addScheduleModal";
 import { Button, BgColor } from "src/design-system/button/Button";
 import {
   Font,
@@ -14,8 +14,8 @@ import {
   FontBold,
 } from "src/design-system/font/Font";
 import Input from "src/components/basic/input";
-import MultiplexSelect from "src/components/admin/tickets/multiplexSelect";
-import TheaterSelect from "src/components/admin/tickets/theaterSelect";
+import MultiplexSelect from "src/components/admin/movieSchedule/multiplexSelect";
+import TheaterSelect from "src/components/admin/movieSchedule/theaterSelect";
 import "src/App.css";
 
 const API =

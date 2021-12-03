@@ -49,7 +49,7 @@ class Movie_info extends Component {
                 영화
                 <ul className="Sub_bar">
                   <li className="Sub">
-                    <a href="/Movies">전체 영화</a>
+                    <a href="/movies">전체 영화</a>
                   </li>
                   <li className="Sub">
                     <a href="#">etc</a>

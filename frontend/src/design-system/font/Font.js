@@ -4,6 +4,7 @@ import "./font.scss";
 
 export const FontSize = {
   default: "ds-font-size--default",
+  xs: "ds-font-size--xs",
   sm: "ds-font-size--sm",
   lg: "ds-font-size--lg",
   xl: "ds-font-size--xl",
@@ -26,6 +27,7 @@ export const FontColor = {
   gray50: "ds-font-color--gray50",
   gray75: "ds-font-color--gray75",
   green: "ds-font-color--green",
+  blue75: "ds-font-color--blue75",
 };
 
 export const Font = ({

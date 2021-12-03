@@ -18,8 +18,8 @@ class Card extends Component {
     let response = await axios.get(
       "https://react-911-multiplex.herokuapp.com/movies/boxoffice"
     );
-    this.setState(response.data);
-    console.log(response.data.boxOfficeList);
+    let temp = response.data.boxOfficeList.slice(0, 5);
+    this.setState({ boxOfficeList: temp });
   };
 
   componentDidMount() {
@@ -30,7 +30,7 @@ class Card extends Component {
       <div className="Card_View">
         <ul className="Card_List">
           {this.state.boxOfficeList.map((element) => (
-            <li>
+            <li key={element.movie_id.toString()}>
               <div className="Movie">
                 <img src={element.poster} />
                 <ul className="Movie_Sub">
