@@ -13,7 +13,7 @@ import {
   FontColor,
   FontBold,
 } from "src/design-system/font/Font";
-import Input from "src/components/basic/input";
+import Input from "src/components/basic/Input";
 import MultiplexSelect from "src/components/admin/movieSchedule/multiplexSelect";
 import TheaterSelect from "src/components/admin/movieSchedule/theaterSelect";
 import "src/App.css";
