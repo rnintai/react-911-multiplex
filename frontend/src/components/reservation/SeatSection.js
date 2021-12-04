@@ -54,14 +54,14 @@ function SeatSection({
                           width: 5,
                           marginRight: 10,
                           justifyContent: "center",
-                          // alignItems: "center",
                         }}
+                        key={parseIndexToRow(rowIdx)}
                       >
                         {parseIndexToRow(rowIdx)}
                       </Font>
                     </div>
                     {rowList.map((col, colIdx) => (
-                      <div className="flex-col">
+                      <div className="flex-col" key={rowIdx + "" + colIdx}>
                         {rowIdx === 0 && (
                           <Font
                             tag="div"
@@ -73,6 +73,7 @@ function SeatSection({
                               margin: "0 4px 5px 4px",
                               textAlign: "center",
                             }}
+                            key={parseIndexToCol(colIdx)}
                           >
                             {parseIndexToCol(colIdx)}
                           </Font>
@@ -84,8 +85,9 @@ function SeatSection({
                               parseIndexToRow(rowIdx) + parseIndexToCol(colIdx);
                             onClickSeat(seat);
                           }}
-                          key={colIdx}
-                          //
+                          key={
+                            parseIndexToRow(rowIdx) + parseIndexToCol(colIdx)
+                          }
                         ></div>
                       </div>
                     ))}
@@ -110,8 +112,6 @@ function SeatSection({
       selectedSeatListCpy = selectedSeatListCpy.filter((elem) => elem !== seat);
     }
     setSelectedSeatList([...selectedSeatListCpy]);
-    console.log(selectedSeatList);
-    // console.log(seat);
   }
 
   // 선택된 좌석 표시용 함수
