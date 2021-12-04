@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import {
   Font,
   FontSize,
@@ -7,8 +8,14 @@ import {
 } from "src/design-system/font/Font";
 import { Button, BgColor } from "src/design-system/button/Button";
 import RatingMark from "../admin/movie/RatingMark";
+import Spinner from "../basic/Spinner";
 
-function SeatInformation({ scheduleInfo, selectedSeatList }) {
+function SeatInformation({
+  loading,
+  scheduleInfo,
+  selectedSeatList,
+  setSelectedSeatList,
+}) {
   const movieNm = scheduleInfo.movie_name;
   const rate = scheduleInfo.age_limit;
   const multiplexNm = scheduleInfo.multiplex_name;
@@ -39,6 +46,23 @@ function SeatInformation({ scheduleInfo, selectedSeatList }) {
       }}
     >
       <div className="flex-col justify-sb " style={{ height: "100%" }}>
+        <div className="flex-row justify-sb" style={{ marginBottom: 10 }}>
+          <Button
+            background={BgColor.gray75}
+            color={FontColor.white}
+            onClick={onClickReset}
+          >
+            <i class="fas fa-redo-alt" style={{ marginRight: 5 }}></i>초기화
+          </Button>
+          <Button background={BgColor.red50}>
+            <Link to="./payment">
+              <Font color={FontColor.white}>
+                <i class="far fa-credit-card" style={{ marginRight: 5 }}></i>
+                결제
+              </Font>
+            </Link>
+          </Button>
+        </div>
         {/* 영화정보 */}
         <div
           className="flex-row justify-sb border-gray"
@@ -48,40 +72,45 @@ function SeatInformation({ scheduleInfo, selectedSeatList }) {
             marginBottom: 10,
           }}
         >
-          <div className="flex-row">
-            <RatingMark rate={rate}></RatingMark>
-            <div className="flex-col justify-cen">
-              <Font size={FontSize.default} boldness={FontBold.bold}>
-                {movieNm}
-              </Font>
-              <Font size={FontSize.sm} boldness={FontBold.light}>
-                {theaterType}
-              </Font>
-            </div>
-          </div>
-          <div className="flex-row">
-            <Font size={FontSize.sm} boldness={FontBold.light}>
-              {multiplexNm}
-            </Font>
-            <Font
-              size={FontSize.sm}
-              boldness={FontBold.light}
-              color={FontColor.gray50}
-            >
-              &nbsp;|&nbsp;
-            </Font>
-            <Font size={FontSize.sm} boldness={FontBold.light}>
-              {theaterNm}
-            </Font>
-          </div>
-          <div className="flex-col justify-cen">
-            <Font size={FontSize.default} boldness={FontBold.default}>
-              {startTm}
-            </Font>
-            <Font size={FontSize.sm} boldness={FontBold.light}>
-              ~{endTm}
-            </Font>
-          </div>
+          {loading !== false && <Spinner color="#d8d8d8"></Spinner>}
+          {loading !== true && (
+            <>
+              <div className="flex-row">
+                <RatingMark rate={rate}></RatingMark>
+                <div className="flex-col justify-cen">
+                  <Font size={FontSize.default} boldness={FontBold.bold}>
+                    {movieNm}
+                  </Font>
+                  <Font size={FontSize.sm} boldness={FontBold.light}>
+                    {theaterType}
+                  </Font>
+                </div>
+              </div>
+              <div className="flex-row">
+                <Font size={FontSize.sm} boldness={FontBold.light}>
+                  {multiplexNm}
+                </Font>
+                <Font
+                  size={FontSize.sm}
+                  boldness={FontBold.light}
+                  color={FontColor.gray50}
+                >
+                  &nbsp;|&nbsp;
+                </Font>
+                <Font size={FontSize.sm} boldness={FontBold.light}>
+                  {theaterNm}
+                </Font>
+              </div>
+              <div className="flex-col justify-cen">
+                <Font size={FontSize.default} boldness={FontBold.bold}>
+                  {startTm}
+                </Font>
+                <Font size={FontSize.sm} boldness={FontBold.light}>
+                  ~{endTm}
+                </Font>
+              </div>
+            </>
+          )}
         </div>
         {/* 선택좌석 */}
         <div
@@ -114,6 +143,7 @@ function SeatInformation({ scheduleInfo, selectedSeatList }) {
                 color={FontColor.white}
                 className="info-seat border-gray"
                 style={{ marginRight: 5 }}
+                key={seat}
               >
                 {seat}
               </Font>
@@ -200,11 +230,9 @@ function SeatInformation({ scheduleInfo, selectedSeatList }) {
               boldness={FontBold.bold}
               style={{ marginRight: 8 }}
             >
-              {totalPrice(adultCount, juvenCount)}
+              {loading !== true && totalPrice(adultCount, juvenCount)}
+              {loading !== false && <Spinner color="#d8d8d8"></Spinner>}
             </Font>
-            {/* <Font size={FontSize.sm} boldness={FontBold.light}>
-              원
-            </Font> */}
           </div>
         </div>
       </div>
@@ -270,6 +298,12 @@ function SeatInformation({ scheduleInfo, selectedSeatList }) {
     } else {
       alert("수량을 확인해주세요.");
     }
+  }
+
+  // 초기화 버튼 핸들러
+  function onClickReset() {
+    let emptyList = [];
+    setSelectedSeatList([...emptyList]);
   }
 }
 

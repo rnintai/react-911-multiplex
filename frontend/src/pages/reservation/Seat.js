@@ -5,6 +5,7 @@ import Spinner from "src/components/basic/Spinner";
 import SeatSection from "src/components/reservation/SeatSection";
 import "./seat.scss";
 import SeatInformation from "src/components/reservation/SeatInformation";
+import { Button } from "src/design-system/button/Button";
 
 const API =
   window.location.hostname === "localhost" ? "http://localhost:5000" : "/api";
@@ -95,8 +96,10 @@ function Seat() {
         ></SeatSection>
         <section className="flex-col" style={{ width: "35%", height: 500 }}>
           <SeatInformation
+            loading={loading}
             scheduleInfo={scheduleInfo}
             selectedSeatList={selectedSeatList}
+            setSelectedSeatList={setSelectedSeatList}
           ></SeatInformation>
         </section>
       </section>
