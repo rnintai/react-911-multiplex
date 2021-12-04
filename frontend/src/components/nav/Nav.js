@@ -68,7 +68,7 @@ const Nav = () => {
         </Link>
         <ul className="top-menu">
           <li>
-            <Link to="/login">
+            <Link to="/signin">
               <Font tag="button" size={FontSize.sm}>
                 로그인
               </Font>
