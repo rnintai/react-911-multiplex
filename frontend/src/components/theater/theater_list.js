@@ -8,16 +8,16 @@ class theater_list extends Component {
     super(props);
   }
   state = {
-    theaterList: [],
+    multiplexList: [],
   };
   getData = async () => {
     const API =
       window.location.hostname === "localhost"
         ? "http://localhost:5000"
         : "/api";
-    let response = await axios.get(API + "/theater/theaterList.js");
+    let response = await axios.get(API + "/multiplex/multiplexList.js");
     this.setState(response.data);
-    console.log(response.data.theaterList);
+    console.log(response.data.multiplexList);
   };
   cmponentDidMount() {
     this.getData();
@@ -25,13 +25,25 @@ class theater_list extends Component {
   render() {
     return (
       <div className="theater">
-        <div className="title">영화관</div>
-        <div className="theater_box">
-          <div className="image">
-            <img src="" />
+        <div className="title">
+          <h2>영화관</h2>
+        </div>
+        <div className="theater_view">
+          <div className="theater_box">
+            <div className="image">
+              <img src="" />
+            </div>
+            <div className="theater_name">
+              <p>안산점</p>
+            </div>
           </div>
-          <div className="theater_name">
-            <p>{}</p>
+          <div className="theater_box">
+            <div className="image">
+              <img src="" />
+            </div>
+            <div className="theater_name">
+              <p>수원점</p>
+            </div>
           </div>
         </div>
       </div>

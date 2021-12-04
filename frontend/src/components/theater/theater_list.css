@@ -7,6 +7,15 @@
 .title{
     text-align: center;
 }
+.theater_view{
+    display: flex;
+    justify-content: space-evenly;
+}
+.theater_box{
+    display: flexbox;
+    text-align: center;
+}
+
 .image{
     background-image: url("./theater.jpg");
     width : 300px;
