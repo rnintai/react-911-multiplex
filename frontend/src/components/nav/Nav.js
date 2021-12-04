@@ -49,7 +49,7 @@
 // export default Nav;
 
 import React, { Component } from "react";
-import "./nav.scss";
+import "./Nav.scss";
 import { Font, FontSize, FontColor } from "src/design-system/font/Font";
 import logo from "src/assets/navbar/logo.jpg";
 import { Link } from "react-router-dom";
