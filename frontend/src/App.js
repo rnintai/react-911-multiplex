@@ -20,7 +20,7 @@ import Login from "./components/login/Login";
 import MovieList from "./components/movie_list/Movie_list";
 
 // reservation
-import Reservation from "src/pages/reservation/Reservation";
+import Reservation from "./pages/reservation/Reservation";
 import Seat from "./pages/reservation/Seat";
 
 // admin
