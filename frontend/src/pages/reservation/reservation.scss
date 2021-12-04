@@ -21,3 +21,29 @@
     }
   }
 }
+
+.seat-wrap {
+  height: 100%;
+  justify-content: center;
+  .seat-row {
+    justify-content: center;
+    .seat {
+      width: 15px;
+      height: 15px;
+      background-color: #000;
+      // margin: 0 8px 8px 0;
+      margin: 4px;
+      cursor: pointer;
+      display: inline-block;
+
+      &:hover,
+      &.selected {
+        background-color: red;
+      }
+      &.disabled {
+        pointer-events: none;
+        opacity: 0.3;
+      }
+    }
+  }
+}

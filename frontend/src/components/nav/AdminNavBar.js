@@ -42,13 +42,6 @@ const AdminNavBar = () => {
                 </Font>
               </Link>
             </li>
-            <li className="sub-item">
-              <Link to="/admin/movie/reservation">
-                <Font className="sub-link" color={FontColor.gray75}>
-                  예매하기
-                </Font>
-              </Link>
-            </li>
           </ul>
         </div>
         <div className="nav-menu">
