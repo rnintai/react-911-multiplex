@@ -9,7 +9,7 @@ import {
   FontColor,
   FontBold,
 } from "src/design-system/font/Font";
-import Input from "src/components/basic/input";
+import Input from "src/components/basic/Input";
 
 import "../movie/modal.scss";
 import "src/App.css";

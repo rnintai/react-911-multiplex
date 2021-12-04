@@ -8,7 +8,7 @@ import {
   FontColor,
   FontBold,
 } from "src/design-system/font/Font";
-import RatingMark from "../admin/movie/ratingMark";
+import RatingMark from "../admin/movie/RatingMark";
 
 const MovieSection = ({
   scheduleList,
