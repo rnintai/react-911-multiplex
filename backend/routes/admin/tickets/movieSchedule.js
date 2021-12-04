@@ -60,6 +60,8 @@ router.get("/id/:scheduleId", async function (req, res) {
     movie_id, 
     (SELECT movie_name FROM movie
     WHERE movie.movie_id=S.movie_id) as movie_name, 
+    (SELECT age_limit FROM movie
+    WHERE movie.movie_id=S.movie_id) as age_limit, 
     theater_id,
     (SELECT theater_name FROM theater as T
     WHERE T.theater_id=S.theater_id) as theater_name, 
