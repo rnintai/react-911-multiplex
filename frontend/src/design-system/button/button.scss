@@ -1,11 +1,11 @@
 .ds-btn {
-  padding: 0.3em 0.8em;
+  padding: 5px 10px;
   // bg color
   &.ds-btn-bg--default {
-    background-color: #000;
-  }
-  &.ds-btn-bg--white {
     background-color: #fff;
+  }
+  &.ds-btn-bg--black {
+    background-color: #000;
   }
   &.ds-btn-bg--red0 {
     background-color: #ffbdbd;

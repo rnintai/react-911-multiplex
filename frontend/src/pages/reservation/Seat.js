@@ -4,6 +4,7 @@ import { useLocation } from "react-router-dom";
 import Spinner from "src/components/basic/Spinner";
 import SeatSection from "src/components/reservation/SeatSection";
 import "./seat.scss";
+import SeatInformation from "src/components/reservation/SeatInformation";
 
 const API =
   window.location.hostname === "localhost" ? "http://localhost:5000" : "/api";
@@ -92,19 +93,12 @@ function Seat() {
           selectedSeatList={selectedSeatList}
           setSelectedSeatList={setSelectedSeatList}
         ></SeatSection>
-        <section className="flex-col" style={{ width: "35%", height: 700 }}>
-          <div
-            className="border-gray"
-            style={{ height: "60%", marginBottom: 10 }}
-          >
-            스케줄정보
-          </div>
-          <div className="border-gray" style={{ height: "40%" }}>
-            금액
-          </div>
+        <section className="flex-col" style={{ width: "35%", height: 500 }}>
+          <SeatInformation
+            scheduleInfo={scheduleInfo}
+            selectedSeatList={selectedSeatList}
+          ></SeatInformation>
         </section>
-        {/* <SeatSection></SeatSection>
-      <ReservationInfoSection></ReservationInfoSection> */}
       </section>
     </article>
   );

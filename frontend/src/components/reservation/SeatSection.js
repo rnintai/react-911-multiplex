@@ -19,7 +19,7 @@ function SeatSection({
       className="border-gray"
       style={{
         width: "65%",
-        height: 700,
+        height: 500,
         marginRight: 10,
         position: "relative",
       }}
