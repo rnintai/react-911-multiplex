@@ -4,9 +4,6 @@ import axios from "axios";
 import React, { Component } from "react";
 import "./SignUp.css";
 
-const API =
-  window.location.hostname === "localhost" ? "htttp://localhostL5000" : "/api";
-
 class SignUp extends Component {
   constructor(props) {
     super(props);

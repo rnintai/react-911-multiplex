@@ -1,4 +1,4 @@
-.SignIn {
+.LogIn {
   margin-top: 100px;
   padding: 50px;
   position: relative;
@@ -6,7 +6,7 @@
   flex-direction: column;
   align-items: center;
 }
-.SignIn input {
+.LogIn input {
   text-align: center;
   margin: 10px;
 }

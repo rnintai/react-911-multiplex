@@ -16,7 +16,7 @@ import Footer from "./components/footer/Footer";
 import Detail from "./components/movie_info/Detail";
 import NotFound from "./components/404/Not_found";
 import SignUp from "./components/signup/SignUp";
-import SignIn from "./components/signin/SignIn";
+import LogIn from "./components/login/LogIn";
 import MovieList from "./components/movie_list/Movie_list";
 
 // reservation
@@ -69,9 +69,9 @@ class App extends Component {
               <Nav></Nav>
               <SignUp></SignUp>
             </Route>
-            <Route path="/signin" exact>
+            <Route path="/login" exact>
               <Nav></Nav>
-              <SignIn></SignIn>
+              <LogIn></LogIn>
             </Route>
             <Route path="/movie_ticker" exact>
               <Nav></Nav>
