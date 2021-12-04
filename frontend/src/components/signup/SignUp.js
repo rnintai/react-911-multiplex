@@ -172,7 +172,22 @@ class SignUp extends Component {
             " 전화번호 : " +
             this.state.CKphone
         );
-        // axios.post("https://react-911-multiplex.herokuapp.com/user/signup", {});
+        axios
+          .post("https://react-911-multiplex.herokuapp.com/member/signup", {
+            data: {
+              member_id: this.state.CKid,
+              password: this.state.pw,
+              name: this.state.name,
+              email: this.state.CKemail,
+              birthdat: this.state.BTday,
+              phone_number: this.state.CKphone,
+              gender: this.state.gender,
+              address: this.state.address,
+            },
+          })
+          .catch((error) => {
+            console.log(error);
+          });
       }
     }
   };
