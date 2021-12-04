@@ -32,6 +32,7 @@ const fetchMovieDetailRouter = require("./routes/admin/movies/fetchMovieDetail")
 const movieScheduleRouter = require("./routes/admin/tickets/movieSchedule");
 const multiplexRouter = require("./routes/admin/multiplex/multiplexList");
 const theaterRouter = require("./routes/admin/theater/theaterList");
+const employeeRouter = require("./routes/admin/employment/employee");
 var app = express();
 
 // mysql connection
@@ -92,6 +93,8 @@ app.use("/movies/detail/fetch", fetchMovieDetailRouter);
 app.use("/admin/tickets/schedule", movieScheduleRouter);
 app.use("/admin/multiplex", multiplexRouter);
 app.use("/admin/theater", theaterRouter);
+
+app.use("/admin/employee", employeeRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
