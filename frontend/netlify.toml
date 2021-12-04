@@ -1,4 +1,0 @@
-from = "/api/*"
-to = "https://react-911-multiplex.herokuapp.com/:splat"
-status = 200
-force = true
