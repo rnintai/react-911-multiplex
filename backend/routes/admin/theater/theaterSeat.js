@@ -14,7 +14,7 @@ router.get("/:theaterId", async function (req, res) {
 
   // let curPage = req.params.page - 1;
 
-  const sql = `SELECT concat(seat_row, seat_col) as seat_name
+  const sql = `SELECT seat_row, seat_col
   FROM seat
   WHERE theater_id="${req.params.theaterId}"
   ORDER BY seat_row ASC, seat_col ASC`;
