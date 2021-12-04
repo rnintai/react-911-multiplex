@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-globals */
 /* eslint-disable no-useless-constructor */
 import axios from "axios";
 import React, { Component } from "react";
@@ -173,17 +174,18 @@ class SignUp extends Component {
             this.state.CKphone
         );
         axios
-          .post("https://react-911-multiplex.herokuapp.com/member/signup", {
-            data: {
-              member_id: this.state.CKid,
-              password: this.state.pw,
-              name: this.state.name,
-              email: this.state.CKemail,
-              birthdat: this.state.BTday,
-              phone_number: this.state.CKphone,
-              gender: this.state.gender,
-              address: this.state.address,
-            },
+          .post(API + "member/signup", {
+            userId: this.state.CKid,
+            password: this.state.pw,
+            name: this.state.name,
+            email: this.state.CKemail,
+            birthday: this.state.BTday,
+            phoneNum: this.state.CKphone,
+            gender: this.state.gender,
+            address: this.state.address,
+          })
+          .then((response) => {
+            location.href = "https://911-cinema.netlify.app";
           })
           .catch((error) => {
             console.log(error);
@@ -223,13 +225,14 @@ class SignUp extends Component {
           onChange={this.appChangeEmail}
         ></input>
         <button onClick={this.checkEmail}>중복확인</button>
-        <input
-          placeholder="남성, 여성"
-          type="text"
-          maxlength="2"
+        <select
+          placeholder="성별"
           name="gender"
           onChange={this.appChangeGender}
-        ></input>
+        >
+          <option value="남성">남성</option>
+          <option value="여성">여성</option>
+        </select>
         <input
           placeholder="생년월일"
           type="date"
