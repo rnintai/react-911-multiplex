@@ -2,11 +2,13 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
 import Spinner from "src/components/basic/Spinner";
+import SeatSection from "src/components/reservation/SeatSection";
+import "./seat.scss";
 
 const API =
   window.location.hostname === "localhost" ? "http://localhost:5000" : "/api";
 
-function Seat({}) {
+function Seat() {
   // state
   const [scheduleInfo, setScheduleInfo] = useState({});
   const [theaterSeatList, setTheaterSeatList] = useState([]);
@@ -60,8 +62,6 @@ function Seat({}) {
     res.data.reservedSeatList.forEach((element) => {
       let row = parseRowToIndex(element.seat_row);
       let col = parseColToIndex(element.seat_col);
-      // console.log(row, col);
-      // console.log(theaterSeatList);
       reservedSeatListCpy[row][col] = false;
     });
     setReservedSeatList(reservedSeatListCpy);
@@ -86,37 +86,12 @@ function Seat({}) {
   return (
     <article className="container">
       <section className="flex-row">
-        <div
-          className="border-gray"
-          style={{ width: "65%", height: 700, marginRight: 10 }}
-        >
-          {loading !== true && reservedSeatList.length !== 0 && (
-            <div className="seat-wrap flex-col">
-              {reservedSeatList.map((rowList, rowIdx) => {
-                return (
-                  <div
-                    key={rowIdx}
-                    className="seat-row flex-row justify-center"
-                  >
-                    {rowList.map((col, colIdx) => (
-                      <div
-                        className={col === true ? "seat" : "seat disabled"}
-                        onClick={() => {
-                          let seat =
-                            parseIndexToRow(rowIdx) + parseIndexToCol(colIdx);
-                          onClickSeat(seat);
-                        }}
-                        key={colIdx}
-                        //
-                      ></div>
-                    ))}
-                  </div>
-                );
-              })}
-            </div>
-          )}
-          {loading === true && <Spinner color="#d8d8d8"></Spinner>}
-        </div>
+        <SeatSection
+          loading={loading}
+          reservedSeatList={reservedSeatList}
+          selectedSeatList={selectedSeatList}
+          setSelectedSeatList={setSelectedSeatList}
+        ></SeatSection>
         <section className="flex-col" style={{ width: "35%", height: 700 }}>
           <div
             className="border-gray"
@@ -139,18 +114,6 @@ function Seat({}) {
   }
   function parseColToIndex(col) {
     return Number(col) - 1;
-  }
-  function parseIndexToRow(idx) {
-    const ascii = idx + "A".charCodeAt();
-    return String.fromCharCode(ascii);
-  }
-  function parseIndexToCol(idx) {
-    let col = idx + 1;
-    return col < 10 ? "0" + col : "" + col;
-  }
-  // 클릭 핸들러
-  function onClickSeat(seat) {
-    console.log(seat);
   }
 }
 
