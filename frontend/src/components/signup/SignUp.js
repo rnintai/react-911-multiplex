@@ -177,7 +177,7 @@ class SignUp extends Component {
             this.state.CKphone
         );
         axios
-          .post(API + "member/signup", {
+          .post("act-911-multiplex.herokuapp.com/member/signup", {
             userId: this.state.CKid,
             password: this.state.pw,
             name: this.state.name,
@@ -233,6 +233,7 @@ class SignUp extends Component {
           name="gender"
           onChange={this.appChangeGender}
         >
+          <option value="">--</option>
           <option value="남성">남성</option>
           <option value="여성">여성</option>
         </select>
