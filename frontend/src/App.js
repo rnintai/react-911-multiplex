@@ -19,6 +19,9 @@ import SignUp from "./components/signup/SignUp";
 import LogIn from "./components/login/LogIn";
 import MovieList from "./components/movie_list/Movie_list";
 
+//theater
+import TheaterList from "./components/theater/theater_list";
+
 // reservation
 import Reservation from "./pages/reservation/Reservation";
 import Seat from "./pages/reservation/Seat";
@@ -75,6 +78,10 @@ class App extends Component {
             </Route>
             <Route path="/movie_ticker" exact>
               <Nav></Nav>
+            </Route>
+            <Route path="/theater" exact>
+              <Nav></Nav>
+              <TheaterList></TheaterList>
             </Route>
 
             {/* </Route> */}
