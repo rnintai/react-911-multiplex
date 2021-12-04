@@ -1,5 +1,10 @@
 .ds-btn {
   padding: 5px 10px;
+  box-shadow: rgb(0 0 0 / 31%) 1px 1px 4px;
+  transition: all 0.2s ease-in-out;
+  &:hover {
+    transform: scale(1.05);
+  }
   // bg color
   &.ds-btn-bg--default {
     background-color: #fff;
