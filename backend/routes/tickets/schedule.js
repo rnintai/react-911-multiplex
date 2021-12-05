@@ -69,6 +69,8 @@ router.get("/id/:scheduleId", async function (req, res) {
     (SELECT multiplex_name FROM multiplex as M 
     WHERE M.multiplex_id=S.multiplex_id) as multiplex_name,
     movie_id, 
+    (SELECT poster FROM movie
+    WHERE movie.movie_id=S.movie_id) as poster, 
     (SELECT movie_name FROM movie
     WHERE movie.movie_id=S.movie_id) as movie_name, 
     theater_id,
