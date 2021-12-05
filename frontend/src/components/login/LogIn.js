@@ -25,7 +25,7 @@ class LogIn extends Component {
     });
   };
 
-  PostLogIn = (id, pw) => {
+  PostLogin = (id, pw) => {
     if (this.state.id === "" || this.state.pw === "") {
       alert("아이디/비밀번호를 입력해 주십시오");
     } else {
@@ -34,18 +34,19 @@ class LogIn extends Component {
           this.state.id
       );
       if (checkoutID.data === false) {
-        alert("가입되지 않은 아이디 입니다");
+        alert("가입되지 않은 ID 입니다.");
       } else {
-        let checklogin = axios
+        let checkLogin = axios
           .post("https://react-911-multiplex.herokuapp.com/member/login", {
             id: this.state.id,
             password: this.state.pw,
           })
           .then((response) => {
             if (response.data.success === 1) {
-              location.href = "http://localhost:3001";
+              alert("확인.");
+              location.href = "https://911-cinema.netlify.app";
             } else {
-              alert("비밀번호가 일치하지 않습니다");
+              alert("비밀번호가 틀렸습니다.");
               console.log(response);
             }
           });
@@ -60,14 +61,14 @@ class LogIn extends Component {
           placeholder="ID"
           type="text"
           name="id"
-          onChange={this.ChangeId}
+          onChange={this.appChangeId}
         ></input>
 
         <input
           placeholder="비밀번호"
           type="password"
           name="pw"
-          onChange={this.ChangePw}
+          onChange={this.appChangePw}
         ></input>
 
         <button onClick={this.PostLogIn}>로그인</button>
