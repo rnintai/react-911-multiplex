@@ -21,6 +21,9 @@ body {
 .justify-cen {
   justify-content: center;
 }
+.align-cen {
+  align-items: center;
+}
 
 .row-1_1 {
   width: 100%;
