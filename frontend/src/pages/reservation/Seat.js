@@ -27,9 +27,7 @@ function Seat() {
 
   // 스케줄id로 스케줄 정보 조회
   async function fetchMovieSchedule() {
-    const res = await axios.get(
-      API + "/admin/tickets/schedule/id/" + scheduleId
-    );
+    const res = await axios.get(API + "/tickets/schedule/id/" + scheduleId);
     setScheduleInfo(res.data.scheduleInfo);
   }
 
