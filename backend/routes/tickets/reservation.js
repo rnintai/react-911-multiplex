@@ -18,6 +18,7 @@ router.post("/", async function (req, res) {
   let totalPrice = req.body.totalPrice;
   let movieScheduleId = req.body.movieScheduleId;
 
+  // console.log(req.body);
   console.log(
     movieReservationId,
     memberId,
@@ -36,11 +37,12 @@ router.post("/", async function (req, res) {
     "INSERT INTO movie_reservation (movie_reservation_id, member_id, movie_reservation_date, movie_schedule_start, seat_name, multiplex_id, theater_id, movie_id, total_price, movie_schedule_id) VALUES (?,?,?,?,?,?,?,?,?,?)";
 
   const seat_sql =
-    "INSERT INTO reserved_seat (movie_schedule_id, seat_id) VALUES (?, ?)";
+    "INSERT INTO reserved_seat (movie_schedule_id, seat_row, seat_col) VALUES (?, ?, ?)";
 
   await conn.beginTransaction();
 
   var seatArray = seatName.split(",");
+  console.log(seatArray);
 
   try {
     let response = await conn.query(reservation_sql, [
@@ -57,7 +59,10 @@ router.post("/", async function (req, res) {
     ]);
 
     for (let i = 0; i < seatArray.length; i++) {
-      await conn.query(seat_sql, [movieScheduleId, seatArray[i]]);
+      const seatRow = seatArray[i].slice(0, 1);
+      const seatCol = seatArray[i].slice(1, 3);
+      console.log(seatRow, seatCol);
+      await conn.query(seat_sql, [movieScheduleId, seatRow, seatCol]);
     }
 
     await conn.commit();
@@ -86,7 +91,7 @@ router.get("/date/:date", async function (req, res) {
   const sql = `
   SELECT count(movie_reservation_id) as reservation_count 
   FROM movie_reservation 
-  WHERE movie_reservation_date="${req.params.date}"`;
+  WHERE movie_reservation_date LIKE "${req.params.date}%"`;
 
   const result = await connection.query(sql);
 
