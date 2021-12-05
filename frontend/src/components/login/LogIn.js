@@ -43,6 +43,8 @@ class LogIn extends Component {
           })
           .then((response) => {
             if (response.data.success === 1) {
+              let success = this.state.id;
+              localStorage.setItem("authenticated", success);
               alert("확인.");
               location.href = "https://911-cinema.netlify.app";
             } else {
