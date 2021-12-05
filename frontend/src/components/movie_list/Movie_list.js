@@ -40,6 +40,7 @@ class Movie_list extends Component {
                         ? "/images/uploads/poster/default.jpg"
                         : element.poster
                     }
+                    alt={element.movie_id + "-poster"}
                   />
                   <ul className="Moviecard_Sub">
                     <li>
