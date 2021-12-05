@@ -110,4 +110,31 @@ router.get("/date/:date", async function (req, res) {
   }
 });
 
+// GET /tickets/reservation/info/:reservationId
+// 해당 id를 갖는 예매 조회
+router.get("/info/:reservationId", async function (req, res) {
+  let connection = await pool.getConnection();
+
+  const sql = `
+  SELECT *
+  FROM movie_reservation 
+  WHERE movie_reservation_id="${req.params.reservationId}"`;
+
+  const result = await connection.query(sql);
+
+  try {
+    connection.release();
+    res.json({
+      success: true,
+      reservationInfo: result[0][0],
+    });
+  } catch (err) {
+    connection.release();
+    res.json({
+      success: false,
+      err,
+    });
+  }
+});
+
 module.exports = router;
