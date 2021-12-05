@@ -25,6 +25,7 @@ import TheaterList from "./components/theater/theater_list";
 // reservation
 import Reservation from "./pages/reservation/Reservation";
 import Seat from "./pages/reservation/Seat";
+import ReservationResult from "./pages/reservation/ReservationResult";
 
 // admin
 import AdminNavBar from "./components/nav/AdminNavBar";
@@ -63,6 +64,12 @@ class App extends Component {
               <Nav></Nav>
               <Seat></Seat>
             </Route>
+            {/* 결과 */}
+            <Route path="/reservation/result" exact>
+              <Nav></Nav>
+              <ReservationResult></ReservationResult>
+            </Route>
+
             {/*  */}
             <Route path="/404" exact>
               <Nav></Nav>
