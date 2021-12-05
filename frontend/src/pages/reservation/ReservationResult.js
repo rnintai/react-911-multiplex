@@ -17,19 +17,15 @@ const API =
 function ReservationResult({ memberId }) {
   // query
   const query = queryString.parse(useLocation().search);
-  const scheduleId = query.schedule;
-  const seatString = query.seat;
-  const totalPrice = query.price;
+  const reservationCode = query.reservationCode;
+  const scheduleId = query.scheduleId;
 
   // state
   const [scheduleInfo, setScheduleInfo] = useState({});
-  const [reservationCode, setReservationCode] = useState("");
+  const [reservationInfo, setReservationInfo] = useState({});
   const [loading, setLoading] = useState(true);
-  // 예매 상태
-  const [reservationLoading, setReservationLoading] = useState(true);
-  const [reservationSuccess, setReservationSuccess] = useState(true);
 
-  // info
+  // 스케줄 info
   const movieId = scheduleInfo.movie_id;
   const movieNm = scheduleInfo.movie_name;
   const poster = scheduleInfo.poster;
@@ -39,56 +35,39 @@ function ReservationResult({ memberId }) {
   const theaterId = scheduleInfo.theater_id;
   const theaterNm = scheduleInfo.theater_name;
   const theaterType = scheduleInfo.theater_type;
+  const ticketPrice = scheduleInfo.theater_ticket_price;
   const startTm = ISOtoHHMM(scheduleInfo.movie_schedule_start);
   const endTm = ISOtoHHMM(scheduleInfo.movie_schedule_end);
 
+  // 예약 정보
+  const seat = reservationInfo.seat_name;
+
   // 스케줄 정보
   async function getScheduleInfo() {
-    const res = await axios.get(API + "/tickets/schedule/id/" + scheduleId);
-    setScheduleInfo(res.data.scheduleInfo);
-  }
-
-  // 예매 번호 산출
-  async function getReservationCountByDate() {
-    const date = new Date().toISOString().split("T")[0];
-    const res = await axios.get(API + "/tickets/reservation/date/" + date);
-    let serial = res.data.count[0].reservation_count + 1;
-
-    let dateArr = date.split("-").join("");
-    serial = String(serial).split("");
-    let serialArr = new Array("0", "0", "0", "0");
-
-    let i = serialArr.length - 1;
-    for (let j = serial.length - 1; j >= 0; j--) {
-      serialArr[i] = serial[j];
-      i = i - 1;
+    try {
+      const res = await axios.get(API + "/tickets/schedule/id/" + scheduleId);
+      setScheduleInfo(res.data.scheduleInfo);
+    } catch (err) {
+      console.log(err);
     }
-
-    setReservationCode(dateArr + serialArr.join(""));
-    setLoading(false);
   }
 
-  // 예매 프로세스
-  async function makeReservation() {
-    // const member = memberId===undefined ? reservationCode:memberId;
-    const res = await axios.post(API + "/tickets/reservation", {
-      movieReservationId: reservationCode,
-      // memberId: member,
-      movieScheduleStart: startTm,
-      seatName: seatString,
-      multiplexId,
-      theaterId,
-      movieId,
-      totalPrice,
-      movieScheduleId: scheduleId,
-    });
-    console.log(res);
+  // 예매 정보
+  async function getReservationInfo() {
+    try {
+      const res = await axios.get(
+        API + "/tickets/reservation/info/" + reservationCode
+      );
+      setReservationInfo(res.data.reservationInfo);
+    } catch (err) {
+      console.log(err);
+    }
+    setLoading(false);
   }
 
   useEffect(() => {
     getScheduleInfo();
-    getReservationCountByDate();
-    // makeReservation();
+    getReservationInfo();
   }, []);
 
   return (
@@ -143,11 +122,18 @@ function ReservationResult({ memberId }) {
                   >
                     {multiplexNm}
                   </Font>
+                  <Font
+                    size={FontSize.default}
+                    boldness={FontBold.light}
+                    style={{ marginRight: 4 }}
+                  >
+                    &gt;
+                  </Font>
                   <Font size={FontSize.default} boldness={FontBold.light}>
                     {theaterNm}
                   </Font>
                 </div>
-                <div className="flex-row">
+                <div className="flex-row" style={{ marginBottom: 8 }}>
                   <Font
                     size={FontSize.default}
                     boldness={FontBold.light}
@@ -171,6 +157,23 @@ function ReservationResult({ memberId }) {
                   </Font>
                   <Font size={FontSize.default} boldness={FontBold.light}>
                     {endTm}
+                  </Font>
+                </div>
+                <div className="flex-row">
+                  <Font
+                    size={FontSize.default}
+                    boldness={FontBold.light}
+                    style={{ marginRight: 4 }}
+                  >
+                    좌석:
+                  </Font>
+                  <Font
+                    size={FontSize.default}
+                    boldness={FontBold.default}
+                    color={FontColor.red75}
+                    style={{ marginRight: 4 }}
+                  >
+                    {seat}
                   </Font>
                 </div>
               </div>

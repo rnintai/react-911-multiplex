@@ -61,10 +61,8 @@ class App extends Component {
               <Nav></Nav>
               <Reservation></Reservation>
             </Route>
-            <Route path="/reservation/seat" exact>
-              <Nav></Nav>
-              <Seat></Seat>
-            </Route>
+            <Route path="/reservation/seat" component={Nav}></Route>
+            <Route path="/reservation/seat" component={Seat} exact></Route>
             {/* 결과 */}
             <Route path="/reservation/result" exact>
               <Nav></Nav>
