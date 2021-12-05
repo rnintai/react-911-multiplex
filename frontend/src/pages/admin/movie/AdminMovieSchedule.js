@@ -48,7 +48,7 @@ const AdminMovieSchedule = () => {
     let curPage = 1;
     let scheduleListCpy = [];
     let fromDate = new Date();
-    fromDate.setMonth(fromDate.getMonth() - 3);
+    fromDate.setMonth(fromDate.getMonth());
     fromDate = fromDate.toISOString().split("T")[0];
 
     while (1) {
