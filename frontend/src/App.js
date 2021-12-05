@@ -32,6 +32,8 @@ import AdminNavBar from "./components/nav/AdminNavBar";
 import AdminMovieInfo from "./pages/admin/movie/AdminMovieInfo";
 import AdminMovieSchedule from "./pages/admin/movie/AdminMovieSchedule";
 
+import AdminMultiplex from "./pages/admin/multiplex/AdminMultiplex";
+
 class App extends Component {
   render() {
     return (
@@ -104,6 +106,12 @@ class App extends Component {
               <AdminNavBar></AdminNavBar>
               <AdminMovieSchedule></AdminMovieSchedule>
             </Route>
+            <Route path="/admin/multiplex" component={AdminNavBar}></Route>
+            <Route
+              path="/admin/multiplex"
+              component={AdminMultiplex}
+              exact
+            ></Route>
             <Footer></Footer>
           </Route>
         </Switch>
