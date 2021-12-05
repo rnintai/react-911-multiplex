@@ -12,7 +12,10 @@ router.get("/list/:page", async function (req, res) {
 
   let curPage = req.params.page - 1;
 
-  const sql = `SELECT * FROM theater
+  const sql = `SELECT *,
+  (SELECT count(seat_col) FROM seat as S 
+  WHERE S.theater_id=T.theater_id) as total_seat
+  FROM theater T
   LIMIT ${curPage * itemPerPage},${itemPerPage}`;
 
   const result = await connection.query(sql);
