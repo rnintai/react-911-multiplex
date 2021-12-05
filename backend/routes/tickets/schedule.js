@@ -1,4 +1,4 @@
-// /admin/tickets/schedule/
+// /tickets/schedule/
 const express = require("express");
 const router = express.Router();
 
@@ -9,7 +9,7 @@ const itemPerPage = 10;
 /**
  * 스케줄 목록을 가져온다.
  */
-router.get("/:fromDate/:page", async function (req, res) {
+router.get("/list/:fromDate/:page", async function (req, res) {
   let connection = await pool.getConnection();
   let fromDate = req.params.fromDate;
   let toDateObj = new Date(fromDate);
@@ -84,7 +84,6 @@ router.get("/id/:scheduleId", async function (req, res) {
     as reserved_count,
     (SELECT age_limit FROM movie
     WHERE movie.movie_id=S.movie_id) as age_limit
-    FROM movie_schedule as S
     FROM movie_schedule as S
     WHERE movie_schedule_id=${req.params.scheduleId}
     `;
