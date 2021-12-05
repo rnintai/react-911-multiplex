@@ -50,10 +50,11 @@ class App extends Component {
               <MovieList></MovieList>
             </Route>
             {/* movieInfo */}
+            <Route path="/movies/detail" component={Nav}></Route>
             <Route
               path="/movies/detail/:movie_id"
-              exact={true}
               component={Detail}
+              exact
             ></Route>
             {/* 예약 */}
             <Route path="/reservation" exact>
