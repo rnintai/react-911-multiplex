@@ -26,7 +26,7 @@ const AdminNavBar = () => {
       </section>
       <nav className="admin-nav-wrap">
         <div className="nav-menu">
-          <Font className="nav-link">영화</Font>
+          <Font className="nav-link">영화관리</Font>
           <ul className="sub-list">
             <li className="sub-item">
               <Link to="/admin/movie/info">
@@ -45,8 +45,8 @@ const AdminNavBar = () => {
           </ul>
         </div>
         <div className="nav-menu">
-          <Link to="/admin/#">
-            <Font className="nav-link">시설물</Font>
+          <Link to="/admin/multiplex">
+            <Font className="nav-link">지점관리</Font>
           </Link>
         </div>
         <div className="nav-menu">
