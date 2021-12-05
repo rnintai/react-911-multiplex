@@ -4,10 +4,12 @@ require("dotenv").config();
 
 const pool = require("../../mysql");
 
+// POST /tickets/reservation
+// 예매 완료
 router.post("/", async function (req, res) {
   let movieReservationId = req.body.movieReservationId;
   let memberId = req.body.memberId;
-  let movieReservationDate = req.body.movieReservationDate;
+  let movieReservationDate = new Date();
   let movieScheduleStart = req.body.movieScheduleStart;
   let seatName = req.body.seatName;
   let multiplexId = req.body.multiplexId;
@@ -70,6 +72,33 @@ router.post("/", async function (req, res) {
     await conn.rollback();
     conn.release();
     res.status(400).json({
+      success: false,
+      err,
+    });
+  }
+});
+
+// GET /tickets/reservation/date/:date
+// 해당 날짜의 예매수
+router.get("/date/:date", async function (req, res) {
+  let connection = await pool.getConnection();
+
+  const sql = `
+  SELECT count(movie_reservation_id) as reservation_count 
+  FROM movie_reservation 
+  WHERE movie_reservation_date="${req.params.date}"`;
+
+  const result = await connection.query(sql);
+
+  try {
+    connection.release();
+    res.json({
+      success: true,
+      count: result[0],
+    });
+  } catch (err) {
+    connection.release();
+    res.json({
       success: false,
       err,
     });

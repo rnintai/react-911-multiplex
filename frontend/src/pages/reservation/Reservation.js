@@ -40,10 +40,12 @@ const Reservation = () => {
   const getSchedule = async () => {
     let curPage = 1;
     let scheduleListCpy = [];
+    let fromDate = new Date().toISOString().split("T")[0];
+
     while (1) {
       try {
         const response = await axios.get(
-          API + "/admin/tickets/schedule/" + curPage
+          API + `/tickets/schedule/list/${fromDate}/${curPage}`
         );
         if (response.data.scheduleList.length === 0) {
           break;
@@ -100,6 +102,26 @@ const Reservation = () => {
     setTheaterList(theaterListCpy);
     setLoading(false);
   };
+  // 스케줄 점유좌석 수 받아오기
+  // const getReservedSeatList = async () => {
+  //   let curPage = 1;
+  //   let theaterListCpy = [];
+  //   let fromDate = new Date().toISOString.split("T")[0];
+  //   while (1) {
+  //     try {
+  //       const response = await axios.get(
+  //         API + `/tickets/reservedseat/${fromDate}/${curPage}`
+  //       );
+  //       if (response.data.theaterList.length === 0) {
+  //         break;
+  //       }
+  //       theaterListCpy.push(...response.data.theaterList);
+  //       curPage = curPage + 1;
+  //     } catch (e) {
+  //       console.log(e);
+  //     }
+  //   }
+  // };
 
   useEffect(() => {
     getSchedule();

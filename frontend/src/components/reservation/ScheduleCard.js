@@ -54,9 +54,17 @@ function ScheduleCard({
         >
           {theaterName}
         </Font>
-        <Font size={FontSize.xs} className="text-right">
-          {availSeat}/{totalSeat}
-        </Font>
+        <div className="flex-row" style={{ justifyContent: "flex-end" }}>
+          <Font size={FontSize.xs} boldness={FontBold.bold}>
+            {availSeat}
+          </Font>
+          <Font size={FontSize.xs} boldness={FontBold.light}>
+            /
+          </Font>
+          <Font size={FontSize.xs} boldness={FontBold.light}>
+            {totalSeat}
+          </Font>
+        </div>
       </div>
     </div>
   );
