@@ -31,6 +31,8 @@ router.get("/:fromDate/:page", async function (req, res) {
     (SELECT theater_type FROM theater as T
     WHERE T.theater_id=S.theater_id) as theater_type, 
     movie_schedule_start, movie_schedule_end,
+    (SELECT count(seat_col) FROM seat
+    WHERE seat.theater_id=S.theater_id) as total_seat,
     (SELECT count(seat_col) FROM reserved_seat as RS
     WHERE RS.movie_schedule_id=S.movie_schedule_id)
     as reserved_count,
@@ -69,16 +71,20 @@ router.get("/id/:scheduleId", async function (req, res) {
     movie_id, 
     (SELECT movie_name FROM movie
     WHERE movie.movie_id=S.movie_id) as movie_name, 
-    (SELECT age_limit FROM movie
-    WHERE movie.movie_id=S.movie_id) as age_limit, 
     theater_id,
     (SELECT theater_name FROM theater as T
     WHERE T.theater_id=S.theater_id) as theater_name, 
     (SELECT theater_type FROM theater as T
     WHERE T.theater_id=S.theater_id) as theater_type, 
-    (SELECT theater_ticket_price FROM theater as T
-    WHERE T.theater_id=S.theater_id) as theater_ticket_price, 
-    movie_schedule_start, movie_schedule_end 
+    movie_schedule_start, movie_schedule_end,
+    (SELECT count(seat_col) FROM seat
+    WHERE seat.theater_id=S.theater_id) as total_seat,
+    (SELECT count(seat_col) FROM reserved_seat as RS
+    WHERE RS.movie_schedule_id=S.movie_schedule_id)
+    as reserved_count,
+    (SELECT age_limit FROM movie
+    WHERE movie.movie_id=S.movie_id) as age_limit
+    FROM movie_schedule as S
     FROM movie_schedule as S
     WHERE movie_schedule_id=${req.params.scheduleId}
     `;
