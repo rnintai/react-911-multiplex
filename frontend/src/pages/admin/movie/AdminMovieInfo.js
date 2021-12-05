@@ -24,8 +24,6 @@ const AdminMovie = () => {
   const [moviesLength, setMoviesLength] = useState(0);
   const [curMovieCnt, setCurMovieCnt] = useState(0);
 
-  console.log(API);
-
   const getMovie = async () => {
     try {
       const response = await axios.get(API + "/movies/boxoffice");
