@@ -19,7 +19,7 @@ const preMoviesRouter = require("./routes/movies/preMovies");
 const moviesDetailRouter = require("./routes/movies/moviesDetail");
 const getMoviesListRouter = require("./routes/movies/getMoviesList");
 // ticket
-const getMovieScheduleRouter = require("./routes/tickets/schedule");
+const movieScheduleRouter = require("./routes/tickets/schedule");
 const reservationRouter = require("./routes/tickets/reservation");
 const reservedSeatRouter = require("./routes/tickets/reservedSeat");
 // theater
@@ -29,7 +29,7 @@ const theaterSeatRouter = require("./routes/admin/theater/theaterSeat");
 const uploadPosterRouter = require("./routes/admin/movies/uploadPoster");
 const fetchMoviesRouter = require("./routes/admin/movies/fetchMovie");
 const fetchMovieDetailRouter = require("./routes/admin/movies/fetchMovieDetail");
-const movieScheduleRouter = require("./routes/admin/tickets/movieSchedule");
+// const movieScheduleRouter = require("./routes/admin/tickets/movieSchedule");
 const multiplexRouter = require("./routes/admin/multiplex/multiplexList");
 const theaterRouter = require("./routes/admin/theater/theaterList");
 const employeeRouter = require("./routes/admin/employment/employee");
@@ -79,7 +79,8 @@ app.use("/movies/pre", preMoviesRouter);
 app.use("/movies/detail", moviesDetailRouter);
 app.use("/movies/list", getMoviesListRouter);
 // tickets
-app.use("/tickets/schedule", getMovieScheduleRouter);
+// app.use("/tickets/schedule", getMovieScheduleRouter);
+app.use("/tickets/schedule", movieScheduleRouter);
 app.use("/tickets/reservation", reservationRouter);
 app.use("/tickets/reservedseat", reservedSeatRouter);
 // theaters
@@ -90,7 +91,7 @@ app.use("/movies/detail/poster", uploadPosterRouter);
 app.use("/movies/list/fetch", fetchMoviesRouter);
 app.use("/movies/detail/fetch", fetchMovieDetailRouter);
 
-app.use("/admin/tickets/schedule", movieScheduleRouter);
+// app.use("/admin/tickets/schedule", movieScheduleRouter);
 app.use("/admin/multiplex", multiplexRouter);
 app.use("/admin/theater", theaterRouter);
 
