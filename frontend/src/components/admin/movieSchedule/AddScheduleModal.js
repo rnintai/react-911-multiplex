@@ -197,7 +197,7 @@ const AddScheduleModal = ({
       // setScheduleList(scheduleListCpy);
       // setFilteredScheduleList(filteredScheduleListCpy);
     }
-    const response = await axios.post(API + "/admin/tickets/schedule", {
+    const response = await axios.post(API + "/tickets/schedule", {
       scheduleId: generatedId,
       multiplex,
       theater,
@@ -206,7 +206,7 @@ const AddScheduleModal = ({
       movieCd,
     });
     const getResponse = await axios.get(
-      API + "/admin/tickets/schedule/id/" + generatedId
+      API + "/tickets/schedule/id/" + generatedId
     );
     setResponse(response.data);
     // getSchedule();
@@ -222,7 +222,7 @@ const AddScheduleModal = ({
   }
 
   async function removeSchedule() {
-    await axios.post(API + "/admin/tickets/schedule/delete/" + scheduleId);
+    await axios.post(API + "/tickets/schedule/delete/" + scheduleId);
     closeModal();
     // getSchedule();
     let scheduleListCpy = scheduleList.filter(

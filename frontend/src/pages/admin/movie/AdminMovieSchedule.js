@@ -47,10 +47,14 @@ const AdminMovieSchedule = () => {
   const getSchedule = async () => {
     let curPage = 1;
     let scheduleListCpy = [];
+    let fromDate = new Date();
+    fromDate.setMonth(fromDate.getMonth() - 3);
+    fromDate = fromDate.toISOString().split("T")[0];
+
     while (1) {
       try {
         const response = await axios.get(
-          API + "/admin/tickets/schedule/" + curPage
+          API + `/tickets/schedule/list/${fromDate}/${curPage}`
         );
         if (response.data.scheduleList.length === 0) {
           break;
@@ -218,7 +222,7 @@ const AdminMovieSchedule = () => {
   }
   async function handleEventClick(arg) {
     let scheduleResponse = await axios.get(
-      API + "/admin/tickets/schedule/id/" + arg.event.id
+      API + "/tickets/schedule/id/" + arg.event.id
     );
     setScheduleId(arg.event.id);
     setStartTime(substringOfDate(arg.event.startStr));
