@@ -55,7 +55,14 @@ function SeatInformation({
             <i class="fas fa-redo-alt" style={{ marginRight: 5 }}></i>초기화
           </Button>
           <Button background={BgColor.red50}>
-            <Link to="./payment">
+            <Link
+              to={`./result?schedule=${
+                scheduleInfo.movie_schedule_id
+              }&seat=${selectedSeatList.join(",")}&price=${totalPriceString(
+                adultCount,
+                juvenCount
+              )}`}
+            >
               <Font color={FontColor.white}>
                 <i class="far fa-credit-card" style={{ marginRight: 5 }}></i>
                 결제
@@ -263,6 +270,13 @@ function SeatInformation({
     return formatter.format(
       ticketPrice * adultCount +
         ticketPrice * (1 - juvenDiscountRatio) * juvenCount
+    );
+  }
+  // 숫자 String 총액
+  function totalPriceString(adultCount, juvenCount) {
+    return (
+      ticketPrice * adultCount +
+      ticketPrice * (1 - juvenDiscountRatio) * juvenCount
     );
   }
 
