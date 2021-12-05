@@ -76,7 +76,10 @@ router.get("/id/:scheduleId", async function (req, res) {
     WHERE T.theater_id=S.theater_id) as theater_name, 
     (SELECT theater_type FROM theater as T
     WHERE T.theater_id=S.theater_id) as theater_type, 
-    movie_schedule_start, movie_schedule_end,
+    (SELECT theater_ticket_price FROM theater as T
+    WHERE T.theater_id=S.theater_id) as theater_ticket_price, 
+    movie_schedule_start, 
+    movie_schedule_end,
     (SELECT count(seat_col) FROM seat
     WHERE seat.theater_id=S.theater_id) as total_seat,
     (SELECT count(seat_col) FROM reserved_seat as RS
