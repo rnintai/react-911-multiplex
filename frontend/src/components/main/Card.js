@@ -37,7 +37,7 @@ class Card extends Component {
                   <li>
                     <Link
                       to={{
-                        pathname: `/reservation?id=${element.movie_id}`,
+                        pathname: `/reservation?movieId=${element.movie_id}`,
                         state: {
                           movie_id: element.movie_id,
                         },
