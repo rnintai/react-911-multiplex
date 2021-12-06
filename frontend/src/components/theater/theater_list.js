@@ -1,6 +1,7 @@
 import react, { Component } from "react";
 import axios from "axios";
 import "./theater_list.css";
+import { Link } from "react-router-dom";
 
 class theater_list extends Component {
   // eslint-disable-next-line no-useless-constructor
