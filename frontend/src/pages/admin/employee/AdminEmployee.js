@@ -94,6 +94,7 @@ const Employee = ({ history }) => {
         history={history}
         columns={columns}
         data={data}
+        getEmployeeList={getEmployeeList}
       ></EmployeeTable>
     </>
   );

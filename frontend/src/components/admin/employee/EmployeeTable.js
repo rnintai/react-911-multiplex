@@ -9,16 +9,19 @@ import {
 } from "src/design-system/font/Font";
 
 import { Button, BgColor } from "src/design-system/button/Button";
-// import Modal from "./Modal";
+import Modal from "./Modal";
 // import PosterModal from "./PosterModal";
 
-export const EmployeeTable = ({ history, columns, data }) => {
+export const EmployeeTable = ({ history, columns, data, getEmployeeList }) => {
   const [modalState, setModalState] = useState(false);
-  const [posterModalState, setPosterModalState] = useState(false);
-  const [movieId, setMovieId] = useState("");
-  const [synopsis, setSynopsis] = useState("");
-  const [poster, setPoster] = useState("");
-  const [trailer, setTrailer] = useState("");
+  const [employeeId, setEmployeeId] = useState("");
+  const [memberId, setMemberId] = useState("");
+  const [department, setDepartment] = useState("");
+  const [position, setPosition] = useState("");
+  const [wage, setWage] = useState("");
+  const [employmentDate, setEmploymentDate] = useState("");
+  const [multiplex, setMultiplex] = useState("");
+  const [workTime, setWorkTime] = useState("");
 
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
     useTable({ columns, data });
@@ -62,41 +65,97 @@ export const EmployeeTable = ({ history, columns, data }) => {
               <tr {...row.getRowProps()}>
                 {row.cells.map((cell) => (
                   // getCellProps는 각 cell data를 호출해낸다
-                  <td
-                    {...cell.getCellProps()}
-                    style={{
-                      textOverflow: "ellipsis",
-                      overflow: "hidden",
-                      whiteSpace: "nowrap",
-                      width: "50%",
-                      textAlign: "center",
-                    }}
-                    title={cell.value}
-                  >
-                    <Font size={FontSize.sm}>{cell.render("Cell")}</Font>
-                  </td>
+                  <>
+                    {cell.column.id === "employee_id" && (
+                      <td
+                        {...cell.getCellProps()}
+                        style={{
+                          textOverflow: "ellipsis",
+                          overflow: "hidden",
+                          whiteSpace: "nowrap",
+                          width: "50%",
+                          textAlign: "center",
+                        }}
+                        title={cell.value}
+                      >
+                        <Font
+                          size={FontSize.sm}
+                          onClick={() => {
+                            editModal(row);
+                          }}
+                          style={{
+                            cursor: "pointer",
+                            textDecoration: "underline",
+                          }}
+                        >
+                          {cell.render("Cell")}
+                        </Font>
+                      </td>
+                    )}
+                    {cell.column.id !== "employee_id" && (
+                      <td
+                        {...cell.getCellProps()}
+                        style={{
+                          textOverflow: "ellipsis",
+                          overflow: "hidden",
+                          whiteSpace: "nowrap",
+                          width: "50%",
+                          textAlign: "center",
+                        }}
+                        title={cell.value}
+                      >
+                        <Font size={FontSize.sm}>{cell.render("Cell")}</Font>
+                      </td>
+                    )}
+                  </>
                 ))}
-                <td>
-                  {/* <Button
+                {/* <td>
+                  <Button
                     color={FontColor.white}
                     boldness={FontBold.light}
                     background={BgColor.green}
-                    // onClick={() => {
-                    //   onClickDetail(row);
-                    // }}
+                    onClick={() => {
+                      editModal(row);
+                    }}
                   >
                     편집
-                  </Button> */}
-                </td>
+                  </Button>
+                </td> */}
               </tr>
             );
           })}
         </tbody>
       </table>
+      <Modal
+        getEmployeeList={getEmployeeList}
+        modalState={modalState}
+        setModalState={setModalState}
+        employeeId={employeeId}
+        memberId={memberId}
+        department={department}
+        setDepartment={setDepartment}
+        position={position}
+        setPosition={setPosition}
+        wage={wage}
+        setWage={setWage}
+        employmentDate={employmentDate}
+        multiplex={multiplex}
+        setMultiplex={setMultiplex}
+        workTime={workTime}
+        setWorkTime={setWorkTime}
+      ></Modal>
     </>
   );
 
-  // function onClickDetail(row) {
-  //   history.push("./multiplex/detail?id=" + row.values.multiplex_id);
-  // }
+  function editModal(row) {
+    setModalState(true);
+    setEmployeeId(row.cells[0].value);
+    setMemberId(row.cells[1].value);
+    setDepartment(row.cells[2].value);
+    setPosition(row.cells[3].value);
+    setWage(row.cells[4].value);
+    setEmploymentDate(row.cells[5].value);
+    setMultiplex(row.cells[6].value);
+    setWorkTime(row.cells[7].value || "");
+  }
 };
