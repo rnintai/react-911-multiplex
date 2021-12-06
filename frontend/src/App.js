@@ -33,7 +33,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      userId: localStorage.getItem("authenticated"),
+      userId: localStorage.getItem("authenticated") || "",
     };
   }
   render() {
@@ -61,7 +61,11 @@ class App extends Component {
             {/* 예약 */}
             <Route path="/reservation" component={Nav}></Route>
             <Route path="/reservation" component={Reservation} exact></Route>
-            <Route path="/reservation/seat" component={Seat} exact></Route>
+            <Route
+              path="/reservation/seat"
+              render={(props) => <Seat {...props} userId={this.state.userId} />}
+              exact
+            ></Route>
             {/* 결과 */}
             <Route path="/reservation/result" exact>
               <ReservationResult></ReservationResult>
