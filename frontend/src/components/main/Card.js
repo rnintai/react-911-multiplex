@@ -35,7 +35,16 @@ class Card extends Component {
                 <img src={element.poster} />
                 <ul className="Movie_Sub">
                   <li>
-                    <a href="/404">예매하기</a>
+                    <Link
+                      to={{
+                        pathname: `/reservation?movieid=${element.movie_id}`,
+                        state: {
+                          movie_id: element.movie_id,
+                        },
+                      }}
+                    >
+                      예매하기
+                    </Link>
                   </li>
                   <li>
                     <Link
