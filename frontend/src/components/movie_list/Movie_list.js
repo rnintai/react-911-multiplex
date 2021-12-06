@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-constructor */
 //전체 영화
 import React, { Component } from "react";
 import axios from "axios";
@@ -48,7 +49,7 @@ class Movie_list extends Component {
                         to={{
                           pathname: `/reservation?movieId=${element.movie_id}`,
                           state: {
-                          movie_id: element.movie_id,
+                            movie_id: element.movie_id,
                           },
                         }}
                       >
