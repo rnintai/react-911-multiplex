@@ -1,12 +1,7 @@
 import "./App.css";
 import "./reset.css";
 import React, { Component } from "react";
-import {
-  Route,
-  Switch,
-  Link,
-  BrowserRouter as Browser,
-} from "react-router-dom";
+import { Route, Switch, BrowserRouter as Browser } from "react-router-dom";
 
 import Nav from "./components/nav/Nav";
 import Card from "./components/main/Card";
@@ -35,13 +30,18 @@ import AdminMovieSchedule from "./pages/admin/movie/AdminMovieSchedule";
 import AdminMultiplex from "./pages/admin/multiplex/AdminMultiplex";
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      userId: localStorage.getItem("authenticated"),
+    };
+  }
   render() {
     return (
       <Browser>
         <Switch>
           <Route>
             {/* <Route path="/"> */}
-
             <Route path="/" exact>
               <Nav></Nav>
               <Card></Card>
@@ -68,7 +68,6 @@ class App extends Component {
               <Nav></Nav>
               <ReservationResult></ReservationResult>
             </Route>
-
             {/*  */}
             <Route path="/404" exact>
               <Nav></Nav>
@@ -89,9 +88,7 @@ class App extends Component {
               <Nav></Nav>
               <TheaterList></TheaterList>
             </Route>
-
             {/* </Route> */}
-
             {/* admin */}
             <Route path="/admin" exact>
               <AdminNavBar></AdminNavBar>

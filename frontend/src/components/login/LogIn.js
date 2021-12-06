@@ -1,5 +1,4 @@
 /* eslint-disable no-restricted-globals */
-/* eslint-disable no-useless-constructor */
 import axios from "axios";
 import React, { Component } from "react";
 import "./LogIn.css";
@@ -49,7 +48,6 @@ class LogIn extends Component {
               location.href = "https://911-cinema.netlify.app";
             } else {
               alert("비밀번호가 틀렸습니다.");
-              console.log(response);
             }
           });
       }
@@ -65,15 +63,13 @@ class LogIn extends Component {
           name="id"
           onChange={this.appChangeId}
         ></input>
-
         <input
           placeholder="비밀번호"
           type="password"
           name="pw"
           onChange={this.appChangePw}
         ></input>
-
-        <button onClick={this.PostLogIn}>로그인</button>
+        <button onClick={this.PostLogin}>로그인</button>
       </div>
     );
   }
