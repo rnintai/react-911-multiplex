@@ -5,6 +5,7 @@ import { FontSize, FontBold, FontColor } from "../font/Font";
 
 export const BgColor = {
   default: "ds-btn-bg--default",
+  tp: "ds-btn-bg--tp",
   white: "ds-btn-bg--white",
   red0: "ds-btn-bg--red0",
   red25: "ds-btn-bg--red25",

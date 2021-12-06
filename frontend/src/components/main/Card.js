@@ -6,6 +6,9 @@ import axios from "axios";
 import "./Card.css";
 import { Link } from "react-router-dom";
 
+import { Font, FontColor, FontSize } from "src/design-system/font/Font";
+import { Button, BgColor } from "src/design-system/button/Button";
+
 class Card extends Component {
   constructor(props) {
     super(props);
@@ -35,7 +38,7 @@ class Card extends Component {
                 <img src={element.poster} />
                 <ul className="Movie_Sub">
                   <li>
-                    <Link
+                    {/* <Link
                       to={{
                         pathname: `/reservation?movieId=${element.movie_id}`,
                         state: {
@@ -44,7 +47,20 @@ class Card extends Component {
                       }}
                     >
                       예매하기
-                    </Link>
+                    </Link> */}
+                    <Button
+                      color={FontColor.white}
+                      background={BgColor.tp}
+                      className="movie-btn"
+                      onClick={() =>
+                        this.props.history.push({
+                          pathname: "/reservation",
+                          search: `?movieId=${element.movie_id}`,
+                        })
+                      }
+                    >
+                      예매하기
+                    </Button>
                   </li>
                   <li>
                     <Link
@@ -55,12 +71,18 @@ class Card extends Component {
                         },
                       }}
                     >
-                      상세정보
+                      <Button
+                        color={FontColor.white}
+                        background={BgColor.tp}
+                        className="movie-btn"
+                      >
+                        상세정보
+                      </Button>
                     </Link>
                   </li>
                 </ul>
               </div>
-              <p>{element.movie_name}</p>
+              <Font color={FontColor.white}>{element.movie_name}</Font>
             </li>
           ))}
         </ul>

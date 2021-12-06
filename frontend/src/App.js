@@ -42,11 +42,17 @@ class App extends Component {
         <Switch>
           <Route>
             {/* <Route path="/"> */}
-            <Route path="/" exact>
-              <Nav></Nav>
-              <Card></Card>
-              <Theater></Theater>
-            </Route>
+            <Route
+              path="/"
+              render={(props) => (
+                <>
+                  <Nav></Nav>
+                  <Card {...props}></Card>
+                  <Theater {...props}></Theater>
+                </>
+              )}
+              exact
+            ></Route>
             <Route path="/movies" exact>
               <Nav></Nav>
               <MovieList></MovieList>
@@ -60,7 +66,18 @@ class App extends Component {
             ></Route>
             {/* 예약 */}
             <Route path="/reservation" component={Nav}></Route>
-            <Route path="/reservation" component={Reservation} exact></Route>
+            {/* <Route path="/reservation" component={Reservation} exact></Route> */}
+            <Route
+              path="/reservation"
+              render={(props) => (
+                <>
+                  {/* <Nav></Nav> */}
+                  <Reservation {...props} />
+                </>
+              )}
+              exact
+            ></Route>
+            {/* <Route path="/reservation" component={Reservation} exact></Route> */}
             <Route
               path="/reservation/seat"
               render={(props) => <Seat {...props} userId={this.state.userId} />}
