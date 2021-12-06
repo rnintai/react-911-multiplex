@@ -170,23 +170,27 @@ const AddScheduleModal = ({
 
   async function applyChanges() {
     // YYMMDDHH(startTime) + theaterId + movieCd
-    let generatedId = startTime
-      .substring(2, startTime.indexOf(":"))
-      .replaceAll("-", "")
-      .replace("T", "");
+    let generatedId =
+      startTime
+        .substring(2, startTime.indexOf(":"))
+        .replaceAll("-", "")
+        .replace("T", "") + startTime.split(":")[1];
     // YYMMDDHH
     generatedId += theater + movieCd;
 
     let scheduleListCpy = scheduleList;
     let filteredScheduleListCpy = filteredScheduleList;
 
+    console.log(generatedId, scheduleId);
+
     if (scheduleId !== "" && generatedId !== scheduleId) {
       // let scheduleListCpy = scheduleList.filter((elem) => elem.movie_schedule_id !== scheduleId);
       // setScheduleList(scheduleListCpy);
       // let filteredScheduleListCpy = filteredScheduleList.filter((elem) => elem.movie_schedule_id !== scheduleId);
       // setFilteredScheduleList(filteredScheduleListCpy);
-      // removeSchedule();
-      // await axios.post(API + "/admin/tickets/schedule/delete/" + scheduleId);
+      console.log("변경");
+      // await axios.post(API + "/tickets/schedule/delete/" + scheduleId);
+      removeSchedule();
 
       scheduleListCpy = scheduleListCpy.filter(
         (elem) => elem.movie_schedule_id !== scheduleId
@@ -194,6 +198,7 @@ const AddScheduleModal = ({
       filteredScheduleListCpy = filteredScheduleListCpy.filter(
         (elem) => elem.movie_schedule_id !== scheduleId
       );
+
       // setScheduleList(scheduleListCpy);
       // setFilteredScheduleList(filteredScheduleListCpy);
     }
