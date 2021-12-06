@@ -10,7 +10,7 @@ import { Button } from "src/design-system/button/Button";
 const API =
   window.location.hostname === "localhost" ? "http://localhost:5000" : "/api";
 
-function Seat({ history }) {
+function Seat({ history, userId }) {
   // state
   const [scheduleInfo, setScheduleInfo] = useState({});
   const [theaterSeatList, setTheaterSeatList] = useState([]);
@@ -95,6 +95,7 @@ function Seat({ history }) {
         <section className="flex-col" style={{ width: "35%", height: 500 }}>
           <SeatInformation
             history={history}
+            userId={userId}
             loading={loading}
             scheduleInfo={scheduleInfo}
             selectedSeatList={selectedSeatList}

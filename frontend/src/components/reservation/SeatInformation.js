@@ -18,7 +18,7 @@ const API =
 
 function SeatInformation({
   history,
-  memberId,
+  userId,
   loading,
   scheduleInfo,
   selectedSeatList,
@@ -72,7 +72,7 @@ function SeatInformation({
   }
   // 예매 진행
   async function makeReservation() {
-    const member = memberId === undefined ? reservationCode : memberId;
+    const member = userId === "" ? reservationCode : userId;
     setReserveLoading(1);
     try {
       const res = await axios.post(API + "/tickets/reservation", {
