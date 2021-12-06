@@ -10,7 +10,7 @@
 }
 
 .Moviecard_View {
-  display: flexbox;
+  /* display: flexbox; */
   align-items: center;
   width: 1000px;
   height: 1000px;
@@ -25,10 +25,10 @@
   justify-content: space-evenly;
 }
 
-.Moviecard_List li {
+/* .Moviecard_List li {
   padding-left: 25px;
   padding-right: 25px;
-}
+} */
 
 /*영화 카드 리스트*/
 .Movie_box {
@@ -65,12 +65,18 @@
   color: red;
 }
 
-.Moviecard_Sub li {
+/* .Moviecard_Sub li {
   margin: 10px;
   width: 100px;
   padding: 5px;
   border: 1px solid black;
   border-radius: 10px;
+} */
+.Moviecard_Sub .movie-btn {
+  margin: 5px 0;
+  padding: 3px 24px;
+  border: 1px solid black;
+  border-radius: 5px;
 }
 
 .Movie:hover img {

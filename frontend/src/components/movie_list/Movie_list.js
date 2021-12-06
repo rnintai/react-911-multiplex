@@ -5,6 +5,14 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import "./Movie_list.css";
 
+import {
+  Font,
+  FontBold,
+  FontColor,
+  FontSize,
+} from "src/design-system/font/Font";
+import { Button, BgColor } from "src/design-system/button/Button";
+
 class Movie_list extends Component {
   constructor(props) {
     super(props);
@@ -45,7 +53,7 @@ class Movie_list extends Component {
                   />
                   <ul className="Moviecard_Sub">
                     <li>
-                      <Link
+                      {/* <Link
                         to={{
                           pathname: `/reservation?movieId=${element.movie_id}`,
                           state: {
@@ -54,7 +62,20 @@ class Movie_list extends Component {
                         }}
                       >
                         예매하기
-                      </Link>
+                      </Link> */}
+                      <Button
+                        background={BgColor.tp}
+                        boldness={FontBold.bold}
+                        className="movie-btn"
+                        onClick={() =>
+                          this.props.history.push({
+                            pathname: "/reservation",
+                            search: `?movieId=${element.movie_id}`,
+                          })
+                        }
+                      >
+                        예매하기
+                      </Button>
                     </li>
                     <li>
                       <Link
@@ -65,7 +86,13 @@ class Movie_list extends Component {
                           },
                         }}
                       >
-                        상세정보
+                        <Button
+                          boldness={FontBold.bold}
+                          background={BgColor.tp}
+                          className="movie-btn"
+                        >
+                          상세정보
+                        </Button>
                       </Link>
                     </li>
                   </ul>
