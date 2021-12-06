@@ -22,12 +22,16 @@ const API =
   window.location.hostname === "localhost" ? "http://localhost:5000" : "/api";
 
 const Reservation = () => {
+  // 로딩 여부
   const [loading, setLoading] = useState(true);
 
   // 데이터 목록
   const [scheduleList, setScheduleList] = useState([]);
   const [multiplexList, setMultiplexList] = useState([]);
   const [theaterList, setTheaterList] = useState([]);
+
+  // 선택가능한 영화 리스트
+  const [availMovieList, setAvailMovieList] = useState([]);
 
   // 선택된 아이템
   const [selectedMovieId, setSelectedMovieId] = useState("");

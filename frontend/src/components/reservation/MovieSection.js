@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import _ from "lodash";
+import { useLocation } from "react-router";
+import queryString from "query-string";
 import "./selection.scss";
 
 import {
@@ -13,18 +15,24 @@ import RatingMark from "../admin/movie/RatingMark";
 const MovieSection = ({
   scheduleList,
   selectedMovieId,
-  selectedMultiplexId,
   setSelectedMovieId,
+  selectedMultiplexId,
   setSelectedMultiplexId,
   setSelectedScheduleId,
   filteredScheduleList,
 }) => {
+  // 쿼리 스트링
+  const query = queryString.parse(useLocation().search);
+  const movieIdQuery = query.movieId;
+
   const [movieList, setMovieList] = useState([]);
-  // const [availableMovieList, setAvailableMovieList] = useState([]);
 
   useEffect(() => {
     setMovieList(filterScheduleListByMovieId());
   }, [scheduleList]);
+  useEffect(() => {
+    setInitialSelectedMovie();
+  }, [movieList]);
 
   // useEffect(() => {
   // setAvailableMovieList(
@@ -99,6 +107,15 @@ const MovieSection = ({
     }
     // setSelectedMultiplexId("");
     setSelectedScheduleId("");
+  }
+  // 쿼리 스트링 존재 시 자동선택
+  function setInitialSelectedMovie() {
+    const filterByQuery = movieList.filter(
+      (elem) => elem.movie_id === movieIdQuery
+    );
+    if (filterByQuery.length !== 0) {
+      setSelectedMovieId(movieIdQuery);
+    }
   }
 };
 
