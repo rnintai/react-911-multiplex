@@ -9,6 +9,9 @@ import {
 import { Button, BgColor } from "src/design-system/button/Button";
 import "./modal.scss";
 
+const API =
+  window.location.hostname === "localhost" ? "http://localhost:5000" : "/api";
+
 const Modal = ({
   modalState,
   setModalState,
@@ -153,7 +156,7 @@ const Modal = ({
   }
 
   async function applyChanges() {
-    const response = await axios.put("/movies/detail/" + movieId, {
+    const response = await axios.put(API + "/movies/detail/" + movieId, {
       synopsis: synopsis,
       poster: poster,
       trailer: trailer,

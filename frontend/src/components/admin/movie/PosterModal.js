@@ -3,6 +3,9 @@ import axios from "axios";
 import { Button, BgColor } from "src/design-system/button/Button";
 import "./modal.scss";
 
+const API =
+  window.location.hostname === "localhost" ? "http://localhost:5000" : "/api";
+
 const PosterModal = ({
   movieId,
   poster,
@@ -37,7 +40,7 @@ const PosterModal = ({
     const formData = new FormData();
     formData.append("poster", event.target.files[0]);
     await axios
-      .post("/movies/detail/poster/" + movieId, formData, {
+      .post(API + "/movies/detail/poster/" + movieId, formData, {
         header: { "content-type": "multipart/form-data" },
       })
       .then((response) => {
