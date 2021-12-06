@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-globals */
 import React, { Component } from "react";
 import "./Nav.scss";
 import { Font, FontSize, FontColor } from "src/design-system/font/Font";
@@ -5,6 +6,10 @@ import logo from "src/assets/navbar/logo.jpg";
 import { Link } from "react-router-dom";
 
 const Nav = () => {
+  const SignOut = () => {
+    location.reload();
+    localStorage.clear();
+  };
   return (
     <header className="nav-container">
       <section
@@ -35,7 +40,10 @@ const Nav = () => {
               </li>
             </>
           ) : localStorage.getItem("authenticated") !== null ? (
-            <p> {localStorage.getItem("authenticated")} 님 </p>
+            <>
+              <p> {localStorage.getItem("authenticated")} 님 </p>
+              <button onClick={SignOut}>로그아웃</button>
+            </>
           ) : null}
         </ul>
       </section>
