@@ -50,7 +50,7 @@ const AdminNavBar = () => {
           </Link>
         </div>
         <div className="nav-menu">
-          <Link to="/admin/#">
+          <Link to="/admin/employee">
             <Font className="nav-link">직원관리</Font>
           </Link>
         </div>

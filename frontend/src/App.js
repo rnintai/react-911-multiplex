@@ -28,6 +28,7 @@ import AdminMovieInfo from "./pages/admin/movie/AdminMovieInfo";
 import AdminMovieSchedule from "./pages/admin/movie/AdminMovieSchedule";
 
 import AdminMultiplex from "./pages/admin/multiplex/AdminMultiplex";
+import Employee from "./pages/admin/employee/AdminEmployee";
 
 class App extends Component {
   constructor(props) {
@@ -124,6 +125,12 @@ class App extends Component {
             <Route
               path="/admin/multiplex"
               component={AdminMultiplex}
+              exact
+            ></Route>
+            <Route path="/admin/employee" component={AdminNavBar}></Route>
+            <Route
+              path="/admin/employee"
+              render={(props) => <Employee {...props}></Employee>}
               exact
             ></Route>
             <Footer></Footer>
