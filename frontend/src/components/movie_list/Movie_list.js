@@ -44,7 +44,16 @@ class Movie_list extends Component {
                   />
                   <ul className="Moviecard_Sub">
                     <li>
-                      <a href="/404">예매하기</a>
+                      <Link
+                        to={{
+                          pathname: `/reservation?movieId=${element.movie_id}`,
+                          state: {
+                          movie_id: element.movie_id,
+                          },
+                        }}
+                      >
+                        예매하기
+                      </Link>
                     </li>
                     <li>
                       <Link
