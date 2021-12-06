@@ -3,10 +3,15 @@ const router = express.Router();
 
 const pool = require("../../../mysql");
 
-router.get("/", async function (req, res) {
+const itemPerPage = 10;
+
+router.get("/:page", async function (req, res) {
   let connection = await pool.getConnection();
 
-  const sql = `SELECT * from employee`;
+  let curPage = req.params.page - 1;
+
+  const sql = `SELECT * from employee
+  LIMIT ${curPage * itemPerPage},${itemPerPage}`;
 
   const result = await connection.query(sql);
 
@@ -14,7 +19,7 @@ router.get("/", async function (req, res) {
     connection.release();
     res.json({
       success: true,
-      scheduleList: result[0],
+      employeeList: result[0],
     });
   } catch (err) {
     connection.release();
