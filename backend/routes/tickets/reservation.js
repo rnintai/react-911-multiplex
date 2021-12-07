@@ -120,7 +120,8 @@ router.get("/info/:reservationId", async function (req, res) {
   movie_reservation_id, 
   member_id, 
   movie_reservation_date,
-  movie_schedule_start,
+  (SELECT movie_schedule_start FROM movie_schedule as MS
+    WHERE MS.movie_schedule_id=MR.movie_schedule_id) as movie_schedule_start,
   (SELECT movie_schedule_end FROM movie_schedule as MS
     WHERE MS.movie_schedule_id=MR.movie_schedule_id) as movie_schedule_end,
   seat_name,
@@ -173,7 +174,8 @@ router.get("/list/:page/:memberId", async function (req, res) {
   movie_reservation_id, 
   member_id, 
   movie_reservation_date,
-  movie_schedule_start,
+  (SELECT movie_schedule_start FROM movie_schedule as MS
+    WHERE MS.movie_schedule_id=MR.movie_schedule_id) as movie_schedule_start,
   (SELECT movie_schedule_end FROM movie_schedule as MS
     WHERE MS.movie_schedule_id=MR.movie_schedule_id) as movie_schedule_end,
   seat_name,
