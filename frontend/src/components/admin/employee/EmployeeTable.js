@@ -9,7 +9,7 @@ import {
 } from "src/design-system/font/Font";
 
 import { Button, BgColor } from "src/design-system/button/Button";
-import Modal from "./Modal";
+import Modal from "./EditEmployeeModal";
 // import PosterModal from "./PosterModal";
 
 export const EmployeeTable = ({ history, columns, data, getEmployeeList }) => {
