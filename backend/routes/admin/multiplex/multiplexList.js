@@ -33,4 +33,30 @@ router.get("/list/:page", async function (req, res) {
   }
 });
 
+// 지점 id로 상세정보 조회
+// /admin/multiplex/detail/:multiplexId
+
+router.get("/detail/:multiplexId", async function (req, res) {
+  let connection = await pool.getConnection();
+
+  const sql = `SELECT * FROM multiplex
+    WHERE multiplex_id=${req.params.multiplexId}`;
+
+  const result = await connection.query(sql);
+
+  try {
+    connection.release();
+    res.json({
+      success: true,
+      multiplexDetail: result[0],
+    });
+  } catch (err) {
+    connection.release();
+    res.json({
+      success: false,
+      err,
+    });
+  }
+});
+
 module.exports = router;
