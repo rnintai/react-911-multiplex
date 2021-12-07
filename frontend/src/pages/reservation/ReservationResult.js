@@ -10,11 +10,12 @@ import {
 } from "src/design-system/font/Font";
 import Spinner from "src/components/basic/Spinner";
 import RatingMark from "src/components/admin/movie/RatingMark";
+import ReservationSection from "src/components/reservation/ReservationCard";
 
 const API =
   window.location.hostname === "localhost" ? "http://localhost:5000" : "/api";
 
-function ReservationResult({ memberId }) {
+function ReservationResult({ userId }) {
   // query
   const query = queryString.parse(useLocation().search);
   const reservationCode = query.reservationCode;
@@ -38,9 +39,11 @@ function ReservationResult({ memberId }) {
   const ticketPrice = scheduleInfo.theater_ticket_price;
   const startTm = ISOtoHHMM(scheduleInfo.movie_schedule_start);
   const endTm = ISOtoHHMM(scheduleInfo.movie_schedule_end);
+  // const totalPrice =
 
   // 예약 정보
   const seat = reservationInfo.seat_name;
+  const totalPrice = reservationInfo.total_price;
 
   // 스케줄 정보
   async function getScheduleInfo() {
@@ -94,90 +97,29 @@ function ReservationResult({ memberId }) {
             >
               예매가 완료되었습니다.
             </Font>
-            <div className="flex-row justify-cen">
-              <img src={poster} style={{ height: "180px" }} alt="poster"></img>
-
-              <div
-                className="flex-col border-gray justify-cen align-cen"
-                style={{ width: 400, height: "100%" }}
+            <ReservationSection
+              poster={poster}
+              reservationCode={reservationCode}
+              rate={rate}
+              movieNm={movieNm}
+              theaterType={theaterType}
+              multiplexNm={multiplexNm}
+              theaterNm={theaterNm}
+              startTm={startTm}
+              endTm={endTm}
+              seat={seat}
+              totalPrice={formatPrice(totalPrice)}
+            ></ReservationSection>
+            {userId === "" && (
+              <Font
+                className="text-center"
+                color={FontColor.red50}
+                style={{ marginTop: 10 }}
               >
-                <Font
-                  size={FontSize.lg}
-                  boldness={FontBold.default}
-                  style={{ marginBottom: 8 }}
-                >
-                  예매번호: {reservationCode}
-                </Font>
-                <div className="flex-row">
-                  <RatingMark rate={rate}></RatingMark>
-                  <Font size={FontSize.lg} boldness={FontBold.default}>
-                    {movieNm} ({theaterType})
-                  </Font>
-                </div>
-                <div className="flex-row">
-                  <Font
-                    size={FontSize.default}
-                    boldness={FontBold.light}
-                    style={{ marginRight: 4 }}
-                  >
-                    {multiplexNm}
-                  </Font>
-                  <Font
-                    size={FontSize.default}
-                    boldness={FontBold.light}
-                    style={{ marginRight: 4 }}
-                  >
-                    &gt;
-                  </Font>
-                  <Font size={FontSize.default} boldness={FontBold.light}>
-                    {theaterNm}
-                  </Font>
-                </div>
-                <div className="flex-row" style={{ marginBottom: 8 }}>
-                  <Font
-                    size={FontSize.default}
-                    boldness={FontBold.light}
-                    style={{ marginRight: 4 }}
-                  >
-                    상영시간:
-                  </Font>
-                  <Font
-                    size={FontSize.default}
-                    boldness={FontBold.light}
-                    style={{ marginRight: 4 }}
-                  >
-                    {startTm}
-                  </Font>
-                  <Font
-                    size={FontSize.default}
-                    boldness={FontBold.light}
-                    style={{ marginRight: 4 }}
-                  >
-                    ~
-                  </Font>
-                  <Font size={FontSize.default} boldness={FontBold.light}>
-                    {endTm}
-                  </Font>
-                </div>
-                <div className="flex-row">
-                  <Font
-                    size={FontSize.default}
-                    boldness={FontBold.light}
-                    style={{ marginRight: 4 }}
-                  >
-                    좌석:
-                  </Font>
-                  <Font
-                    size={FontSize.default}
-                    boldness={FontBold.default}
-                    color={FontColor.red75}
-                    style={{ marginRight: 4 }}
-                  >
-                    {seat}
-                  </Font>
-                </div>
-              </div>
-            </div>
+                ※ 비회원 예매의 경우 <strong>예매번호</strong>를 통해 예매내역
+                조회 및 취소할 수 있습니다.
+              </Font>
+            )}
           </>
         )}
       </div>
@@ -196,6 +138,16 @@ function ReservationResult({ memberId }) {
         : newDate.getMinutes();
 
     return `${hr}:${mn}`;
+  }
+
+  // 화폐 포맷
+  function formatPrice(price) {
+    const formatter = new Intl.NumberFormat("ko-KR", {
+      style: "currency",
+      currency: "KRW",
+    });
+
+    return formatter.format(price);
   }
 }
 
