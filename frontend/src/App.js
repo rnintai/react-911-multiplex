@@ -22,6 +22,9 @@ import Reservation from "./pages/reservation/Reservation";
 import Seat from "./pages/reservation/Seat";
 import ReservationResult from "./pages/reservation/ReservationResult";
 
+// mypage
+import ResetPw from "./pages/user/mypage/ResetPw";
+import MyReservation from "./pages/user/mypage/MyReservation";
 // admin
 import AdminNavBar from "./components/nav/AdminNavBar";
 import AdminMovieInfo from "./pages/admin/movie/AdminMovieInfo";
@@ -29,7 +32,6 @@ import AdminMovieSchedule from "./pages/admin/movie/AdminMovieSchedule";
 
 import AdminMultiplex from "./pages/admin/multiplex/AdminMultiplex";
 import Employee from "./pages/admin/employee/AdminEmployee";
-import ResetPw from "./pages/user/mypage/ResetPw";
 
 class App extends Component {
   constructor(props) {
@@ -43,7 +45,6 @@ class App extends Component {
       <Browser>
         <Switch>
           <Route>
-            {/* <Route path="/"> */}
             <Route
               path="/"
               render={(props) => (
@@ -71,22 +72,26 @@ class App extends Component {
               path="/reservation"
               render={(props) => (
                 <>
-                  {/* <Nav></Nav> */}
                   <Reservation {...props} />
                 </>
               )}
               exact
             ></Route>
-            {/* <Route path="/reservation" component={Reservation} exact></Route> */}
             <Route
               path="/reservation/seat"
               render={(props) => <Seat {...props} userId={this.state.userId} />}
               exact
             ></Route>
             {/* 결과 */}
-            <Route path="/reservation/result" exact>
-              <ReservationResult></ReservationResult>
-            </Route>
+            <Route
+              path="/reservation/result"
+              render={() => (
+                <ReservationResult
+                  userId={this.state.userId}
+                  exact
+                ></ReservationResult>
+              )}
+            ></Route>
             {/*  */}
             <Route path="/404" exact>
               <Nav></Nav>
@@ -103,6 +108,13 @@ class App extends Component {
             {/* 마이페이지 */}
             <Route path="/mypage" component={Nav}></Route>
             <Route path="/mypage/resetpw" component={ResetPw} exact></Route>
+            <Route
+              path="/mypage/reservation"
+              render={() => (
+                <MyReservation userId={this.state.userId}></MyReservation>
+              )}
+              exact
+            ></Route>
             <Route path="/movie_ticker" exact>
               <Nav></Nav>
             </Route>
