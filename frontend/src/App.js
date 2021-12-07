@@ -55,12 +55,10 @@ class App extends Component {
               )}
               exact
             ></Route>
-            <Route path="/movies" exact>
-              <Nav></Nav>
-              <MovieList></MovieList>
-            </Route>
+            <Route path="/movies" component={Nav}></Route>
+            <Route path="/movies" component={MovieList} exact></Route>
             {/* movieInfo */}
-            <Route path="/movies/detail" component={Nav}></Route>
+            <Route path="/movies/detail"></Route>
             <Route
               path="/movies/detail/:movie_id"
               component={Detail}
