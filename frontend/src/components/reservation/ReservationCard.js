@@ -10,6 +10,7 @@ import RatingMark from "../admin/movie/RatingMark";
 function ReservationSection({
   poster,
   reservationCode,
+  reservationDate,
   rate,
   movieNm,
   theaterType,
@@ -23,18 +24,29 @@ function ReservationSection({
   return (
     <div className="flex-row justify-cen" style={{ height: "180px" }}>
       <img src={poster} style={{ height: "180px" }} alt="poster"></img>
-
       <div
         className="flex-col border-gray justify-cen align-cen"
         style={{ width: 400, height: "100%" }}
       >
-        <Font
-          size={FontSize.lg}
-          boldness={FontBold.default}
-          style={{ marginBottom: 8 }}
+        <div
+          className="flex-row justify-sb"
+          style={{ width: "95%", position: "absolute", top: 3 }}
         >
-          예매번호: {reservationCode}
-        </Font>
+          <Font
+            size={FontSize.sm}
+            boldness={FontBold.default}
+            style={{ marginBottom: 8 }}
+          >
+            예매일시: {reservationDate}
+          </Font>
+          <Font
+            size={FontSize.sm}
+            boldness={FontBold.default}
+            style={{ marginBottom: 8 }}
+          >
+            예매번호: {reservationCode}
+          </Font>
+        </div>
         <div className="flex-row">
           <RatingMark rate={rate}></RatingMark>
           <Font size={FontSize.lg} boldness={FontBold.default}>

@@ -44,6 +44,9 @@ function ReservationResult({ userId }) {
   // 예약 정보
   const seat = reservationInfo.seat_name;
   const totalPrice = reservationInfo.total_price;
+  const reservationDate = reservationInfo.reservation_date
+    .replace("T", " ")
+    .split(".")[0];
 
   // 스케줄 정보
   async function getScheduleInfo() {
@@ -100,6 +103,7 @@ function ReservationResult({ userId }) {
             <ReservationSection
               poster={poster}
               reservationCode={reservationCode}
+              reservationDate={reservationDate}
               rate={rate}
               movieNm={movieNm}
               theaterType={theaterType}
