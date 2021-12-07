@@ -21,7 +21,14 @@ const Nav = () => {
             <img src={logo} alt="" />
           </div>
         </Link>
-        <ul className="top-menu">
+        <ul className="top-menu flex-row">
+          <li>
+            <Link to="/mypage/reservation">
+              <Font size={FontSize.sm} style={{ textDecoration: "underline" }}>
+                예매내역
+              </Font>
+            </Link>
+          </li>
           {localStorage.getItem("authenticated") === null ? (
             <>
               <li>
@@ -40,10 +47,12 @@ const Nav = () => {
               </li>
             </>
           ) : localStorage.getItem("authenticated") !== null ? (
-            <>
-              <p> {localStorage.getItem("authenticated")} 님 </p>
-              <button onClick={SignOut}>로그아웃</button>
-            </>
+            <li>
+              {/* <p> {localStorage.getItem("authenticated")} 님 </p> */}
+              <Font size={FontSize.sm} tag="button" onClick={SignOut}>
+                로그아웃
+              </Font>
+            </li>
           ) : null}
         </ul>
       </section>
