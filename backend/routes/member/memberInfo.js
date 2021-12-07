@@ -22,11 +22,13 @@ router.get("/:memberID", async function (req, res) {
 
   try {
     const response = await conn.query(sql);
+    conn.release();
     res.json({
       msg: "success",
       data: response[0][0],
     });
   } catch (err) {
+    conn.release();
     res.json({
       msg: "success",
       err,
