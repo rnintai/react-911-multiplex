@@ -51,7 +51,9 @@ class App extends Component {
     this.setState({ isAdmin: response.data.data.isAdmin });
   };
   componentDidMount() {
-    this.getData();
+    if (this.state.userId !== "") {
+      this.getData();
+    }
   }
   render() {
     return (
