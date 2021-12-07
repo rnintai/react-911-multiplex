@@ -5,7 +5,7 @@ import { Font, FontSize, FontColor } from "src/design-system/font/Font";
 import logo from "src/assets/navbar/logo.jpg";
 import { Link } from "react-router-dom";
 
-const Nav = () => {
+const Nav = ({ userInfo }) => {
   const SignOut = () => {
     location.reload();
     localStorage.clear();
@@ -41,7 +41,11 @@ const Nav = () => {
             </>
           ) : localStorage.getItem("authenticated") !== null ? (
             <>
-              <p> {localStorage.getItem("authenticated")} 님 </p>
+              <p>
+                {" "}
+                {userInfo.isAdmin === 1 && "관리자 "}
+                {userInfo.name} 님{" "}
+              </p>
               <button onClick={SignOut}>로그아웃</button>
             </>
           ) : null}

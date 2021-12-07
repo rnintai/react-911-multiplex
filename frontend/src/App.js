@@ -1,5 +1,6 @@
 import "./App.css";
 import "./reset.css";
+import axios from "axios";
 import React, { Component } from "react";
 import { Route, Switch, BrowserRouter as Browser } from "react-router-dom";
 
@@ -31,13 +32,28 @@ import AdminMultiplex from "./pages/admin/multiplex/AdminMultiplex";
 import Employee from "./pages/admin/employee/AdminEmployee";
 import ResetPw from "./pages/user/mypage/ResetPw";
 
+const API =
+  window.location.hostname === "localhost" ? "http://localhost:5000" : "/api";
+
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      userId: localStorage.getItem("authenticated") || "",
+      token: localStorage.getItem("authenticated") || "",
+      userInfo: {},
     };
   }
+
+  async componentDidMount() {
+    console.log("cDU");
+    if (this.state.userInfo !== {}) {
+      const res = await axios.post(API + "/member/info", {
+        token: localStorage.getItem("authenticated"),
+      });
+      this.setState({ userInfo: res.data.data });
+    }
+  }
+
   render() {
     return (
       <Browser>
@@ -48,7 +64,7 @@ class App extends Component {
               path="/"
               render={(props) => (
                 <>
-                  <Nav></Nav>
+                  <Nav userInfo={this.state.userInfo}></Nav>
                   <Card {...props}></Card>
                   <Theater {...props}></Theater>
                 </>
@@ -56,24 +72,30 @@ class App extends Component {
               exact
             ></Route>
             <Route path="/movies" exact>
-              <Nav></Nav>
+              <Nav userInfo={this.state.userInfo}></Nav>
               <MovieList></MovieList>
             </Route>
             {/* movieInfo */}
-            <Route path="/movies/detail" component={Nav}></Route>
+            <Route
+              path="/movies/detail"
+              render={() => <Nav userInfo={this.state.userInfo}></Nav>}
+            ></Route>
             <Route
               path="/movies/detail/:movie_id"
               component={Detail}
               exact
             ></Route>
             {/* 예약 */}
-            <Route path="/reservation" component={Nav}></Route>
+            <Route
+              path="/reservation"
+              render={() => <Nav userInfo={this.state.userInfo}></Nav>}
+            ></Route>
             {/* <Route path="/reservation" component={Reservation} exact></Route> */}
             <Route
               path="/reservation"
               render={(props) => (
                 <>
-                  {/* <Nav></Nav> */}
+                  {/* <Nav userInfo={this.state.userInfo}></Nav> */}
                   <Reservation {...props} />
                 </>
               )}
@@ -91,47 +113,60 @@ class App extends Component {
             </Route>
             {/*  */}
             <Route path="/404" exact>
-              <Nav></Nav>
+              <Nav userInfo={this.state.userInfo}></Nav>
               <NotFound></NotFound>
             </Route>
             <Route path="/signup" exact>
-              <Nav></Nav>
+              <Nav userInfo={this.state.userInfo}></Nav>
               <SignUp></SignUp>
             </Route>
             <Route path="/login" exact>
-              <Nav></Nav>
+              <Nav userInfo={this.state.userInfo}></Nav>
               <LogIn></LogIn>
             </Route>
             {/* 마이페이지 */}
-            <Route path="/mypage" component={Nav}></Route>
+            <Route
+              path="/mypage"
+              render={() => <Nav userInfo={this.state.userInfo}></Nav>}
+            ></Route>
             <Route path="/mypage/resetpw" component={ResetPw} exact></Route>
             <Route path="/movie_ticker" exact>
-              <Nav></Nav>
+              <Nav userInfo={this.state.userInfo}></Nav>
             </Route>
             <Route path="/theater" exact>
-              <Nav></Nav>
+              <Nav userInfo={this.state.userInfo}></Nav>
               <TheaterList></TheaterList>
             </Route>
             {/* </Route> */}
             {/* admin */}
             <Route path="/admin" exact>
-              <AdminNavBar></AdminNavBar>
+              <AdminNavBar userInfo={this.state.userInfo}></AdminNavBar>
             </Route>
             <Route path="/admin/movie/info" exact>
-              <AdminNavBar></AdminNavBar>
+              <AdminNavBar userInfo={this.state.userInfo}></AdminNavBar>
               <AdminMovieInfo></AdminMovieInfo>
             </Route>
             <Route path="/admin/movie/schedule" exact>
-              <AdminNavBar></AdminNavBar>
+              <AdminNavBar userInfo={this.state.userInfo}></AdminNavBar>
               <AdminMovieSchedule></AdminMovieSchedule>
             </Route>
-            <Route path="/admin/multiplex" component={AdminNavBar}></Route>
+            <Route
+              path="/admin/multiplex"
+              render={() => (
+                <AdminNavBar userInfo={this.state.userInfo}></AdminNavBar>
+              )}
+            ></Route>
             <Route
               path="/admin/multiplex"
               component={AdminMultiplex}
               exact
             ></Route>
-            <Route path="/admin/employee" component={AdminNavBar}></Route>
+            <Route
+              path="/admin/employee"
+              render={() => (
+                <AdminNavBar userInfo={this.state.userInfo}></AdminNavBar>
+              )}
+            ></Route>
             <Route
               path="/admin/employee"
               render={(props) => <Employee {...props}></Employee>}

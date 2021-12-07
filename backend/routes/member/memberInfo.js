@@ -1,34 +1,20 @@
 const express = require("express");
 const router = express.Router();
 
-const pool = require("../../mysql");
+// const pool = require("../../mysql");
 
-// /member/info/:memberID
-router.get("/:memberID", async function (req, res) {
-  let conn = await pool.getConnection();
+const jwtMiddleware = require("../../auth");
 
-  const sql = `
-  SELECT member_id, 
-  name, 
-  email, 
-  birthday, 
-  phone_number, 
-  gender, 
-  signin_date, 
-  address,
-  isAdmin
-  from member 
-  WHERE member_id='${req.params.memberID}'`;
-
+// /member/info
+router.post("/", jwtMiddleware, async function (req, res) {
   try {
-    const response = await conn.query(sql);
     res.json({
-      msg: "success",
-      data: response[0][0],
+      success: true,
+      data: req.user,
     });
   } catch (err) {
     res.json({
-      msg: "success",
+      success: false,
       err,
     });
   }

@@ -33,6 +33,10 @@ const fetchMovieDetailRouter = require("./routes/admin/movies/fetchMovieDetail")
 const multiplexRouter = require("./routes/admin/multiplex/multiplexList");
 const theaterRouter = require("./routes/admin/theater/theaterList");
 const employeeRouter = require("./routes/admin/employment/employee");
+
+// jwt test
+const jwtLoginRouter = require("./routes/member/jwtLogin");
+
 var app = express();
 
 // mysql connection
@@ -96,6 +100,8 @@ app.use("/admin/multiplex", multiplexRouter);
 app.use("/admin/theater", theaterRouter);
 
 app.use("/admin/employee", employeeRouter);
+// jwt test
+app.use("/jwt", jwtLoginRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

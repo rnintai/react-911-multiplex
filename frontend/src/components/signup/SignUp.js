@@ -1,8 +1,12 @@
 /* eslint-disable no-restricted-globals */
 /* eslint-disable no-useless-constructor */
 import axios from "axios";
+
 import React, { Component } from "react";
 import "./SignUp.css";
+
+const API =
+  window.location.hostname === "localhost" ? "http://localhost:5000" : "/api";
 
 class SignUp extends Component {
   constructor(props) {
@@ -71,8 +75,7 @@ class SignUp extends Component {
       alert("아이디를 입력해 주세요.");
     } else {
       let checkoutID = await axios.get(
-        "https://react-911-multiplex.herokuapp.com/member/checkid/" +
-          this.state.id
+        API + "/member/checkid/" + this.state.id
       );
       if (checkoutID.data === true) {
         alert("사용가능한 아이디 입니다.");
@@ -94,8 +97,7 @@ class SignUp extends Component {
       alert("이메일을 입력해 주세요");
     } else {
       let checkoutEmail = await axios.get(
-        "https://react-911-multiplex.herokuapp.com/member/checkemail/" +
-          this.state.email
+        API + "/member/checkemail/" + this.state.email
       );
       if (checkoutEmail.data === true) {
         alert("사용가능한 E-mail 입니다.");
@@ -118,8 +120,7 @@ class SignUp extends Component {
       alert("전화번호를 입력해 주세요");
     } else {
       let checkoutPhone = await axios.get(
-        "https://react-911-multiplex.herokuapp.com/member/checkphone/" +
-          this.state.phone
+        API + "/member/checkphone/" + this.state.phone
       );
       if (checkoutPhone.data === true) {
         alert("가입가능한 전화번호 입니다.");
@@ -174,7 +175,8 @@ class SignUp extends Component {
             this.state.CKphone
         );
         axios
-          .post("act-911-multiplex.herokuapp.com/member/signup", {
+          // .post(API + "/member/signup", {
+          .post(API + "/jwt/signup", {
             userId: this.state.CKid,
             password: this.state.pw,
             name: this.state.name,
@@ -185,7 +187,7 @@ class SignUp extends Component {
             address: this.state.address,
           })
           .then((response) => {
-            location.href = "https://911-cinema.netlify.app";
+            location.href = "/";
           })
           .catch((error) => {
             console.log(error);
