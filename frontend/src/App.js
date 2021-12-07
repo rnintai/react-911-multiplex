@@ -29,6 +29,7 @@ import AdminMovieSchedule from "./pages/admin/movie/AdminMovieSchedule";
 
 import AdminMultiplex from "./pages/admin/multiplex/AdminMultiplex";
 import Employee from "./pages/admin/employee/AdminEmployee";
+import ResetPw from "./pages/user/mypage/ResetPw";
 
 class App extends Component {
   constructor(props) {
@@ -101,6 +102,9 @@ class App extends Component {
               <Nav></Nav>
               <LogIn></LogIn>
             </Route>
+            {/* 마이페이지 */}
+            <Route path="/mypage" component={Nav}></Route>
+            <Route path="/mypage/resetpw" component={ResetPw} exact></Route>
             <Route path="/movie_ticker" exact>
               <Nav></Nav>
             </Route>
