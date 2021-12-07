@@ -78,7 +78,7 @@ function SeatInformation({
       const res = await axios.post(API + "/tickets/reservation", {
         movieReservationId: reservationCode,
         memberId: member,
-        movieScheduleStart: scheduleInfo.movie_schedule_start,
+        movieScheduleStart: startTm,
         seatName: selectedSeatList.join(","),
         multiplexId: multiplexId,
         theaterId: theaterId,
