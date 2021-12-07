@@ -21,9 +21,8 @@ router.get("/list/:page", async function (req, res) {
   FROM theater T
   LIMIT ${curPage * itemPerPage},${itemPerPage}`;
 
-  const result = await connection.query(sql);
-
   try {
+    const result = await connection.query(sql);
     connection.release();
     res.json({
       success: true,
@@ -49,9 +48,8 @@ router.get("/list/id/:multiplexId", async function (req, res) {
   WHERE multiplex_id=${req.params.multiplexId}`;
   // LIMIT ${curPage * itemPerPage},${itemPerPage}`;
 
-  const result = await connection.query(sql);
-
   try {
+    const result = await connection.query(sql);
     connection.release();
     res.json({
       success: true,

@@ -16,9 +16,8 @@ router.get("/list/:page", async function (req, res) {
   const sql = `SELECT * FROM multiplex
     LIMIT ${curPage * itemPerPage},${itemPerPage}`;
 
-  const result = await connection.query(sql);
-
   try {
+    const result = await connection.query(sql);
     connection.release();
     res.json({
       success: true,
@@ -42,9 +41,8 @@ router.get("/detail/:multiplexId", async function (req, res) {
   const sql = `SELECT * FROM multiplex
     WHERE multiplex_id=${req.params.multiplexId}`;
 
-  const result = await connection.query(sql);
-
   try {
+    const result = await connection.query(sql);
     connection.release();
     res.json({
       success: true,

@@ -19,9 +19,8 @@ router.get("/:theaterId", async function (req, res) {
   WHERE theater_id="${req.params.theaterId}"
   ORDER BY seat_row ASC, seat_col ASC`;
 
-  const result = await connection.query(sql);
-
   try {
+    const result = await connection.query(sql);
     connection.release();
     res.json({
       success: true,

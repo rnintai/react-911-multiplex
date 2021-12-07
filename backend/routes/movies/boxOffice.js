@@ -9,25 +9,30 @@ const pool = require("../../mysql");
  * 추후
  */
 router.get("/", async function (req, res) {
-  let connection = await pool.getConnection((conn) => conn);
   try {
-    const sql = `SELECT *, 
-    (SELECT count(movie_reservation_id) FROM
-    movie_reservation AS MR
-    WHERE MR.movie_id=movie.movie_id) as real_reserved_count
-    FROM movie 
-    ORDER BY reserved_count DESC, movie_name ASC 
-    LIMIT 10`;
+    let connection = await pool.getConnection(async (conn) => conn);
+    try {
+      const sql = `SELECT *, 
+      (SELECT count(movie_reservation_id) FROM
+      movie_reservation AS MR
+      WHERE MR.movie_id=movie.movie_id) as real_reserved_count
+      FROM movie 
+      ORDER BY reserved_count DESC, movie_name ASC 
+      LIMIT 10`;
 
-    const result = await connection.query(sql);
+      const result = await connection.query(sql);
 
-    connection.release();
+      connection.release();
 
-    console.log("success");
-    res.status(200).send({ boxOfficeList: result[0] });
+      console.log("success");
+      res.status(200).send({ boxOfficeList: result[0] });
+    } catch (err) {
+      connection.release();
+
+      console.log(err);
+      res.status(400).send(err);
+    }
   } catch (err) {
-    connection.release();
-
     console.log(err);
     res.status(400).send(err);
   }

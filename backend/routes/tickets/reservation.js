@@ -144,13 +144,13 @@ router.get("/info/:reservationId", async function (req, res) {
   FROM movie_reservation as MR
   WHERE movie_reservation_id="${req.params.reservationId}"`;
 
-  const result = await connection.query(sql);
-
   try {
+    const result = await connection.query(sql);
     connection.release();
+
     res.json({
       success: true,
-      reservationInfo: result[0][0],
+      reservationInfo: result[0][0] || {},
     });
   } catch (err) {
     connection.release();
