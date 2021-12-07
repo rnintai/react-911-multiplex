@@ -1,7 +1,9 @@
+/* eslint-disable no-undef */
 import "./App.css";
 import "./reset.css";
 import React, { Component } from "react";
 import { Route, Switch, BrowserRouter as Browser } from "react-router-dom";
+import axios from "axios";
 
 import Nav from "./components/nav/Nav";
 import Card from "./components/main/Card";
@@ -36,7 +38,18 @@ class App extends Component {
     super(props);
     this.state = {
       userId: localStorage.getItem("authenticated") || "",
+      isAdmin: "",
     };
+  }
+  getData = async () => {
+    let response = await axios.get(
+      "https://react-911-multiplex.herokuapp.com/member/info/" +
+        this.state.userId
+    );
+    this.setState({ isAdmin: response.data.data.isAdmin });
+  };
+  componentDidMount() {
+    this.getData();
   }
   render() {
     return (
