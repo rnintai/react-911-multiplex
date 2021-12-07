@@ -45,7 +45,7 @@ class LogIn extends Component {
               let success = this.state.id;
               localStorage.setItem("authenticated", success);
               alert("확인.");
-              location.href = "https://911-cinema.netlify.app";
+              location.href = "/";
             } else {
               alert("비밀번호가 틀렸습니다.");
             }
