@@ -99,11 +99,9 @@ function MyReservation({ userId }) {
                 <ReservationSection
                   poster={reservationInfo.poster}
                   reservationCode={reservationInfo.movie_reservation_id}
-                  reservationDate={
+                  reservationDate={getDateString(
                     reservationInfo.movie_reservation_date
-                      .replace("T", " ")
-                      .split(".")[0]
-                  }
+                  ).replace("T", " ")}
                   rate={reservationInfo.age_limit}
                   movieNm={reservationInfo.movie_name}
                   theaterType={reservationInfo.theater_type}
@@ -142,9 +140,9 @@ function MyReservation({ userId }) {
                 <ReservationSection
                   poster={rsrv.poster}
                   reservationCode={rsrv.movie_reservation_id}
-                  reservationDate={
-                    rsrv.movie_reservation_date.replace("T", " ").split(".")[0]
-                  }
+                  reservationDate={getDateString(
+                    rsrv.movie_reservation_date
+                  ).replace("T", " ")}
                   rate={rsrv.age_limit}
                   movieNm={rsrv.movie_name}
                   theaterType={rsrv.theater_type}
@@ -161,6 +159,29 @@ function MyReservation({ userId }) {
       )}
     </div>
   );
+
+  // 날짜 stringify
+  function getDateString(ISOString) {
+    let date = new Date(ISOString);
+    let year = date.getFullYear().toString();
+
+    let month = date.getMonth() + 1;
+    month = month < 10 ? "0" + month.toString() : month.toString();
+
+    let day = date.getDate();
+    day = day < 10 ? "0" + day.toString() : day.toString();
+
+    let hour = date.getHours();
+    hour = hour < 10 ? "0" + hour.toString() : hour.toString();
+
+    let minutes = date.getMinutes();
+    minutes = minutes < 10 ? "0" + minutes.toString() : minutes.toString();
+
+    let seconds = date.getSeconds();
+    seconds = seconds < 10 ? "0" + seconds.toString() : seconds.toString();
+
+    return `${year}-${month}-${day}T${hour}:${minutes}:${seconds}`;
+  }
 
   // 시간 포맷
   function ISOtoHHMM(date) {

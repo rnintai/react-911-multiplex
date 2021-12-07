@@ -78,7 +78,7 @@ function SeatInformation({
       const res = await axios.post(API + "/tickets/reservation", {
         movieReservationId: reservationCode,
         memberId: member,
-        movieScheduleStart: startTm,
+        movieScheduleStart: getDateString(scheduleInfo.movie_schedule_start),
         seatName: selectedSeatList.join(","),
         multiplexId: multiplexId,
         theaterId: theaterId,
@@ -328,6 +328,29 @@ function SeatInformation({
       </div>
     </div>
   );
+
+  // 날짜 stringify
+  function getDateString(ISOString) {
+    let date = new Date(ISOString);
+    let year = date.getFullYear().toString();
+
+    let month = date.getMonth() + 1;
+    month = month < 10 ? "0" + month.toString() : month.toString();
+
+    let day = date.getDate();
+    day = day < 10 ? "0" + day.toString() : day.toString();
+
+    let hour = date.getHours();
+    hour = hour < 10 ? "0" + hour.toString() : hour.toString();
+
+    let minutes = date.getMinutes();
+    minutes = minutes < 10 ? "0" + minutes.toString() : minutes.toString();
+
+    let seconds = date.getSeconds();
+    seconds = seconds < 10 ? "0" + seconds.toString() : seconds.toString();
+
+    return `${year}-${month}-${day}T${hour}:${minutes}:${seconds}`;
+  }
 
   // 시간 포맷
   function ISOtoHHMM(date) {

@@ -33,6 +33,7 @@ function Seat({ history, userId }) {
 
   // 해당 상영관의 좌석 배치 받아오기
   async function fetchTheaterSeat() {
+    if (scheduleInfo.theater_id === undefined) return;
     const res = await axios.get(
       API + "/theater/seat/" + scheduleInfo.theater_id
     );
