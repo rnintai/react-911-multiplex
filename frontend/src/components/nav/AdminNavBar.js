@@ -1,10 +1,21 @@
-import React, { Component } from "react";
+import React, { Component, useEffect } from "react";
 import "./adminnavbar.scss";
 import { Font, FontSize, FontColor } from "src/design-system/font/Font";
 import logo from "src/assets/navbar/logo.jpg";
 import { Link } from "react-router-dom";
 
-const AdminNavBar = () => {
+const AdminNavBar = ({ history, isAdmin }) => {
+  function checkAdmin() {
+    if (isAdmin !== "1") {
+      alert("관리 권한이 없습니다.");
+      // history.push("/");
+    }
+  }
+
+  useEffect(() => {
+    checkAdmin();
+  }, []);
+
   return (
     <header className="admin-nav-container">
       <section
@@ -17,11 +28,11 @@ const AdminNavBar = () => {
           </div>
         </Link>
         <ul className="top-menu">
-          <li>
+          {/* <li>
             <Font tag="button" size={FontSize.sm}>
               로그인
             </Font>
-          </li>
+          </li> */}
         </ul>
       </section>
       <nav className="admin-nav-wrap">

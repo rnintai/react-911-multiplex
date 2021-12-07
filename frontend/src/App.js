@@ -139,24 +139,26 @@ class App extends Component {
             </Route>
             {/* </Route> */}
             {/* admin */}
-            <Route path="/admin" exact>
-              <AdminNavBar></AdminNavBar>
-            </Route>
+            <Route
+              path="/admin"
+              render={(props) => (
+                <AdminNavBar {...props} isAdmin={this.state.isAdmin} />
+              )}
+            ></Route>
+            <Route path="/admin" exact></Route>
             <Route path="/admin/movie/info" exact>
-              <AdminNavBar></AdminNavBar>
               <AdminMovieInfo></AdminMovieInfo>
             </Route>
             <Route path="/admin/movie/schedule" exact>
-              <AdminNavBar></AdminNavBar>
               <AdminMovieSchedule></AdminMovieSchedule>
             </Route>
-            <Route path="/admin/multiplex" component={AdminNavBar}></Route>
+            <Route path="/admin/multiplex"></Route>
             <Route
               path="/admin/multiplex"
               component={AdminMultiplex}
               exact
             ></Route>
-            <Route path="/admin/employee" component={AdminNavBar}></Route>
+            <Route path="/admin/employee"></Route>
             <Route
               path="/admin/employee"
               render={(props) => <Employee {...props}></Employee>}
