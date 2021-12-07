@@ -21,7 +21,7 @@ function ReservationSection({
   totalPrice,
 }) {
   return (
-    <div className="flex-row justify-cen">
+    <div className="flex-row justify-cen" style={{ height: "180px" }}>
       <img src={poster} style={{ height: "180px" }} alt="poster"></img>
 
       <div

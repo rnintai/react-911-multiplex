@@ -116,8 +116,32 @@ router.get("/info/:reservationId", async function (req, res) {
   let connection = await pool.getConnection();
 
   const sql = `
-  SELECT *
-  FROM movie_reservation 
+  SELECT 
+  movie_reservation_id, 
+  member_id, 
+  movie_reservation_date,
+  movie_schedule_start,
+  (SELECT movie_schedule_end FROM movie_schedule as MS
+    WHERE MS.movie_schedule_id=MR.movie_schedule_id) as movie_schedule_end,
+  seat_name,
+  multiplex_id,
+  (SELECT multiplex_name FROM multiplex as MUL
+    WHERE MUL.multiplex_id=MR.multiplex_id) as multiplex_name,
+  theater_id,
+  (SELECT theater_name FROM theater as T
+    WHERE T.theater_id=MR.theater_id) as theater_name,
+  (SELECT theater_type FROM theater as T
+    WHERE T.theater_id=MR.theater_id) as theater_type,
+  movie_id,
+  (SELECT movie_name FROM movie as M
+    WHERE M.movie_id=MR.movie_id) as movie_name,
+  (SELECT poster FROM movie as M
+    WHERE M.movie_id=MR.movie_id) as poster,
+  (SELECT age_limit FROM movie as M
+    WHERE M.movie_id=MR.movie_id) as age_limit,
+  total_price,
+  movie_schedule_id
+  FROM movie_reservation as MR
   WHERE movie_reservation_id="${req.params.reservationId}"`;
 
   const result = await connection.query(sql);
@@ -131,6 +155,60 @@ router.get("/info/:reservationId", async function (req, res) {
   } catch (err) {
     connection.release();
     res.json({
+      success: false,
+      err,
+    });
+  }
+});
+// GET /tickets/reservation/list/:memberId
+// 유저 id로 예매 내역 조회
+const itemPerPage = 10;
+
+router.get("/list/:page/:memberId", async function (req, res) {
+  let connection = await pool.getConnection();
+
+  let curPage = req.params.page - 1;
+
+  const sql = `SELECT 
+  movie_reservation_id, 
+  member_id, 
+  movie_reservation_date,
+  movie_schedule_start,
+  (SELECT movie_schedule_end FROM movie_schedule as MS
+    WHERE MS.movie_schedule_id=MR.movie_schedule_id) as movie_schedule_end,
+  seat_name,
+  multiplex_id,
+  (SELECT multiplex_name FROM multiplex as MUL
+    WHERE MUL.multiplex_id=MR.multiplex_id) as multiplex_name,
+  theater_id,
+  (SELECT theater_name FROM theater as T
+    WHERE T.theater_id=MR.theater_id) as theater_name,
+  (SELECT theater_type FROM theater as T
+    WHERE T.theater_id=MR.theater_id) as theater_type,
+  movie_id,
+  (SELECT movie_name FROM movie as M
+    WHERE M.movie_id=MR.movie_id) as movie_name,
+  (SELECT poster FROM movie as M
+    WHERE M.movie_id=MR.movie_id) as poster,
+  (SELECT age_limit FROM movie as M
+    WHERE M.movie_id=MR.movie_id) as age_limit,
+  total_price,
+  movie_schedule_id
+  FROM movie_reservation as MR
+  WHERE member_id="${req.params.memberId}"
+  LIMIT ${curPage * itemPerPage},${itemPerPage}`;
+
+  try {
+    const result = await connection.query(sql);
+    connection.release();
+    return res.status(200).json({
+      success: true,
+      reservationList: result[0],
+    });
+  } catch (err) {
+    connection.release();
+    console.log(err);
+    return res.status(200).json({
       success: false,
       err,
     });
