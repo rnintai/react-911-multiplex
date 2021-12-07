@@ -45,8 +45,7 @@ class App extends Component {
   }
 
   async componentDidMount() {
-    console.log("cDU");
-    if (this.state.userInfo !== {}) {
+    if (this.state.token !== "") {
       const res = await axios.post(API + "/member/info", {
         token: localStorage.getItem("authenticated"),
       });
@@ -93,18 +92,15 @@ class App extends Component {
             {/* <Route path="/reservation" component={Reservation} exact></Route> */}
             <Route
               path="/reservation"
-              render={(props) => (
-                <>
-                  {/* <Nav userInfo={this.state.userInfo}></Nav> */}
-                  <Reservation {...props} />
-                </>
-              )}
+              render={(props) => <Reservation {...props} />}
               exact
             ></Route>
             {/* <Route path="/reservation" component={Reservation} exact></Route> */}
             <Route
               path="/reservation/seat"
-              render={(props) => <Seat {...props} userId={this.state.userId} />}
+              render={(props) => (
+                <Seat {...props} userId={this.state.userInfo.member_id} />
+              )}
               exact
             ></Route>
             {/* 결과 */}

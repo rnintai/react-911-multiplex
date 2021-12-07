@@ -12,9 +12,7 @@ const jwtMiddleware = async (req, res, next) => {
   // token을 decode 합니다.
   jwt.verify(token, SECRET_TOKEN, async (error, decoded) => {
     if (error) {
-      return res
-        .status(500)
-        .json({ error: "token을 decode하는 데 실패 했습니다." });
+      return res.status(500).json({ isAuth: false, error });
     }
     // decoded에는 jwt를 생성할 때 첫번째 인자로 전달한 객체가 있습니다.
     // { random: user._id } 형태로 줬으므로 _id를 꺼내 씁시다
@@ -53,7 +51,7 @@ const jwtMiddleware = async (req, res, next) => {
       next();
     } catch (e) {
       conn.release();
-      return res.json({ error: "DB에서 찾는 도중 오류가 발생했습니다" });
+      return res.json({ isAuth: false, e });
     }
   });
 };
