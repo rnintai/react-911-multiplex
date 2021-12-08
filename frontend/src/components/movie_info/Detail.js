@@ -4,6 +4,9 @@ import React, { Component } from "react";
 import "./Movie_info.css";
 import axios from "axios";
 
+const API =
+  window.location.hostname === "localhost" ? "http://localhost:5000" : "/api";
+
 class Movie_info extends Component {
   constructor(props) {
     super(props);
@@ -16,8 +19,7 @@ class Movie_info extends Component {
   getData = async () => {
     //  데이터불러오기
     let MovieInfo = await axios.get(
-      "https://react-911-multiplex.herokuapp.com/movies/detail/" +
-        this.props.location.state.movie_id
+      API + "/movies/detail/" + this.props.location.state.movie_id
     );
     MovieInfo = MovieInfo.data.movieDetail[0]; //data1 지정
     this.setState({ MovieInfo });

@@ -9,6 +9,9 @@ import { Link } from "react-router-dom";
 import { Font, FontColor, FontSize } from "src/design-system/font/Font";
 import { Button, BgColor } from "src/design-system/button/Button";
 
+const API =
+  window.location.hostname === "localhost" ? "http://localhost:5000" : "/api";
+
 class Card extends Component {
   constructor(props) {
     super(props);
@@ -18,9 +21,7 @@ class Card extends Component {
     boxOfficeList: [],
   };
   getData = async () => {
-    let response = await axios.get(
-      "https://react-911-multiplex.herokuapp.com/movies/boxoffice"
-    );
+    let response = await axios.get(API + "/movies/boxoffice");
     let temp = response.data.boxOfficeList.slice(0, 5);
     this.setState({ boxOfficeList: temp });
   };
