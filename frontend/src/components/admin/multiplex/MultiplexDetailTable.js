@@ -12,7 +12,7 @@ import { Button, BgColor } from "src/design-system/button/Button";
 // import Modal from "./Modal";
 // import PosterModal from "./PosterModal";
 
-export const MultiplexTable = ({ history, columns, data, fetchMovie }) => {
+export const MultiplexDetailTable = ({ history, columns, data }) => {
   // const [modalState, setModalState] = useState(false);
   // const [posterModalState, setPosterModalState] = useState(false);
   // const [movieId, setMovieId] = useState("");
@@ -73,19 +73,24 @@ export const MultiplexTable = ({ history, columns, data, fetchMovie }) => {
                     }}
                     title={cell.value}
                   >
-                    <Font size={FontSize.sm}>{cell.render("Cell")}</Font>
+                    {console.log(cell)}
+                    <Font size={FontSize.sm}>
+                      {cell.column.id === "total_price"
+                        ? wonFormatter(cell.value)
+                        : cell.render("Cell")}
+                    </Font>
                   </td>
                 ))}
                 <td>
                   <Button
                     color={FontColor.white}
                     boldness={FontBold.light}
-                    background={BgColor.green}
+                    background={BgColor.skyblue}
                     onClick={() => {
                       onClickDetail(row);
                     }}
                   >
-                    상세
+                    편집
                   </Button>
                 </td>
               </tr>
@@ -98,5 +103,15 @@ export const MultiplexTable = ({ history, columns, data, fetchMovie }) => {
 
   function onClickDetail(row) {
     history.push("./multiplex/detail?id=" + row.values.multiplex_id);
+  }
+
+  // 화폐 포매터
+  function wonFormatter(number) {
+    const formatter = new Intl.NumberFormat("ko-KR", {
+      style: "currency",
+      currency: "KRW",
+    });
+    console.log(number);
+    return formatter.format(number);
   }
 };

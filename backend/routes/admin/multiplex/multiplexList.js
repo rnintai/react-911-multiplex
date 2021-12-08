@@ -37,9 +37,18 @@ router.get("/list/:page", async function (req, res) {
 
 router.get("/detail/:multiplexId", async function (req, res) {
   let connection = await pool.getConnection();
+  let fromDate = req.query.from;
+  let toDate = req.query.to;
 
-  const sql = `SELECT * FROM multiplex
-    WHERE multiplex_id=${req.params.multiplexId}`;
+  const sql = `SELECT *,
+  (SELECT multiplex_name FROM multiplex AS MUL
+    WHERE MUL.multiplex_id=TH.multiplex_id) as multiplex_name,
+  (SELECT SUM(total_price) FROM movie_reservation as MR
+  WHERE DATE(MR.movie_reservation_date) BETWEEN
+  "${fromDate}" AND "${toDate}" AND
+  MR.theater_id=TH.theater_id) as total_price
+  FROM theater as TH
+  WHERE multiplex_id='${req.params.multiplexId}'`;
 
   try {
     const result = await connection.query(sql);

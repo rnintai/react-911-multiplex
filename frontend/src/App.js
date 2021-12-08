@@ -29,10 +29,14 @@ import ResetPw from "./pages/user/mypage/ResetPw";
 import MyReservation from "./pages/user/mypage/MyReservation";
 // admin
 import AdminNavBar from "./components/nav/AdminNavBar";
+
+// 영화관리
 import AdminMovieInfo from "./pages/admin/movie/AdminMovieInfo";
 import AdminMovieSchedule from "./pages/admin/movie/AdminMovieSchedule";
-
+// 지점관리
 import AdminMultiplex from "./pages/admin/multiplex/AdminMultiplex";
+import AdminMultiplexDetail from "./pages/admin/multiplex/AdminMultiplexDetail";
+// 직원관리
 import Employee from "./pages/admin/employee/AdminEmployee";
 
 class App extends Component {
@@ -130,9 +134,9 @@ class App extends Component {
               )}
               exact
             ></Route>
-            <Route path="/movie_ticker" exact>
+            {/* <Route path="/movie_ticker" exact>
               <Nav></Nav>
-            </Route>
+            </Route> */}
             <Route path="/theater" exact>
               <Nav></Nav>
               <TheaterList></TheaterList>
@@ -152,12 +156,18 @@ class App extends Component {
             <Route path="/admin/movie/schedule" exact>
               <AdminMovieSchedule></AdminMovieSchedule>
             </Route>
-            <Route path="/admin/multiplex"></Route>
+            {/* 지점관리 */}
             <Route
               path="/admin/multiplex"
               component={AdminMultiplex}
               exact
             ></Route>
+            <Route
+              path="/admin/multiplex/detail"
+              component={AdminMultiplexDetail}
+              exact
+            ></Route>
+            {/*  */}
             <Route path="/admin/employee"></Route>
             <Route
               path="/admin/employee"

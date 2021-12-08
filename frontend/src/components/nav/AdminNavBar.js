@@ -21,7 +21,7 @@ const AdminNavBar = ({ history, userId }) => {
     }
     if (isAdmin === 0 || isAdmin === undefined || isAdmin === null) {
       alert("관리 권한이 없습니다.");
-      // history.push("/");
+      history.push("/");
     }
   }
 
