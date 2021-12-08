@@ -1,12 +1,25 @@
-import React, { Component, useEffect } from "react";
+import React, { Component, useState, useEffect } from "react";
+import axios from "axios";
 import "./adminnavbar.scss";
 import { Font, FontSize, FontColor } from "src/design-system/font/Font";
 import logo from "src/assets/navbar/logo.jpg";
 import { Link } from "react-router-dom";
 
-const AdminNavBar = ({ history, isAdmin }) => {
-  function checkAdmin() {
-    if (isAdmin !== "1") {
+const API =
+  window.location.hostname === "localhost" ? "http://localhost:5000" : "/api";
+
+const AdminNavBar = ({ history, userId }) => {
+  const [isAdmin, setIsAdmin] = useState(-1);
+
+  async function checkAdmin() {
+    try {
+      let response = await axios.get(API + "/member/info/" + userId);
+      setIsAdmin(response.data.data.isAdmin);
+    } catch (err) {
+      console.log(err);
+      setIsAdmin(0);
+    }
+    if (isAdmin === 0 || isAdmin === undefined || isAdmin === null) {
       alert("관리 권한이 없습니다.");
       // history.push("/");
     }
@@ -14,7 +27,7 @@ const AdminNavBar = ({ history, isAdmin }) => {
 
   useEffect(() => {
     checkAdmin();
-  }, []);
+  }, [isAdmin]);
 
   return (
     <header className="admin-nav-container">
@@ -28,11 +41,13 @@ const AdminNavBar = ({ history, isAdmin }) => {
           </div>
         </Link>
         <ul className="top-menu">
-          {/* <li>
-            <Font tag="button" size={FontSize.sm}>
-              로그인
-            </Font>
-          </li> */}
+          <li>
+            <Link to="/">
+              <Font tag="button" size={FontSize.sm}>
+                홈으로
+              </Font>
+            </Link>
+          </li>
         </ul>
       </section>
       <nav className="admin-nav-wrap">

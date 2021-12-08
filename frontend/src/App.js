@@ -142,7 +142,7 @@ class App extends Component {
             <Route
               path="/admin"
               render={(props) => (
-                <AdminNavBar {...props} isAdmin={this.state.isAdmin} />
+                <AdminNavBar {...props} userId={this.state.userId} />
               )}
             ></Route>
             <Route path="/admin" exact></Route>
