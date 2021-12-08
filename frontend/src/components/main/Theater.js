@@ -8,8 +8,12 @@ class Theater extends Component {
       <div>
         <h1 className="Theater">영화관</h1>
         <div className="Theater_Show">
-          <img src="#" />
-          <img src="#" />
+          <section className="usedTT">
+            <h3>안산점</h3>
+          </section>
+          <section className="usedTT">
+            <h3>수원점</h3>
+          </section>
           <img src="#" />
           <img src="#" />
           <img src="#" />

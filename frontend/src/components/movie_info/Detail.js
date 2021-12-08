@@ -29,7 +29,7 @@ class Movie_info extends Component {
 
   render() {
     return (
-      <div>
+      <div className="Detail_box">
         <section>
           <img className="Movie_img" src={this.state.MovieInfo.poster} />
           <p className="Movie_name"> {this.state.MovieInfo.movie_name} </p>

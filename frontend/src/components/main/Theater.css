@@ -1,33 +1,45 @@
-
-.Theater{
-  width : 1000px;
-  height : auto;
-  position : relative;
-  display :flex;
-  flex-wrap : wrap;
-  align-items : flex-start;
-  justify-content : flex-start;
-  margin : 0 auto;
-  top : 75px;
+.Theater {
+  width: 1000px;
+  height: auto;
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: flex-start;
+  margin: 0 auto;
+  top: 75px;
 }
 
-.Theater_Show{
-  position : relative;
-  width : 1000px;
-  height : 378px;
-  left : 0px;
-  top : 100px;
-  display : flex;
-  flex-direction : row;
-  flex-wrap : wrap;
-  align-items : center;
-  justify-content : space-evenly;
-  table-layout : auto;
-  margin : 0 auto;
+.Theater_Show {
+  position: relative;
+  width: 1000px;
+  height: 378px;
+  left: 0px;
+  top: 100px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-evenly;
+  table-layout: auto;
+  margin: 0 auto;
 }
 
-.Theater_Show img{
-  width : 188px;
-  height : 184px;
+.Theater_Show img {
+  position: relative;
+  width: 188px;
+  height: 184px;
 }
-
+.usedTT {
+  background-image: url("./theater.jpg");
+  width: 188px;
+  height: 184px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.usedTT h3 {
+  text-align: center;
+  position: absolute;
+  color: white;
+}

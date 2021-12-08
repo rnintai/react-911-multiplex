@@ -32,7 +32,8 @@ class LogIn extends Component {
         "https://react-911-multiplex.herokuapp.com/member/checkid/" +
           this.state.id
       );
-      if (checkoutID.data === false) {
+      console.log(checkoutID.data);
+      if (checkoutID.data === true) {
         alert("가입되지 않은 ID 입니다.");
       } else {
         let checkLogin = axios
@@ -47,7 +48,7 @@ class LogIn extends Component {
               alert("확인.");
               location.href = "/";
             } else {
-              alert("비밀번호가 틀렸습니다.");
+              alert("아이디/비밀번호가 틀렸습니다.");
             }
           });
       }

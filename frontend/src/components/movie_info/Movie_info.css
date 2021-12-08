@@ -1,12 +1,8 @@
-.Movie_img{
-  position : relative;
-  width : 153px;
-  height : 226px;
+.Movie_img {
+  position: relative;
+  width: 153px;
+  height: 226px;
 }
-.Movie_name{
+.Detail_box{
+  padding-left: 10%;
 }
-.Info{
-
-}
-
-
