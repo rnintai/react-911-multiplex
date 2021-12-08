@@ -116,11 +116,31 @@ function AdminMultiplexDetail() {
         columns={columns}
         data={data}
       ></MultiplexDetailTable>
+      <Font>
+        총 매출액: <strong>{calTotalIncome()}</strong>
+      </Font>
     </div>
   );
   // 조회버튼 클릭시
   function onClickSearch() {
     setIsSearching(true);
+  }
+  // 총액 계산
+  function calTotalIncome() {
+    let result = 0;
+    multiplexDetail.forEach((elem) => {
+      result += elem.total_price;
+    });
+    return wonFormatter(result);
+  }
+
+  // 화폐 포매터
+  function wonFormatter(number) {
+    const formatter = new Intl.NumberFormat("ko-KR", {
+      style: "currency",
+      currency: "KRW",
+    });
+    return formatter.format(number);
   }
 }
 
