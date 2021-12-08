@@ -73,7 +73,6 @@ export const MultiplexDetailTable = ({ history, columns, data }) => {
                     }}
                     title={cell.value}
                   >
-                    {console.log(cell)}
                     <Font size={FontSize.sm}>
                       {cell.column.id === "total_price"
                         ? wonFormatter(cell.value)
@@ -111,7 +110,6 @@ export const MultiplexDetailTable = ({ history, columns, data }) => {
       style: "currency",
       currency: "KRW",
     });
-    console.log(number);
     return formatter.format(number);
   }
 };
