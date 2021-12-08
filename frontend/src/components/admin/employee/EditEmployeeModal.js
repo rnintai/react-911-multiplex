@@ -7,7 +7,6 @@ import {
   FontColor,
 } from "src/design-system/font/Font";
 import { Button, BgColor } from "src/design-system/button/Button";
-import "./modal.scss";
 
 const API =
   window.location.hostname === "localhost" ? "http://localhost:5000" : "/api";

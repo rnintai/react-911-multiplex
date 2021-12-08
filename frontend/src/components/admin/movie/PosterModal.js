@@ -17,7 +17,7 @@ const PosterModal = ({
   return (
     <div className={posterModalState ? "modal-wrap show" : "modal-wrap"}>
       <div className="modal-bg" onClick={closeModal}></div>
-      <div className="modal-window">
+      <div className="modal-window" style={{ width: 220, height: 350 }}>
         <form encType="multipart/form-data" style={{ display: "flex" }}>
           <input
             type="file"
