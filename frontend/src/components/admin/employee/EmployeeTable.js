@@ -33,7 +33,7 @@ export const EmployeeTable = ({ history, columns, data, getEmployeeList }) => {
         style={{
           tableLayout: "fixed",
           margin: "30px 20px",
-          height: "400px",
+          minHeight: "400px",
           width: "100%",
         }}
       >

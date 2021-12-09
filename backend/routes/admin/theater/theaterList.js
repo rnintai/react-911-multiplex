@@ -132,6 +132,7 @@ router.delete("/:theaterId", async function (req, res) {
       error,
     });
   }
+  //
 });
 
 module.exports = router;
