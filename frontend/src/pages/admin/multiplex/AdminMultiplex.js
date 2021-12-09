@@ -75,21 +75,25 @@ const AdminMultiplex = ({ history }) => {
   const data = useMemo(() => multiplexList, [multiplexList]);
 
   return (
-    <>
-      <div
+    <div style={{ width: 1000, margin: "0 auto", position: "relative" }}>
+      {/* <Font
         style={{
-          width: "100%",
+          width: "80%",
           display: "flex",
-          justifyContent: "center",
-          margin: "20px 0",
+          // justifyContent: "center",
+          margin: "20px auto",
         }}
-      ></div>
+        size={FontSize.lg}
+        boldness={FontBold.bold}
+      >
+        지점 관리
+      </Font> */}
       <MultiplexTable
         history={history}
         columns={columns}
         data={data}
       ></MultiplexTable>
-    </>
+    </div>
   );
 };
 

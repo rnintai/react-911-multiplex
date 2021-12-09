@@ -9,17 +9,27 @@ import {
 } from "src/design-system/font/Font";
 
 import { Button, BgColor } from "src/design-system/button/Button";
+import MultiplexDetailModal from "./MultiplexDetailModal";
 // import Modal from "./Modal";
 // import PosterModal from "./PosterModal";
 
-export const MultiplexDetailTable = ({ history, columns, data }) => {
-  // const [modalState, setModalState] = useState(false);
-  // const [posterModalState, setPosterModalState] = useState(false);
-  // const [movieId, setMovieId] = useState("");
-  // const [synopsis, setSynopsis] = useState("");
-  // const [poster, setPoster] = useState("");
-  // const [trailer, setTrailer] = useState("");
-
+export const MultiplexDetailTable = ({
+  history,
+  columns,
+  data,
+  modalState,
+  multiplexId,
+  theaterId,
+  theaterName,
+  theaterType,
+  ticketPrice,
+  setModalState,
+  setTheaterId,
+  setTheaterName,
+  setTheaterType,
+  setTicketPrice,
+  getMultiplexDetail,
+}) => {
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
     useTable({ columns, data });
 
@@ -30,7 +40,7 @@ export const MultiplexDetailTable = ({ history, columns, data }) => {
         style={{
           tableLayout: "fixed",
           margin: "30px 20px",
-          height: "400px",
+          height: "200px",
           width: "100%",
         }}
       >
@@ -74,7 +84,8 @@ export const MultiplexDetailTable = ({ history, columns, data }) => {
                     title={cell.value}
                   >
                     <Font size={FontSize.sm}>
-                      {cell.column.id === "total_price"
+                      {cell.column.id === "total_price" ||
+                      cell.column.id === "theater_ticket_price"
                         ? wonFormatter(cell.value)
                         : cell.render("Cell")}
                     </Font>
@@ -86,7 +97,7 @@ export const MultiplexDetailTable = ({ history, columns, data }) => {
                     boldness={FontBold.light}
                     background={BgColor.skyblue}
                     onClick={() => {
-                      onClickDetail(row);
+                      onClickEdit(row);
                     }}
                   >
                     편집
@@ -97,11 +108,29 @@ export const MultiplexDetailTable = ({ history, columns, data }) => {
           })}
         </tbody>
       </table>
+      <MultiplexDetailModal
+        modalState={modalState}
+        multiplexId={multiplexId}
+        theaterId={theaterId}
+        theaterName={theaterName}
+        theaterType={theaterType}
+        ticketPrice={ticketPrice}
+        setModalState={setModalState}
+        setTheaterId={setTheaterId}
+        setTheaterName={setTheaterName}
+        setTheaterType={setTheaterType}
+        setTicketPrice={setTicketPrice}
+        getMultiplexDetail={getMultiplexDetail}
+      ></MultiplexDetailModal>
     </>
   );
 
-  function onClickDetail(row) {
-    history.push("./multiplex/detail?id=" + row.values.multiplex_id);
+  function onClickEdit(row) {
+    setModalState("edit");
+    setTheaterId(row.cells[1].value);
+    setTheaterName(row.cells[2].value);
+    setTheaterType(row.cells[3].value);
+    setTicketPrice(row.cells[4].value);
   }
 
   // 화폐 포매터

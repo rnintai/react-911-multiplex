@@ -137,7 +137,7 @@ const AddScheduleModal = ({
             color={FontColor.white}
             boldness={FontBold.bold}
             background={BgColor.gray75}
-            style={{ margin: "10px" }}
+            style={{ margin: "10px", float: "right" }}
             onClick={removeSchedule}
           >
             삭제

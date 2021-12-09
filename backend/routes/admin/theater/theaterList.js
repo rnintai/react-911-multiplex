@@ -64,4 +64,74 @@ router.get("/list/id/:multiplexId", async function (req, res) {
   }
 });
 
+// 지점 추가 및 편집
+// POST /admin/theater
+router.post("/", async function (req, res) {
+  let conn = await pool.getConnection();
+
+  let theaterId = req.body.theaterId;
+  let multiplexId = req.body.multiplexId;
+  let theaterName = req.body.theaterName;
+  let theaterType = req.body.theaterType;
+  let ticketPrice = req.body.ticketPrice * 1;
+
+  const sql = `
+  INSERT INTO theater 
+  (theater_id, multiplex_id, theater_name, theater_type, theater_ticket_price)
+  VALUES (?,?,?,?,?)
+  ON DUPLICATE KEY UPDATE
+  theater_name=VALUES(theater_name), 
+  theater_type=VALUES(theater_type), 
+  theater_ticket_price=VALUES(theater_ticket_price)`;
+
+  await conn.beginTransaction();
+
+  try {
+    let result = await conn.query(sql, [
+      theaterId,
+      multiplexId,
+      theaterName,
+      theaterType,
+      ticketPrice,
+    ]);
+    await conn.commit();
+    conn.release();
+    return res.status(200).json({
+      success: true,
+      result: result[0],
+    });
+  } catch (error) {
+    await conn.rollback();
+    conn.release();
+    return res.status(400).json({
+      success: false,
+      error,
+    });
+  }
+});
+
+// 지점 삭제
+router.delete("/:theaterId", async function (req, res) {
+  const conn = await pool.getConnection();
+  const theaterId = req.params.theaterId;
+
+  try {
+    const sql = `DELETE FROM theater
+    WHERE theater_id=${theaterId}`;
+    const result = await conn.query(sql);
+
+    conn.release();
+    return res.status(200).json({
+      success: true,
+      result: result[0],
+    });
+  } catch (error) {
+    conn.release();
+    return res.status(400).json({
+      success: false,
+      error,
+    });
+  }
+});
+
 module.exports = router;

@@ -6,7 +6,16 @@ import {
   FontBold,
 } from "src/design-system/font/Font";
 
-const Input = ({ name, type, state, setState, labelText, height, options }) => {
+const Input = ({
+  name,
+  type,
+  state,
+  setState,
+  labelText,
+  height,
+  options,
+  ...props
+}) => {
   return (
     <div style={{ display: "flex", flexDirection: "column" }}>
       <Font
@@ -52,6 +61,7 @@ const Input = ({ name, type, state, setState, labelText, height, options }) => {
       )}
       {type !== "textarea" && type !== "select" && (
         <Font
+          {...props}
           tag="input"
           type={type}
           id={name}

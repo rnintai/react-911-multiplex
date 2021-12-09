@@ -12,6 +12,7 @@ import {
 import Input from "src/components/basic/Input";
 import { Button, BgColor } from "src/design-system/button/Button";
 import { MultiplexDetailTable } from "src/components/admin/multiplex/MultiplexDetailTable";
+import Spinner from "src/components/basic/Spinner";
 
 const API =
   window.location.hostname === "localhost" ? "http://localhost:5000" : "/api";
@@ -32,6 +33,14 @@ function AdminMultiplexDetail() {
   // state
   const [fromDate, setFromDate] = useState(initialFromDate);
   const [toDate, setToDate] = useState(initialToDate);
+  const [theaterId, setTheaterId] = useState("");
+  const [theaterName, setTheaterName] = useState("");
+  const [theaterType, setTheaterType] = useState("");
+  const [ticketPrice, setTicketPrice] = useState(0);
+  // 모달 종류
+  const [modalState, setModalState] = useState("");
+  // initial loading
+  const [initLoading, setInitLoading] = useState(true);
 
   // 조회 trigger
   const [isSearching, setIsSearching] = useState(false);
@@ -43,6 +52,7 @@ function AdminMultiplexDetail() {
       API + `/admin/multiplex/detail/${id}?from=${fromDate}&to=${toDate}`
     );
     setMultiplexDetail(result.data.multiplexDetail);
+    setInitLoading(false);
   }
 
   useEffect(() => {
@@ -84,40 +94,68 @@ function AdminMultiplexDetail() {
       className="flex-col"
       style={{ width: 1000, margin: "0 auto", position: "relative" }}
     >
-      <div className="flex-row" style={{ marginBottom: 20 }}>
-        <div style={{ marginRight: 10 }}>
-          <Input
-            name="fromDate"
-            type="date"
-            state={fromDate.split("T")[0]}
-            setState={setFromDate}
-            labelText="조회시작일"
-          ></Input>
-        </div>
-        <div style={{ marginRight: 10 }}>
-          <Input
-            name="toDate"
-            type="date"
-            state={toDate.split("T")[0]}
-            setState={setToDate}
-            labelText="조회종료일"
-          ></Input>
+      <div className="flex-row justify-sb" style={{ marginBottom: 20 }}>
+        <div className="flex-row">
+          <div style={{ marginRight: 10 }}>
+            <Input
+              name="fromDate"
+              type="date"
+              state={fromDate.split("T")[0]}
+              setState={setFromDate}
+              labelText="조회시작일"
+            ></Input>
+          </div>
+          <div style={{ marginRight: 10 }}>
+            <Input
+              name="toDate"
+              type="date"
+              state={toDate.split("T")[0]}
+              setState={setToDate}
+              labelText="조회종료일"
+            ></Input>
+          </div>
+          <Button
+            color={FontColor.white}
+            background={BgColor.green}
+            size={FontSize.sm}
+            onClick={onClickSearch}
+            className={initLoading ? "disabled" : ""}
+          >
+            조회
+          </Button>
+          {isSearching && <Spinner></Spinner>}
         </div>
         <Button
           color={FontColor.white}
-          background={BgColor.green}
+          background={BgColor.red25}
           size={FontSize.sm}
-          onClick={onClickSearch}
+          onClick={onClickAdd}
+          className={initLoading ? "disabled" : ""}
         >
-          조회
+          추가
         </Button>
       </div>
       <MultiplexDetailTable
         columns={columns}
         data={data}
+        modalState={modalState}
+        multiplexId={id}
+        theaterId={theaterId}
+        theaterName={theaterName}
+        theaterType={theaterType}
+        ticketPrice={ticketPrice}
+        setModalState={setModalState}
+        setTheaterId={setTheaterId}
+        setTheaterName={setTheaterName}
+        setTheaterType={setTheaterType}
+        setTicketPrice={setTicketPrice}
+        getMultiplexDetail={getMultiplexDetail}
       ></MultiplexDetailTable>
-      <Font>
+      <Font style={{ textAlign: "right" }}>
         총 매출액: <strong>{calTotalIncome()}</strong>
+        <Font boldness={FontBold.light} style={{ marginLeft: 6 }}>
+          ({fromDate.split("T")[0]} ~ {toDate.split("T")[0]})
+        </Font>
       </Font>
     </div>
   );
@@ -125,6 +163,15 @@ function AdminMultiplexDetail() {
   function onClickSearch() {
     setIsSearching(true);
   }
+
+  // 추가 버튼 클릭시
+  function onClickAdd() {
+    setModalState("add");
+    setTheaterId(
+      Number(multiplexDetail[multiplexDetail.length - 1].theater_id) + 1 + ""
+    );
+  }
+
   // 총액 계산
   function calTotalIncome() {
     let result = 0;

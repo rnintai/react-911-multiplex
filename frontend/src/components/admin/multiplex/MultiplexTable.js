@@ -30,7 +30,7 @@ export const MultiplexTable = ({ history, columns, data, fetchMovie }) => {
         style={{
           tableLayout: "fixed",
           margin: "30px 20px",
-          height: "400px",
+          height: "200px",
           width: "100%",
         }}
       >
