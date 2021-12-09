@@ -129,8 +129,11 @@ class App extends Component {
             <Route path="/mypage/resetpw" component={ResetPw} exact></Route>
             <Route
               path="/mypage/reservation"
-              render={() => (
-                <MyReservation userId={this.state.userId}></MyReservation>
+              render={(...props) => (
+                <MyReservation
+                  {...props}
+                  userId={this.state.userId}
+                ></MyReservation>
               )}
               exact
             ></Route>

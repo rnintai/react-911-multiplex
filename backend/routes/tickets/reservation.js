@@ -83,6 +83,82 @@ router.post("/", async function (req, res) {
   }
 });
 
+// DELETE /tickets/reservation/:reservationId
+router.delete("/:reservationId", async function (req, res) {
+  let reservationId = req.params.reservationId;
+  let seats = [];
+  let scheduleId = "";
+  let selectConnection = await pool.getConnection();
+  try {
+    // seat 배열 받아오기
+    const selectSql = `SELECT seat_name, movie_schedule_id from movie_reservation 
+    WHERE movie_reservation_id="${reservationId}"`;
+    const selectRes = await selectConnection.query(selectSql);
+    seats = selectRes[0][0].seat_name.split(",");
+    scheduleId = selectRes[0][0].movie_schedule_id;
+    selectConnection.release();
+    let deleteConnection = await pool.getConnection();
+    // 예매 내역에서 삭제
+    try {
+      await deleteConnection.beginTransaction();
+
+      const deleteSql = `DELETE FROM movie_reservation 
+      WHERE movie_reservation_id=${reservationId}`;
+
+      await deleteConnection.query(deleteSql);
+
+      await deleteConnection.commit();
+
+      deleteConnection.release();
+      let seatConnection = await pool.getConnection();
+      // 좌석 삭제
+      try {
+        await seatConnection.beginTransaction();
+
+        let seatSql = `DELETE FROM reserved_seat
+        WHERE movie_schedule_id="${scheduleId}"
+        AND (`;
+        for (let i = 0; i < seats.length - 1; i++) {
+          seatSql += `(seat_row="${seats[i].substring(0, 1)}" 
+          AND seat_col="${seats[i].substring(1, 3)}") OR `;
+        }
+        seatSql += `(seat_row="${seats[seats.length - 1].substring(0, 1)}" 
+          AND seat_col="${seats[seats.length - 1].substring(1, 3)}"))`;
+
+        const seatResponse = await seatConnection.query(seatSql);
+
+        await seatConnection.commit();
+        seatConnection.release();
+
+        return res.status(200).json({
+          success: true,
+          result: seatResponse[0],
+        });
+      } catch (deleteSeatErr) {
+        await seatConnection.rollback(0);
+        seatConnection.release();
+        return res.status(400).json({
+          success: false,
+          deleteSeatErr,
+        });
+      }
+    } catch (deleteErr) {
+      await deleteConnection.rollback();
+      deleteConnection.release();
+      return res.status(400).json({
+        success: false,
+        deleteErr,
+      });
+    }
+  } catch (selectErr) {
+    selectConnection.release();
+    return res.status(400).json({
+      success: false,
+      selectErr,
+    });
+  }
+});
+
 // GET /tickets/reservation/date/:date
 // 해당 날짜의 예매수
 router.get("/date/:date", async function (req, res) {
