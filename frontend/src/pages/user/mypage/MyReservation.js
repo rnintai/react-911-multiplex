@@ -44,10 +44,11 @@ function MyReservation({ userId }) {
         curPage = curPage + 1;
       } catch (e) {
         console.log(e);
+        setMemberLoading(false);
       }
       setReservationList(reservationListCpy);
-      setMemberLoading(false);
     }
+    setMemberLoading(false);
   }
 
   // 비회원용
@@ -147,6 +148,9 @@ function MyReservation({ userId }) {
             <div style={{ marginTop: 200 }}>
               <Spinner></Spinner>
             </div>
+          )}
+          {memberLoading === false && reservationList.length === 0 && (
+            <Font className="text-center">예매 내역이 비었습니다.</Font>
           )}
           {memberLoading === false &&
             reservationList.map((rsrv) => (
