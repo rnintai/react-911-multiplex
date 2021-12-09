@@ -1,8 +1,12 @@
 .Movie_img {
   position: relative;
-  width: 153px;
-  height: 226px;
+  width: 233px;
+  /* height: 226px; */   
+  align-self: center;
 }
 .Detail_box{
-  padding-left: 10%;
+  width: 1000px;
+  height:600px;
+  margin:0 auto;
+  justify-content: space-between;
 }
