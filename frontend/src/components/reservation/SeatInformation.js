@@ -136,7 +136,7 @@ function SeatInformation({
               <Font color={FontColor.white}>예매하기</Font>
               {/* </Link> */}
             </Button>
-            <Button background={BgColor.red50} className="disabled">
+            {/* <Button background={BgColor.red50} className="disabled">
               <Link
                 to={`./result?schedule=${
                   scheduleInfo.movie_schedule_id
@@ -150,7 +150,7 @@ function SeatInformation({
                   결제
                 </Font>
               </Link>
-            </Button>
+            </Button> */}
           </div>
         </div>
         {/* 영화정보 */}
