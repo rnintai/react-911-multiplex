@@ -55,7 +55,7 @@ function SeatInformation({
 
   // 예매 번호 산출
   async function getReservationCountByDate() {
-    const date = new Date().toISOString().split("T")[0];
+    const date = getDateString(new Date()).split("T")[0];
     const res = await axios.get(API + "/tickets/reservation/date/" + date);
     let serial = res.data.count[0].reservation_count + 1;
 
