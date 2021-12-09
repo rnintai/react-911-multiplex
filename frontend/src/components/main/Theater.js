@@ -14,14 +14,6 @@ class Theater extends Component {
           <section className="usedTT">
             <h3>수원점</h3>
           </section>
-          <img src="#" />
-          <img src="#" />
-          <img src="#" />
-          <img src="#" />
-          <img src="#" />
-          <img src="#" />
-          <img src="#" />
-          <img src="#" />
         </div>
       </div>
     );

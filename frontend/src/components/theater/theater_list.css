@@ -1,7 +1,10 @@
 .theater{
-    display: flexbox;
-    justify-content: center;
-    align-items: center;
+    /* display: flexbox; */
+    /* justify-content: center; */
+    /* align-items: center; */
+    width: 1000px;
+    position: relative;
+    margin: 0 auto;
 }
 
 .title{
@@ -10,11 +13,12 @@
 }
 .theater_view{
     display: flex;
-    justify-content: space-evenly;
+    /* justify-content: space-evenly; */
 }
 .theater_box{
-    display: flexbox;
+    /* display: flexbox; */
     text-align: center;
+    margin-right: 10px;
 }
 
 .image{
