@@ -316,7 +316,11 @@ const ScheduleSection = ({
 
   // 날짜 클릭 시
   function onClickDateBtn(elem) {
-    setSelectedDate(elem);
+    if (selectedDate === elem) {
+      setSelectedDate("");
+    } else {
+      setSelectedDate(elem);
+    }
     // 이후 로직은 useEffect에서 selectedDate 변경 시.
   }
   // 날짜 이동 버튼 클릭
